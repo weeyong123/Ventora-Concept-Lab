@@ -1,5 +1,16 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/followthrough",
+      "destination": "/followthrough/index.html"
+    },
+    {
+      "source": "/followthrough/",
+      "destination": "/followthrough/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
