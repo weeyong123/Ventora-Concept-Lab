@@ -8,7 +8,16 @@
 | Spatial AI SaaS | `/saas` | 已收录 |
 | LeadsTou Spatial AI Concept | `/leadstou-concept` | 已收录 |
 | LeadsTou Homepage | `/leadstou` | 本地工作版本，未包含在 Demo 5 发布中 |
+| Demo 6 — Johor Property Advisor | `/property-advisor` | Local concept / ready for review |
 | **Demo 5 — Followthrough AI Device Concept** | **`/followthrough`** | **FROZEN / PRESERVED** |
+
+## Demo 6 — Johor Property Advisor
+
+- Permanent route: `/property-advisor`.
+- VENTORA / MOTION STUDIES 06 — JOHOR PROPERTY ADVISOR.
+- Fictional Jason Lim brand; seven editorial scenes, responsive GSAP motion, interactive district map, buyer intents, property selection and client journey.
+- Independent component and styles: `src/PropertyAdvisor.jsx`, `src/PropertyAdvisor.css`. Assets: `public/property-advisor/`.
+- Concept imagery and illustrative selections, not active listings. Contact opens a demo enquiry; no live advisor number is configured.
 
 ## Demo 5 — FROZEN / PRESERVED
 
