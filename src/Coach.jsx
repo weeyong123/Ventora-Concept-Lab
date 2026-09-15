@@ -8,9 +8,9 @@ gsap.registerPlugin(ScrollTrigger)
 
 const A = '/assets/coach/'
 const stages = [
-  { n: '01', name: 'POSITION', line: 'Make the value obvious.', image: `${A}close-portrait.png` },
+  { n: '01', name: 'POSITION', line: 'Make the value obvious.', image: `${A}position-environment.png` },
   { n: '02', name: 'PRESENCE', line: 'Make the perception match.', image: `${A}detail.png` },
-  { n: '03', name: 'CONVERT', line: 'Make the next step inevitable.', image: `${A}movement.png` },
+  { n: '03', name: 'CONVERT', line: 'Make the next step inevitable.', image: `${A}stair-light.png` },
 ]
 // Fictional concept metrics — replace with verified client outcomes in production.
 const demoMetrics = [['+47%', 'Qualified enquiries'], ['3×', 'Profile-to-call conversion'], ['12 weeks', 'Positioning transformation']]
@@ -20,14 +20,14 @@ function Header() {
 }
 
 function Hero() {
-  return <section className="c-hero" id="coach-top">
+  return <section className="elan-hero" id="coach-top">
     <div className="c-hero-light" aria-hidden="true" />
     <div className="c-hero-back" aria-label="Become harder to ignore"><span>BECOME</span><span>HARDER TO</span><span>IGNORE.</span></div>
     <div className="c-hero-photo"><div className="c-hero-photo-inner"><img src={`${A}hero-founder.png`} alt="Founder in an espresso suit, standing in directional architectural light" /></div></div>
     <div className="c-hero-front" aria-hidden="true"><span>HARDER TO</span><span>IGNORE.</span></div>
     <p className="c-hero-copy">Private performance and positioning for ambitious founders, experts and personal brands ready to become impossible to overlook.</p>
-    <div className="c-hero-meta"><span>Private Performance / 2026</span><span>Strategy · Presence · Conversion</span></div>
-    <div className="c-scroll">Scroll to begin <i>↓</i></div>
+    <div className="elan-hero-meta"><span>Private Performance / 2026</span><span>Strategy · Presence · Conversion</span></div>
+    <div className="elan-scroll">Scroll to begin <i>↓</i></div>
   </section>
 }
 
@@ -62,19 +62,19 @@ function Method() {
 
 const frames = [
   { n: '01', lines: ['YOU ARE ALREADY', 'THE EXPERT.'], image: 'movement.png' },
-  { n: '02', lines: ['NOW LOOK', 'LIKE ONE.'], image: 'detail.png' },
-  { n: '03', lines: ['BUILD A BRAND', 'PEOPLE REMEMBER.'], image: 'hero-founder.png' },
+  { n: '02', lines: ['NOW LOOK', 'LIKE ONE.'], image: 'silk-still-life.png' },
+  { n: '03', lines: ['BUILD A BRAND', 'PEOPLE REMEMBER.'], image: 'passage-light.png' },
 ]
 function EditorialRail() {
   return <section className="c-rail-section"><div className="c-rail">{frames.map((f, i) => <article className={`c-frame cf-${i}`} key={f.n}><span className="c-frame-no">{f.n} / 03</span><div className="c-frame-image"><img src={`${A}${f.image}`} alt="" /></div><h2>{f.lines.map(x => <span key={x}>{x}</span>)}</h2></article>)}</div></section>
 }
 
 function Results() {
-  return <section className="c-results"><img src={`${A}detail.png`} alt="" /><p className="c-label">03 / Selected shifts · Concept data</p><h2><span>FROM</span><span>OVERLOOKED</span><i>TO</i><span>REFERRED.</span></h2><div className="c-metrics">{demoMetrics.map(([value, label]) => <div key={value}><strong data-value={value}>{value}</strong><span>{label}</span></div>)}</div></section>
+  return <section className="c-results"><img src={`${A}detail.png`} alt="" /><p className="c-label">03 / Selected shifts · Concept data</p><h2><span>FROM</span><span>OVERLOOKED</span><i>TO</i><span>REFERRED.</span></h2><div className="elan-metrics">{demoMetrics.map(([value, label]) => <div key={value}><strong data-value={value}>{value}</strong><span>{label}</span></div>)}</div></section>
 }
 
 function Final() {
-  return <section className="c-final" id="enquire"><div className="c-final-photo"><img src={`${A}hero-founder.png`} alt="Founder silhouette in architectural light" /></div><p className="c-label">04 / Private performance</p><h2><span>READY TO BECOME</span><span>HARDER TO <i>IGNORE?</i></span></h2><div className="c-final-bottom"><a href="mailto:private@elan.example">START YOUR NEXT CHAPTER <b>↗</b></a><span>PRIVATE ENQUIRY →</span><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Back to top ↑</button></div></section>
+  return <section className="c-final" id="enquire"><div className="c-final-photo"><img src={`${A}quiet-room.png`} alt="Empty leather chair in a limestone room with warm window light" /></div><p className="c-label">04 / Private performance</p><h2><span>READY TO BECOME</span><span>HARDER TO <i>IGNORE?</i></span></h2><div className="c-final-bottom"><a href="mailto:private@elan.example">START YOUR NEXT CHAPTER <b>↗</b></a><span>PRIVATE ENQUIRY →</span><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Back to top ↑</button></div></section>
 }
 
 function Coach() {
@@ -91,8 +91,8 @@ function Coach() {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const mm = gsap.matchMedia()
     const ctx = gsap.context(() => {
-      gsap.timeline({ defaults: { ease: 'power4.out' } }).from('.c-head', { y: -25, opacity: 0, duration: .8 }).from('.c-hero-back span', { yPercent: 110, duration: 1.15, stagger: .1 }, '-=.4').from('.c-hero-photo', { clipPath: 'polygon(35% 0,65% 0,58% 100%,42% 100%)', scale: .92, duration: 1.4 }, '-=1').from('.c-hero-copy,.c-hero-meta,.c-scroll', { opacity: 0, y: 15, stagger: .08 }, '-=.65')
-      gsap.timeline({ scrollTrigger: { trigger: '.c-hero', start: 'top top', end: 'bottom top', scrub: 1 } }).to('.c-hero-back span:nth-child(1)', { xPercent: -10 }, 0).to('.c-hero-back span:nth-child(2)', { xPercent: 8 }, 0).to('.c-hero-front', { xPercent: -7 }, 0).to('.c-hero-photo', { scale: 1.12, clipPath: 'polygon(8% 0,100% 0,90% 100%,0 100%)' }, 0).to('.c-hero-photo img', { yPercent: 8, scale: 1.08 }, 0).to('.c-hero-light', { xPercent: 70 }, 0)
+      gsap.timeline({ defaults: { ease: 'power4.out' } }).from('.c-head', { y: -25, opacity: 0, duration: .8 }).from('.c-hero-back span', { yPercent: 110, duration: 1.15, stagger: .1 }, '-=.4').from('.c-hero-photo', { clipPath: 'polygon(35% 0,65% 0,58% 100%,42% 100%)', scale: .92, duration: 1.4 }, '-=1').from('.c-hero-copy,.elan-hero-meta,.elan-scroll', { opacity: 0, y: 15, stagger: .08 }, '-=.65')
+      gsap.timeline({ scrollTrigger: { trigger: '.elan-hero', start: 'top top', end: 'bottom top', scrub: 1 } }).to('.c-hero-back span:nth-child(1)', { xPercent: -10 }, 0).to('.c-hero-back span:nth-child(2)', { xPercent: 8 }, 0).to('.c-hero-front', { xPercent: -7 }, 0).to('.c-hero-photo', { scale: 1.12, clipPath: 'polygon(8% 0,100% 0,90% 100%,0 100%)' }, 0).to('.c-hero-photo img', { yPercent: 8, scale: 1.08 }, 0).to('.c-hero-light', { xPercent: 70 }, 0)
       gsap.timeline({ scrollTrigger: { trigger: '.c-manifesto', start: 'top top', end: 'bottom bottom', scrub: 1 } }).to('.c-manifest-sticky', { backgroundColor: '#3a2118', color: '#f3ede2', duration: .18 }).fromTo('.c-values span:nth-child(1)', { xPercent: -110 }, { xPercent: 0, duration: .18 }, 0).fromTo('.c-values span:nth-child(2)', { xPercent: 110 }, { xPercent: 0, duration: .18 }, .12).fromTo('.c-values span:nth-child(3)', { scale: .25, letterSpacing: '.3em', opacity: 0 }, { scale: 1, letterSpacing: '-.07em', opacity: 1, duration: .2 }, .28).fromTo('.c-values span:nth-child(4)', { xPercent: -110 }, { xPercent: 0, duration: .18 }, .44).to('.c-values', { opacity: 0, scale: 1.2, duration: .16 }, .6).fromTo('.c-manifest-sticky h2', { opacity: 0 }, { opacity: 1, duration: .08 }, .72).from('.c-manifest-sticky h2 span', { yPercent: 110, stagger: .05, duration: .2 }, .73).to('.c-manifest-sticky', { backgroundColor: '#efe8dc', color: '#211711', duration: .14 }, .88)
       gsap.fromTo('.c-story-image', { clipPath: 'inset(100% 0 0)' }, { clipPath: 'inset(0% 0 0)', scrollTrigger: { trigger: '.c-story', start: 'top 78%', end: 'center 48%', scrub: .8 } })
       gsap.fromTo('.c-story-image img', { yPercent: -10, scale: 1.14 }, { yPercent: 10, scale: 1.02, scrollTrigger: { trigger: '.c-story', start: 'top bottom', end: 'bottom top', scrub: 1 } })
@@ -106,13 +106,13 @@ function Coach() {
         gsap.utils.toArray('.c-frame-image img').forEach(img => gsap.fromTo(img, { xPercent: -7, scale: 1.12 }, { xPercent: 7, scale: 1.02, scrollTrigger: { trigger: img.closest('.c-frame'), containerAnimation: tween, start: 'left right', end: 'right left', scrub: true } }))
       })
       gsap.from('.c-results h2 span,.c-results h2 i', { yPercent: 110, stagger: .08, scrollTrigger: { trigger: '.c-results', start: 'top 65%', end: 'center 45%', scrub: .8 } })
-      gsap.from('.c-metrics>div', { x: 70, opacity: 0, stagger: .1, scrollTrigger: { trigger: '.c-metrics', start: 'top 80%' } })
+      gsap.from('.elan-metrics>div', { x: 70, opacity: 0, stagger: .1, scrollTrigger: { trigger: '.elan-metrics', start: 'top 80%' } })
       gsap.from('.c-final h2 span', { yPercent: 110, stagger: .12, scrollTrigger: { trigger: '.c-final', start: 'top 62%', end: 'center 44%', scrub: .8 } }); gsap.from('.c-final-photo', { clipPath: 'inset(0 0 100% 0)', yPercent: 15, scrollTrigger: { trigger: '.c-final', start: 'top 68%', end: 'center 41%', scrub: .8 } }); gsap.from('.c-final-bottom', { '--line-fill': '0%', scrollTrigger: { trigger: '.c-final-bottom', start: 'top 90%', end: 'top 65%', scrub: true } })
     }, root)
     return () => { ctx.revert(); mm.revert() }
   }, [])
   useEffect(() => {
-    const el = root.current?.querySelector('.c-hero'); if (!el || matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const el = root.current?.querySelector('.elan-hero'); if (!el || matchMedia('(prefers-reduced-motion: reduce)').matches) return
     const move = e => { const x = e.clientX / innerWidth - .5; const y = e.clientY / innerHeight - .5; gsap.to('.c-hero-photo-inner', { x: x * -8, y: y * -6, duration: 1.5, overwrite: true }); gsap.to('.c-hero-light', { x: x * 18, y: y * 10, duration: 2, overwrite: true }) }
     el.addEventListener('pointermove', move); return () => el.removeEventListener('pointermove', move)
   }, [])
