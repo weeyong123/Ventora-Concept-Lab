@@ -32,3 +32,24 @@
 - 本地查看：`npm run dev` 后访问 `/followthrough`。
 - 此版本以 `Add Demo 5 followthrough AI device concept` 提交并通过现有 GitHub → Vercel 生产部署流程发布。
 - 这是视觉演示，未连接真实 AI 或发送服务。
+
+## Demo 07 — MARK® Street Studio
+
+- Permanent route: `/street-studio`. Independent spatial studio concept.
+- Six spatial moments: outside approach, opening doors, graffiti corridor, right turn, main hall, final mark.
+- Files: `src/StreetStudio.jsx`, `src/StreetStudio.css`; four original architectural images in `public/street-studio/rebuild/`.
+- Scroll-driven GSAP timeline, perpendicular CSS 3D rooms, responsive framing, reduced-motion walkthrough and concept contact dialog.
+- Fictional creative studio; no live enquiry collection.
+
+## High Ticket Babes — two-section concept
+
+- Permanent route: `/highticketbabes`.
+- Lauren Nicole Wingate; authority hero and transformation/freedom chapter only.
+- Isolated page and styles: `src/pages/HighTicketBabes/HighTicketBabesPage.jsx` and `HighTicketBabesPage.css`.
+- Supplied local photography: `public/highticketbabes/lauren-black-portrait.png` and `lauren-red-dress.png`; originals unchanged.
+- Existing GSAP/ScrollTrigger drives a reversible desktop chapter sequence with extended reading holds. Mobile uses natural flow plus a short sticky possibility sequence; reduced motion is a static readable layout.
+- Portrait / readability refinement: edge-cropped black portrait hero; larger curriculum hierarchy; smaller sequential fit groups; red-dress image recedes for reading and returns for TIME / MONEY / CHOICE. Approved offer copy is unchanged.
+- Navigation labels are visual; Masterclass buttons open a concept notice linking to Lauren’s live website and collect no information.
+- Content refinement: source-backed possibility statements, founder story, attributed proof, four Masterclass topics and YES/NO fit stages inside the same two sections. Source: `https://www.highticketbabes.biz/`; provenance: `verification/highticketbabes/CONTENT-SOURCES.md`.
+- No existing concept, shared stylesheet, frozen asset or preservation baseline modified.
+- Browser QA runner: `verification/highticketbabes/check.mjs`; results: `verification/highticketbabes/QA.md`.
