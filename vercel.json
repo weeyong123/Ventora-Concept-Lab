@@ -9,6 +9,14 @@
       "destination": "/followthrough/index.html"
     },
     {
+      "source": "/chubby-dips",
+      "destination": "/chubby-dips/index.html"
+    },
+    {
+      "source": "/chubby-dips/",
+      "destination": "/chubby-dips/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
