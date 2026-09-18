@@ -11,7 +11,6 @@ import LeadstouConcept from './LeadstouConcept.jsx'
 import HighTicketBabesPage from './pages/HighTicketBabes/HighTicketBabesPage.jsx'
 
 const Demo9 = lazy(() => import('./pages/Demo9/Demo9.jsx'))
-const Demo9Proof = lazy(() => import('./pages/Demo9Proof/Demo9Proof.jsx'))
 
 const route = window.location.pathname.replace(/\/+$/, '') || '/'
 const isStreetStudio = route === '/street-studio'
@@ -23,11 +22,10 @@ const isLeadstou = route === '/leadstou-concept'
 const isHighTicketBabes = route === '/highticketbabes'
 document.documentElement.dataset.demo = isStreetStudio ? 'street-studio' : isPropertyAdvisor ? 'property-advisor' : isLeadstou ? 'leadstou' : isSaas ? 'saas' : isConstruction ? 'construction' : isCoach ? 'coach' : 'noema'
 if (route === '/demo9') document.documentElement.dataset.demo = 'demo9'
-if (route === '/demo9-proof') document.documentElement.dataset.demo = 'demo9-proof'
 if (isHighTicketBabes) document.documentElement.dataset.demo = 'highticketbabes'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {route === '/demo9' ? <Suspense fallback={null}><Demo9 /></Suspense> : route === '/demo9-proof' ? <Suspense fallback={null}><Demo9Proof /></Suspense> : isHighTicketBabes ? <HighTicketBabesPage /> : isStreetStudio ? <StreetStudio /> : isPropertyAdvisor ? <PropertyAdvisor /> : isLeadstou ? <LeadstouConcept /> : isSaas ? <Saas /> : isConstruction ? <Construction /> : isCoach ? <Coach /> : <App />}
+    {route === '/demo9' ? <Suspense fallback={null}><Demo9 /></Suspense> : isHighTicketBabes ? <HighTicketBabesPage /> : isStreetStudio ? <StreetStudio /> : isPropertyAdvisor ? <PropertyAdvisor /> : isLeadstou ? <LeadstouConcept /> : isSaas ? <Saas /> : isConstruction ? <Construction /> : isCoach ? <Coach /> : <App />}
   </StrictMode>,
 )
