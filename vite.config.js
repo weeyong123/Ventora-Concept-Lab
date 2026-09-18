@@ -21,12 +21,4 @@ export default defineConfig({
     configureServer: serveDemo5,
     configurePreviewServer: serveDemo5,
   }],
-  build: {
-    rollupOptions: {
-      input: {
-        main: fileURLToPath(new URL('./index.html', import.meta.url)),
-        chubbyDips: fileURLToPath(new URL('./chubby-dips/index.html', import.meta.url)),
-      },
-    },
-  },
 })
