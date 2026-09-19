@@ -1,14 +1,11 @@
 import { useEffect, useRef } from 'react'
 import './Demo9.css'
 import useDemo9Pointer from './useDemo9Pointer'
+import { createVideoSeekGate } from './videoSeekGate'
+import { masterProgress, scrollProgress, smoothProgress, FILM_START, FILM_DISTANCE, HOLD_DISTANCE, FILM_END, TIMELINE_DISTANCE } from './filmProgress'
+import { createRecordingPlayback } from './recordingPlayback'
 
 const ASSETS = '/demo9/demo09-'
-// Intro / threshold shortened 35%; the 750vh film mapping stays unchanged.
-// A concise 175vh closing hold, 30% shorter than the previous ending.
-const FILM_START = 1.625
-const FILM_DISTANCE = 7.5
-const HOLD_DISTANCE = 1.75
-const FILM_END = FILM_START + FILM_DISTANCE
 const clamp = (value) => Math.max(0, Math.min(1, value))
 const ease = (value) => { const t = clamp(value); return t * t * (3 - 2 * t) }
 const windowOpacity = (time, start, end) => ease((time - start) / .24) * ease((end - time) / .24)
@@ -22,6 +19,10 @@ export default function Demo9() {
     const page = root.current
     const media = video.current
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const touch = window.matchMedia('(pointer: coarse)')
+    const stage = page.querySelector('.d9-stage')
+    const progressBar = page.querySelector('.d9-progress')
+    const shade = page.querySelector('.d9-local-shade')
     const intro = page.querySelector('.d9-intro')
     const portal = page.querySelector('.d9-portal')
     const start = page.querySelector('.d9-start')
@@ -33,7 +34,32 @@ export default function Demo9() {
     const words = [...page.querySelectorAll('.d9-values span')]
     const lines = [...page.querySelectorAll('.d9-intro h1 > span')]
     const status = page.querySelector('.d9-position')
+    // Cache geometry outside the scroll hot path and skip unchanged DOM writes.
+    let viewportHeight = stage.clientHeight || window.innerHeight
+    let pageTop = window.scrollY + page.getBoundingClientRect().top
+    let viewportWidth = window.innerWidth
+    let viewportTouch = touch.matches
+    const styles = new WeakMap()
+    const style = (element, key, value) => {
+      let previous = styles.get(element)
+      if (!previous) { previous = {}; styles.set(element, previous) }
+      const next = String(value)
+      if (previous[key] === next) return
+      previous[key] = next
+      if (key.startsWith('--')) element.style.setProperty(key, next)
+      else element.style[key] = next
+    }
+    const inert = (element, value) => { if (element.inert !== value) element.inert = value }
+    const aria = (element, value) => { if (element.getAttribute('aria-hidden') !== value) element.setAttribute('aria-hidden', value) }
+    const gate = createVideoSeekGate()
+    let seekTimer = 0
+    let settleTimer = 0
+    let settled = true
+    let lastPortalDistance = -1
     let frame = 0
+    let inputProgress = clamp((window.scrollY - pageTop) / (viewportHeight * TIMELINE_DISTANCE))
+    let lastRenderTime = 0
+    let interpolating = false
     let desiredTime = 0
     let decoded = false
     let decodedTime = 0
@@ -44,59 +70,85 @@ export default function Demo9() {
 
     // Coalesce scroll events into one paint. Only seek again once the decoder is
     // free; a fast wheel gesture always resolves to its latest absolute target.
-    // No play(), autoplay, interpolation clock, or time-driven animation.
+    // One rAF input smoother feeds every visual track; video never plays itself.
     const requestRender = () => {
       if (!frame && !disposed) frame = requestAnimationFrame(render)
     }
-    const seek = () => {
-      if (motion.matches || failed || !Number.isFinite(media.duration) || media.seeking) return
-      const target = Math.min(desiredTime, Math.max(0, media.duration - .001))
-      if (Math.abs(media.currentTime - target) > .012) media.currentTime = target
+    const seek = (now) => {
+      clearTimeout(seekTimer)
+      if (motion.matches || failed || document.hidden) return
+      const plan = gate.plan({ target: desiredTime, duration: media.duration,
+        currentTime: media.currentTime, seeking: media.seeking, readyState: media.readyState,
+        now, touch: touch.matches, settled: settled && !interpolating })
+      if (!plan) return
+      if (plan.wait > 0) {
+        seekTimer = window.setTimeout(requestRender, plan.wait)
+        return
+      }
+      media.currentTime = plan.time
+      gate.didWrite(now)
     }
-    function render() {
+    function render(now) {
       frame = 0
+      if (document.hidden) return
       const reduced = motion.matches
-      const distance = Math.max(0, -page.getBoundingClientRect().top / window.innerHeight)
+      const targetProgress = clamp((window.scrollY - pageTop) / (viewportHeight * TIMELINE_DISTANCE))
+      inputProgress = smoothProgress(inputProgress, targetProgress, lastRenderTime ? now - lastRenderTime : 16, touch.matches || reduced)
+      lastRenderTime = now
+      interpolating = inputProgress !== targetProgress
+      const master = masterProgress(inputProgress)
+      const distance = master * TIMELINE_DISTANCE
       const progress = clamp((distance - FILM_START) / FILM_DISTANCE)
+      if (interpolating && !reduced) requestRender()
       desiredTime = progress * (Number.isFinite(media.duration) ? media.duration : 10)
-      page.dataset.reduced = String(reduced)
-      page.style.setProperty('--d9-progress', clamp(distance / (FILM_START + FILM_DISTANCE + HOLD_DISTANCE)))
+      if (page.dataset.reduced !== String(reduced)) page.dataset.reduced = String(reduced)
+      style(progressBar, 'transform', `scaleX(${master})`)
       if (reduced) {
-        intro.style.opacity = ''
-        intro.inert = false
-        final.style.opacity = ''
-        final.inert = false
-        actions.inert = false
-        closingParts.forEach((part) => { part.style.opacity = ''; part.style.transform = '' })
+        lastPortalDistance = -1
+        style(intro, 'opacity', '')
+        inert(intro, false)
+        style(final, 'opacity', '')
+        inert(final, false)
+        inert(actions, false)
+        closingParts.forEach((part) => { style(part, 'opacity', ''); style(part, 'transform', '') })
         media.pause()
         return
       }
-      const departure = ease(distance / .75)
-      const approach = clamp((distance - .36) / (FILM_START - .36))
-      const opening = ease(approach)
-      const depth = 1 - ease((distance - .2) / (FILM_START - .2))
-      intro.style.opacity = 1 - departure
-      intro.inert = departure > .98
-      lines.forEach((line, index) => {
-        line.style.transform = `translate3d(${(index - 1) * departure * 95}px, ${(index - 1) * departure * 35}px, ${departure * (index === 1 ? 100 : -70)}px)`
-        line.style.letterSpacing = `${-.065 + departure * .055}em`
-      })
-      // The aperture recedes independently of the very small image-plane motion.
-      // Perspective and the bevel both resolve exactly to zero at the film seam.
-      const side = (1 - opening) * 48.7
-      const top = (1 - ease(Math.min(1, approach * 1.12))) * 27
-      const bevel = (1 - opening) * .8
-      portal.style.clipPath = `polygon(${side}% ${top}%, ${100 - side}% ${top + bevel}%, ${100 - side}% ${100 - top - bevel}%, ${side}% ${100 - top}%)`
-      portal.style.opacity = ease((distance - .14) / .325)
-      portal.style.setProperty('--d9-edge', (1 - opening) * .3)
-      start.style.transform = `perspective(1400px) translateZ(${-depth * 35}px) rotateY(${depth * .8}deg) scale(${1 + depth * .065})`
-      start.style.filter = `blur(${depth * 2.5}px)`
+      const portalDistance = Math.min(distance, FILM_START)
+      if (portalDistance !== lastPortalDistance) {
+        lastPortalDistance = portalDistance
+        const departure = ease(distance / .75)
+        const approach = clamp((distance - .36) / (FILM_START - .36))
+        const opening = ease(approach)
+        const depth = 1 - ease((distance - .2) / (FILM_START - .2))
+        style(intro, 'opacity', 1 - departure)
+        inert(intro, departure > .98)
+        lines.forEach((line, index) => {
+          style(line, 'transform', `translate3d(${(index - 1) * departure * 95}px, ${(index - 1) * departure * 35}px, ${departure * (index === 1 ? 100 : -70)}px) scaleX(${1 + departure * .08})`)
+        })
+        // The aperture recedes independently of the very small image-plane motion.
+        // Perspective and the bevel both resolve exactly to zero at the film seam.
+        const side = (1 - opening) * 48.7
+        const top = (1 - ease(Math.min(1, approach * 1.12))) * 27
+        const bevel = (1 - opening) * .8
+        style(portal, 'clipPath', opening === 1 ? 'none' : `polygon(${side}% ${top}%, ${100 - side}% ${top + bevel}%, ${100 - side}% ${100 - top - bevel}%, ${side}% ${100 - top}%)`)
+        style(portal, 'opacity', ease((distance - .14) / .325))
+        style(portal, '--d9-edge', (1 - opening) * .3)
+        style(start, 'transform', `perspective(1400px) translateZ(${-depth * 35}px) rotateY(${depth * .8}deg) scale(${1 + depth * .065})`)
+        // Finish sharpening while the aperture is still small, and release the
+        // filter entirely before the image covers the viewport.
+        style(start, 'filter', opening < .65 ? `blur(${depth * 2.5 * (1 - ease(opening / .65))}px)` : 'none')
+        style(portal, 'willChange', distance < FILM_START ? 'clip-path' : 'auto')
+        lines.forEach((line) => style(line, 'willChange', departure < 1 ? 'transform, opacity' : 'auto'))
+      }
       // Identical object-fit geometry for both stills and the video. Blend only
       // at the boundary, and never expose an undecoded video frame.
-      const time = decoded && !failed ? decodedTime : 0
-      start.style.opacity = 1 - (decoded && !failed ? ease(time / .16) : 0)
-      const endBlend = failed ? ease((distance - FILM_END) / .25) : ease((time - (media.duration - .085)) / .08)
-      end.style.opacity = Number.isFinite(endBlend) ? endBlend : 0
+      const time = desiredTime
+      const visibleTime = decoded && !failed ? decodedTime : 0
+      style(start, 'opacity', 1 - (decoded && !failed ? ease(visibleTime / .16) : 0))
+      style(start, 'visibility', visibleTime >= .16 && !failed ? 'hidden' : 'visible')
+      const endBlend = failed ? ease((distance - FILM_END) / .25) : ease((visibleTime - (media.duration - .085)) / .08)
+      style(end, 'opacity', Number.isFinite(endBlend) ? endBlend : 0)
       const filmVisible = distance >= FILM_START && distance < FILM_END
       // Borrow a little of the existing quiet space for reading, without
       // extending the scroll track or overlapping adjacent statements.
@@ -105,78 +157,173 @@ export default function Demo9() {
       moments.forEach((element, index) => {
         const opacity = filmVisible ? windowOpacity(time, ...ranges[index]) : 0
         textPresence = Math.max(textPresence, opacity)
-        element.style.opacity = opacity
-        element.style.transform = `translateY(${(1 - opacity) * 14}px)`
-        element.setAttribute('aria-hidden', opacity < .1 ? 'true' : 'false')
+        style(element, 'opacity', opacity)
+        style(element, 'transform', `translateY(${(1 - opacity) * 14}px)`)
+        aria(element, opacity < .1 ? 'true' : 'false')
       })
       words.forEach((word, index) => {
         const reveal = ease((time - 8.86 - index * .32) / .23)
-        word.style.opacity = reveal
-        word.style.transform = `translateY(${(1 - reveal) * 9}px)`
-        word.setAttribute('aria-hidden', reveal < .1 ? 'true' : 'false')
+        style(word, 'opacity', reveal)
+        style(word, 'transform', `translateY(${(1 - reveal) * 9}px)`)
+        aria(word, reveal < .1 ? 'true' : 'false')
       })
       const hold = distance - FILM_END
       const closingReady = failed || endBlend > .99 ? 1 : 0
       const arrival = ease((hold - .08) / .36) * closingReady
       const supporting = ease((hold - .38) / .3) * closingReady
       const invitation = ease((hold - .7) / .3) * closingReady
-      final.style.opacity = 1
+      style(final, 'opacity', 1)
       // Scroll-led closing cadence: statement, rationale, then invitation.
-      // Every part settles before the last 75vh of the seated-frame hold.
+      // Every part settles before the last 35vh of the seated-frame hold.
       closingParts.forEach((part, index) => {
         const reveal = index < 2 ? arrival : index < 4 ? supporting : invitation
-        part.style.opacity = reveal
-        part.style.transform = `translateY(${(1 - reveal) * (index < 2 ? 12 : 8)}px)`
+        style(part, 'opacity', reveal)
+        style(part, 'transform', `translateY(${(1 - reveal) * (index < 2 ? 12 : 8)}px)`)
       })
-      final.inert = arrival < .1
-      actions.inert = invitation < .95
-      page.style.setProperty('--d9-shade', Math.max(textPresence, arrival))
-      status.textContent = distance < .45 ? 'SCROLL TO ENTER' : distance < FILM_START ? '01 / THE THRESHOLD' : distance < FILM_END ? '02 / ENTER THE WORLD' : '03 / PRESENCE'
-      seek()
+      inert(final, arrival < .1)
+      inert(actions, invitation < .95)
+      style(shade, 'opacity', Math.max(textPresence, arrival))
+      const statusText = distance < .45 ? 'SCROLL TO ENTER' : distance < FILM_START ? '01 / THE THRESHOLD' : distance < FILM_END ? '02 / ENTER THE WORLD' : '03 / PRESENCE'
+      if (status.textContent !== statusText) status.textContent = statusText
+      seek(now)
+    }
+    const finishScroll = () => {
+      clearTimeout(settleTimer)
+      settled = true
+      requestRender()
+    }
+    const scroll = () => {
+      settled = false
+      clearTimeout(settleTimer)
+      settleTimer = window.setTimeout(finishScroll, 140)
+      requestRender()
+    }
+    const resize = () => {
+      // On touch, 100svh is stable as Safari's address bar opens/closes.
+      if (!touch.matches || viewportTouch !== touch.matches || viewportWidth !== window.innerWidth) {
+        viewportWidth = window.innerWidth
+        viewportTouch = touch.matches
+        viewportHeight = stage.clientHeight || window.innerHeight
+        pageTop = window.scrollY + page.getBoundingClientRect().top
+      }
+      requestRender()
+    }
+    const preferenceChanged = () => {
+      viewportHeight = stage.clientHeight || window.innerHeight
+      pageTop = window.scrollY + page.getBoundingClientRect().top
+      lastPortalDistance = -1
+      clearTimeout(seekTimer)
+      lastRenderTime = 0
+      requestRender()
+    }
+    const visibility = () => {
+      clearTimeout(seekTimer)
+      clearTimeout(settleTimer)
+      if (document.hidden) { cancelAnimationFrame(frame); frame = 0; media.pause() }
+      else { settled = true; lastRenderTime = 0; resize() }
     }
     const ready = () => { decoded = true; decodedTime = media.currentTime; requestRender() }
     const error = () => { failed = true; page.dataset.mediaError = 'true'; requestRender() }
     const pause = () => media.pause()
+    // Opt-in presentation advances actual scroll position, never wheel events
+    // or video playback. Geometry is shared with the existing cached renderer.
+    let recording = null
+    const recordMode = new URLSearchParams(window.location.search).get('record') === '1'
+    if (recordMode) {
+      recording = createRecordingPlayback({
+        requestFrame: (callback) => requestAnimationFrame(callback),
+        cancelFrame: (id) => cancelAnimationFrame(id),
+        read: () => (window.scrollY - pageTop) / viewportHeight,
+        write: (distance) => {
+          window.scrollTo({ top: pageTop + distance * viewportHeight, behavior: 'instant' })
+          requestRender()
+        },
+        // Recording supplies input only; all five holds belong to the master.
+        speed: () => .36,
+        end: FILM_END + HOLD_DISTANCE,
+        stateChanged: (state) => { page.dataset.recording = state },
+      })
+      page.dataset.recording = 'ready'
+    }
+    const recordWheel = (event) => {
+      if (!recording || ['manual', 'finished'].includes(recording.state)) return
+      event.preventDefault()
+      if (recording.state === 'ready') recording.start()
+    }
+    const recordClick = (event) => {
+      if (event.target.closest('a, button, input, textarea, select')) return
+      if (recording?.state === 'ready') recording.start()
+    }
+    const recordKey = (event) => {
+      if (!recording || event.repeat || event.ctrlKey || event.metaKey || event.altKey || event.target.closest('input, textarea, select, [contenteditable="true"]')) return
+      if (event.code === 'Escape') { recording.exit(); return }
+      if (event.code === 'KeyR') { event.preventDefault(); recording.restart(); return }
+      if (event.code === 'Space' && recording.state !== 'manual') { event.preventDefault(); recording.toggle() }
+    }
+    const recordScroll = () => { if (recording?.state === 'ready') recording.start() }
+    const recordVisibility = () => { if (document.hidden) recording?.pause() }
+    if (recording) {
+      window.addEventListener('wheel', recordWheel, { passive: false })
+      page.addEventListener('click', recordClick)
+      window.addEventListener('keydown', recordKey)
+      window.addEventListener('scroll', recordScroll, { passive: true })
+      document.addEventListener('visibilitychange', recordVisibility)
+    }
     media.addEventListener('loadeddata', ready)
     media.addEventListener('loadedmetadata', requestRender)
     media.addEventListener('seeked', ready)
     media.addEventListener('error', error)
     media.addEventListener('play', pause)
-    window.addEventListener('scroll', requestRender, { passive: true })
-    window.addEventListener('resize', requestRender)
-    motion.addEventListener('change', requestRender)
+    window.addEventListener('scroll', scroll, { passive: true })
+    window.addEventListener('scrollend', finishScroll)
+    document.addEventListener('visibilitychange', visibility)
+    touch.addEventListener('change', resize)
+    window.addEventListener('resize', resize)
+    motion.addEventListener('change', preferenceChanged)
     if (media.readyState >= 2) { decoded = true; decodedTime = media.currentTime }
     requestRender()
     return () => {
+      recording?.dispose()
+      delete page.dataset.recording
+      window.removeEventListener('wheel', recordWheel)
+      page.removeEventListener('click', recordClick)
+      window.removeEventListener('keydown', recordKey)
+      window.removeEventListener('scroll', recordScroll)
+      document.removeEventListener('visibilitychange', recordVisibility)
       disposed = true
       cancelAnimationFrame(frame)
+      clearTimeout(seekTimer)
+      clearTimeout(settleTimer)
       media.pause()
       media.removeEventListener('loadeddata', ready)
       media.removeEventListener('loadedmetadata', requestRender)
       media.removeEventListener('seeked', ready)
       media.removeEventListener('error', error)
       media.removeEventListener('play', pause)
-      window.removeEventListener('scroll', requestRender)
-      window.removeEventListener('resize', requestRender)
-      motion.removeEventListener('change', requestRender)
+      window.removeEventListener('scroll', scroll)
+      window.removeEventListener('scrollend', finishScroll)
+      document.removeEventListener('visibilitychange', visibility)
+      touch.removeEventListener('change', resize)
+      window.removeEventListener('resize', resize)
+      motion.removeEventListener('change', preferenceChanged)
       document.title = oldTitle
     }
   }, [])
 
-  const explore = () => window.scrollTo({ top: root.current.offsetTop + window.innerHeight * FILM_START, behavior: 'instant' })
+  const explore = () => window.scrollTo({ top: root.current.offsetTop + root.current.querySelector('.d9-stage').clientHeight * TIMELINE_DISTANCE * scrollProgress(FILM_START / TIMELINE_DISTANCE), behavior: 'instant' })
   const about = (event) => {
     event.preventDefault()
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       root.current.querySelector('.d9-final').scrollIntoView()
       return
     }
-    window.scrollTo({ top: root.current.offsetTop + window.innerHeight * (FILM_END + 1.1), behavior: 'instant' })
+    window.scrollTo({ top: root.current.offsetTop + root.current.querySelector('.d9-stage').clientHeight * TIMELINE_DISTANCE * scrollProgress((FILM_END + 1.1) / TIMELINE_DISTANCE), behavior: 'instant' })
   }
 
-  return <main className="d9-film" style={{ '--d9-height': `${(1 + FILM_END + HOLD_DISTANCE) * 100}vh` }} ref={root} aria-label="Ventora — Enter the world">
+  return <main className="d9-film" style={{ '--d9-length': (1 + FILM_END + HOLD_DISTANCE) * 100 }} ref={root} aria-label="Ventora — Enter the world">
     <div className="d9-stage">
       <div className="d9-portal" aria-hidden="true">
-        <video ref={video} className="d9-video" src={`${ASSETS}main.mp4`} poster={`${ASSETS}start.png`} preload="auto" muted playsInline disablePictureInPicture tabIndex={-1} />
+        <video ref={video} className="d9-video" src={`${ASSETS}main-scrub.mp4`} poster={`${ASSETS}start.png`} preload="auto" muted playsInline disablePictureInPicture tabIndex={-1} />
         <img className="d9-start" src={`${ASSETS}start.png`} alt="" fetchPriority="high" />
         <img className="d9-end" src={`${ASSETS}end.png`} alt="" />
       </div>

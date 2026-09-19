@@ -1,13 +1,13 @@
 html[data-demo='demo9'], html[data-demo='demo9'] body { background: #0b0b0a; }
-.d9-film { --d9-progress: 0; --d9-shade: 0; position: relative; height: var(--d9-height); color: #f2ede2; background: #0b0b0a; font-family: 'Manrope', Arial, sans-serif; }
+.d9-film { --d9-progress: 0; --d9-shade: 0; position: relative; height: calc(var(--d9-length) * 1vh); color: #f2ede2; background: #0b0b0a; font-family: 'Manrope', Arial, sans-serif; }
 .d9-film * { box-sizing: border-box; }
 .d9-film a { text-decoration: none; }
 .d9-film button { color: inherit; cursor: pointer; }
 .d9-film a:focus-visible, .d9-film button:focus-visible { outline: 1px solid #e0c99e; outline-offset: 8px; }
 .d9-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; isolation: isolate; }
-.d9-portal { position: absolute; inset: 0; clip-path: inset(27% 48.7%); opacity: 0; will-change: clip-path; }
+.d9-portal { position: absolute; inset: 0; clip-path: inset(27% 48.7%); opacity: 0; }
 .d9-portal img, .d9-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
-.d9-start { will-change: transform; transform-origin: 50% 54%; }
+.d9-start { transform-origin: 50% 54%; }
 .d9-portal::after { content: ''; position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 65px 12px rgb(0 0 0 / var(--d9-edge, 0)); }
 .d9-end { opacity: 0; }
 .d9-local-shade { position: absolute; inset: 0; pointer-events: none; opacity: var(--d9-shade); background: radial-gradient(ellipse 42% 52% at 8% 62%, rgb(0 0 0 / .35) 0%, rgb(0 0 0 / .3) 38%, transparent 100%); }
@@ -22,7 +22,7 @@ html[data-demo='demo9'], html[data-demo='demo9'] body { background: #0b0b0a; }
 .d9-eyebrow { font: 9px/1.6 'DM Mono', monospace; letter-spacing: .19em; color: #c1b094; }
 .d9-intro > .d9-eyebrow { margin: 0 0 32px; }
 .d9-intro h1 { font-size: clamp(62px, 8.2vw, 150px); line-height: .95; font-weight: 400; text-align: center; letter-spacing: -.065em; margin: 0; }
-.d9-intro h1 > span { display: block; transform-style: preserve-3d; will-change: transform, opacity; }
+.d9-intro h1 > span { display: block; transform-style: preserve-3d; }
 .d9-film em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
 .d9-intro h1 em { color: #cbb99a; }
 .d9-intro-foot { position: absolute; bottom: 105px; left: 8%; right: 8%; display: flex; align-items: center; justify-content: space-between; font: 9px/1.5 'DM Mono', monospace; letter-spacing: .16em; color: #ab9e89; }
@@ -38,7 +38,7 @@ html[data-demo='demo9'], html[data-demo='demo9'] body { background: #0b0b0a; }
 .d9-moment:is(:nth-child(2), :nth-child(4), :nth-child(5)) h2 { font-weight: 600; text-shadow: 0 2px 12px rgb(0 0 0 / .42), 0 1px 3px rgb(0 0 0 / .24); }
 .d9-moment:is(:nth-child(2), :nth-child(4), :nth-child(5)) h2 em { -webkit-text-stroke: .12px currentColor; }
 .d9-moment > p:last-child:not(.d9-eyebrow) { font-size: 13.5px; line-height: 1.8; font-weight: 500; color: #f2ede2; }
-.d9-values h2 span { display: block; will-change: opacity, transform; }
+.d9-values h2 span { display: block; }
 .d9-moment .d9-eyebrow, .d9-final .d9-eyebrow { font-size: 10px; color: #d9cbb3; }
 .d9-final { position: absolute; left: 5%; top: 30%; width: 28%; opacity: 0; text-shadow: 0 2px 10px #0005, 0 1px 2px #0003; }
 .d9-final h2 { margin: 24px 0 24px; font-size: clamp(40px, 4.4vw, 79px); line-height: 1.02; letter-spacing: -.055em; font-weight: 500; }
@@ -99,4 +99,10 @@ html[data-demo='demo9'], html[data-demo='demo9'] body { background: #0b0b0a; }
   .d9-actions a > span { transform: translate3d(var(--d9-magnet-x, 0px), var(--d9-magnet-y, 0px), 0); }
   .d9-actions a { transition: color .22s ease, border-color .22s ease; }
   .d9-final .d9-actions a:hover { color: #ead6b2; border-bottom-color: #f0ddba; }
+}
+
+/* Keep touch scroll geometry independent of mobile browser toolbar resizing. */
+@media (pointer: coarse) and (prefers-reduced-motion: no-preference) {
+  .d9-film { height: calc(var(--d9-length) * 1svh); }
+  .d9-stage { height: 100svh; }
 }
