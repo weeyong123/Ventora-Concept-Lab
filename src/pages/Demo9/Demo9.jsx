@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react'
 import './Demo9.css'
+import useDemo9Pointer from './useDemo9Pointer'
 
 const ASSETS = '/demo9/demo09-'
 // Intro / threshold shortened 35%; the 750vh film mapping stays unchanged.
-// Give the seated composition a full 250vh hold.
+// A concise 175vh closing hold, 30% shorter than the previous ending.
 const FILM_START = 1.625
 const FILM_DISTANCE = 7.5
-const HOLD_DISTANCE = 2.5
+const HOLD_DISTANCE = 1.75
 const FILM_END = FILM_START + FILM_DISTANCE
 const clamp = (value) => Math.max(0, Math.min(1, value))
 const ease = (value) => { const t = clamp(value); return t * t * (3 - 2 * t) }
@@ -15,6 +16,7 @@ const windowOpacity = (time, start, end) => ease((time - start) / .24) * ease((e
 export default function Demo9() {
   const root = useRef(null)
   const video = useRef(null)
+  useDemo9Pointer(root, FILM_START)
 
   useEffect(() => {
     const page = root.current
@@ -25,6 +27,8 @@ export default function Demo9() {
     const start = page.querySelector('.d9-start')
     const end = page.querySelector('.d9-end')
     const final = page.querySelector('.d9-final')
+    const closingParts = [...final.children]
+    const actions = final.querySelector('.d9-actions')
     const moments = [...page.querySelectorAll('.d9-moment')]
     const words = [...page.querySelectorAll('.d9-values span')]
     const lines = [...page.querySelectorAll('.d9-intro h1 > span')]
@@ -62,6 +66,8 @@ export default function Demo9() {
         intro.inert = false
         final.style.opacity = ''
         final.inert = false
+        actions.inert = false
+        closingParts.forEach((part) => { part.style.opacity = ''; part.style.transform = '' })
         media.pause()
         return
       }
@@ -109,10 +115,21 @@ export default function Demo9() {
         word.style.transform = `translateY(${(1 - reveal) * 9}px)`
         word.setAttribute('aria-hidden', reveal < .1 ? 'true' : 'false')
       })
-      const arrival = ease((distance - FILM_END - .18) / .62) * (failed || endBlend > .99 ? 1 : 0)
-      final.style.opacity = arrival
-      final.style.transform = `translateY(${(1 - arrival) * 20}px)`
-      final.inert = arrival < .95
+      const hold = distance - FILM_END
+      const closingReady = failed || endBlend > .99 ? 1 : 0
+      const arrival = ease((hold - .08) / .36) * closingReady
+      const supporting = ease((hold - .38) / .3) * closingReady
+      const invitation = ease((hold - .7) / .3) * closingReady
+      final.style.opacity = 1
+      // Scroll-led closing cadence: statement, rationale, then invitation.
+      // Every part settles before the last 75vh of the seated-frame hold.
+      closingParts.forEach((part, index) => {
+        const reveal = index < 2 ? arrival : index < 4 ? supporting : invitation
+        part.style.opacity = reveal
+        part.style.transform = `translateY(${(1 - reveal) * (index < 2 ? 12 : 8)}px)`
+      })
+      final.inert = arrival < .1
+      actions.inert = invitation < .95
       page.style.setProperty('--d9-shade', Math.max(textPresence, arrival))
       status.textContent = distance < .45 ? 'SCROLL TO ENTER' : distance < FILM_START ? '01 / THE THRESHOLD' : distance < FILM_END ? '02 / ENTER THE WORLD' : '03 / PRESENCE'
       seek()
@@ -185,12 +202,13 @@ export default function Demo9() {
         <p className="d9-eyebrow">THE NEXT CHAPTER IS YOURS</p>
         <h2>MAKE YOUR<br /><em>PRESENCE</em><br />FELT.</h2>
         <p className="d9-signature">Ventora Digital</p>
-        <p className="d9-description">Websites, funnels and digital experiences built to be remembered.</p>
-        <div className="d9-actions"><a href="/">VIEW THE WORK <span aria-hidden="true">→</span></a><a href="/#contact">START A PROJECT <span aria-hidden="true">→</span></a></div>
+        <p className="d9-description">A presence that earns attention, inspires trust, and moves people to act.</p>
+        <div className="d9-actions"><a href="/"><span className="d9-cta-label">VIEW THE WORK</span><span aria-hidden="true">→</span></a><a href="/#contact"><span className="d9-cta-label">START A PROJECT</span><span aria-hidden="true">→</span></a></div>
       </section>
       <p className="d9-media-error" role="status">The film couldn’t load. Continue scrolling to the final frame.</p>
       <footer className="d9-footer"><span>VENTORA DIGITAL</span><span className="d9-position">SCROLL TO ENTER</span><span>MOTION STUDY / 2026</span></footer>
       <div className="d9-progress" aria-hidden="true" />
     </div>
+    <div className="d9-cursor" aria-hidden="true"><i /><b /></div>
   </main>
 }
