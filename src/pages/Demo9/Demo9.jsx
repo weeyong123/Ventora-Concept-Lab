@@ -4,6 +4,7 @@ import useDemo9Pointer from './useDemo9Pointer'
 import { createVideoSeekGate } from './videoSeekGate'
 import { masterProgress, scrollProgress, smoothProgress, FILM_START, FILM_DISTANCE, HOLD_DISTANCE, FILM_END, TIMELINE_DISTANCE } from './filmProgress'
 import { createMobilePlayback } from './mobilePlayback'
+import { createAndroidPlayback, isAndroidPlayback } from './androidPlayback'
 import { createRecordingPlayback } from './recordingPlayback'
 
 const ASSETS = '/demo9/demo09-'
@@ -75,7 +76,18 @@ export default function Demo9() {
     const requestRender = () => {
       if (!frame && !disposed) frame = requestAnimationFrame(render)
     }
-    const mobilePlayback = createMobilePlayback(media, requestRender)
+    const android = isAndroidPlayback(navigator.userAgent, touch.matches)
+    const retryControl = page.querySelector('.d9-play-retry')
+    const mobilePlayback = android
+      ? createAndroidPlayback(media, requestRender, (visible) => { retryControl.hidden = !visible },
+        (details) => { if (import.meta.env.DEV) console.debug('[Demo 09 Android]', details) },
+        () => touch.matches && !motion.matches && !document.hidden)
+      : createMobilePlayback(media, requestRender)
+    const retryMobile = (event) => {
+      event.stopPropagation()
+      if (android && !motion.matches && !document.hidden) mobilePlayback.unlock(true)
+    }
+    retryControl.addEventListener('click', retryMobile)
     const unlockMobile = () => {
       if (touch.matches && !motion.matches && !document.hidden) mobilePlayback.unlock()
     }
@@ -295,6 +307,7 @@ export default function Demo9() {
     if (media.readyState >= 2) { decoded = true; decodedTime = media.currentTime }
     requestRender()
     return () => {
+      retryControl.removeEventListener('click', retryMobile)
       mobilePlayback.dispose()
       page.removeEventListener('touchstart', unlockMobile)
       page.removeEventListener('pointerdown', unlockMobile)
@@ -371,6 +384,7 @@ export default function Demo9() {
         <p className="d9-description">A presence that earns attention, inspires trust, and moves people to act.</p>
         <div className="d9-actions"><a href="/"><span className="d9-cta-label">VIEW THE WORK</span><span aria-hidden="true">→</span></a><a href="/#contact"><span className="d9-cta-label">START A PROJECT</span><span aria-hidden="true">→</span></a></div>
       </section>
+      <button className="d9-play-retry" hidden type="button">TAP TO PLAY</button>
       <p className="d9-media-error" role="status">The film couldn’t load. Continue scrolling to the final frame.</p>
       <footer className="d9-footer"><span>VENTORA DIGITAL</span><span className="d9-position">SCROLL TO ENTER</span><span>MOTION STUDY / 2026</span></footer>
       <div className="d9-progress" aria-hidden="true" />
