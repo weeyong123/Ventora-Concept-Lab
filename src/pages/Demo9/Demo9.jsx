@@ -3,6 +3,7 @@ import './Demo9.css'
 import useDemo9Pointer from './useDemo9Pointer'
 import { createVideoSeekGate } from './videoSeekGate'
 import { masterProgress, scrollProgress, smoothProgress, FILM_START, FILM_DISTANCE, HOLD_DISTANCE, FILM_END, TIMELINE_DISTANCE } from './filmProgress'
+import { createMobilePlayback } from './mobilePlayback'
 import { createRecordingPlayback } from './recordingPlayback'
 
 const ASSETS = '/demo9/demo09-'
@@ -74,9 +75,14 @@ export default function Demo9() {
     const requestRender = () => {
       if (!frame && !disposed) frame = requestAnimationFrame(render)
     }
+    const mobilePlayback = createMobilePlayback(media, requestRender)
+    const unlockMobile = () => {
+      if (touch.matches && !motion.matches && !document.hidden) mobilePlayback.unlock()
+    }
     const seek = (now) => {
       clearTimeout(seekTimer)
       if (motion.matches || failed || document.hidden) return
+      if (touch.matches) { mobilePlayback.update(desiredTime); return }
       const plan = gate.plan({ target: desiredTime, duration: media.duration,
         currentTime: media.currentTime, seeking: media.seeking, readyState: media.readyState,
         now, touch: touch.matches, settled: settled && !interpolating })
@@ -143,13 +149,13 @@ export default function Demo9() {
       }
       // Identical object-fit geometry for both stills and the video. Blend only
       // at the boundary, and never expose an undecoded video frame.
-      const time = desiredTime
-      const visibleTime = decoded && !failed ? decodedTime : 0
+      const visibleTime = decoded && !failed ? (touch.matches ? media.currentTime : decodedTime) : 0
+      const time = touch.matches ? visibleTime : desiredTime
       style(start, 'opacity', 1 - (decoded && !failed ? ease(visibleTime / .16) : 0))
       style(start, 'visibility', visibleTime >= .16 && !failed ? 'hidden' : 'visible')
       const endBlend = failed ? ease((distance - FILM_END) / .25) : ease((visibleTime - (media.duration - .085)) / .08)
       style(end, 'opacity', Number.isFinite(endBlend) ? endBlend : 0)
-      const filmVisible = distance >= FILM_START && distance < FILM_END
+      const filmVisible = distance >= FILM_START && (touch.matches ? visibleTime < media.duration - .025 : distance < FILM_END)
       // Borrow a little of the existing quiet space for reading, without
       // extending the scroll track or overlapping adjacent statements.
       const ranges = [[1.5, 3.4], [3.5, 5.9], [6, 7.35], [7.6, 8.82], [8.86, 10.04]]
@@ -224,7 +230,7 @@ export default function Demo9() {
     }
     const ready = () => { decoded = true; decodedTime = media.currentTime; requestRender() }
     const error = () => { failed = true; page.dataset.mediaError = 'true'; requestRender() }
-    const pause = () => media.pause()
+    const pause = () => { if (!touch.matches || motion.matches) media.pause() }
     // Opt-in presentation advances actual scroll position, never wheel events
     // or video playback. Geometry is shared with the existing cached renderer.
     let recording = null
@@ -269,6 +275,12 @@ export default function Demo9() {
       window.addEventListener('scroll', recordScroll, { passive: true })
       document.addEventListener('visibilitychange', recordVisibility)
     }
+    page.addEventListener('touchstart', unlockMobile, { passive: true })
+    page.addEventListener('pointerdown', unlockMobile, { passive: true })
+    page.addEventListener('click', unlockMobile)
+    window.addEventListener('scroll', unlockMobile, { passive: true })
+    media.addEventListener('timeupdate', ready)
+    media.addEventListener('playing', ready)
     media.addEventListener('loadeddata', ready)
     media.addEventListener('loadedmetadata', requestRender)
     media.addEventListener('seeked', ready)
@@ -283,6 +295,13 @@ export default function Demo9() {
     if (media.readyState >= 2) { decoded = true; decodedTime = media.currentTime }
     requestRender()
     return () => {
+      mobilePlayback.dispose()
+      page.removeEventListener('touchstart', unlockMobile)
+      page.removeEventListener('pointerdown', unlockMobile)
+      page.removeEventListener('click', unlockMobile)
+      window.removeEventListener('scroll', unlockMobile)
+      media.removeEventListener('timeupdate', ready)
+      media.removeEventListener('playing', ready)
       recording?.dispose()
       delete page.dataset.recording
       window.removeEventListener('wheel', recordWheel)
