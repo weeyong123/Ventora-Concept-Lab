@@ -13,3 +13,6 @@ html[data-demo="property-advisor"]{background:#f2f0e9;scroll-padding-top:90px}ht
 @media(prefers-reduced-motion:reduce){.pa-area,.pa-takeover{height:auto}.pa-area-stage,.pa-takeover-stage{position:relative;height:auto;min-height:780px}.pa-map-building,.pa-map-transition,.pa-property-plan,.pa-shutter{display:none}.pa-takeover-stage{height:100svh}.pa-map-route{stroke-dashoffset:0}.pa-hero-photo{transform:none}}
 .pa-map-route,.pa-plan-lines path{stroke-dasharray:none;vector-effect:none}.pa-takeover .pa-section-top{mix-blend-mode:normal}
 @media(max-width:800px){.pa-hero-architecture{height:245px}.pa-hero-fragment-a{top:430px;height:90px}.pa-hero-fragment-b{top:450px}.pa-hero-depth-line{height:240px}}
+
+/* Vector arrows inherit editorial ink and cannot fall back to mobile emoji fonts. */
+.pa .pa-arrow{display:inline-block;width:1em;height:1em;min-width:1em;flex-shrink:0;vertical-align:-.12em;overflow:visible;background:none;border:0;border-radius:0;color:inherit;pointer-events:none}.pa-text-link>.pa-arrow,.pa-hero-foot a>.pa-arrow,.pa-footer a>.pa-arrow,.pa-north>.pa-arrow,.pa-property-plan small>.pa-arrow,.pa-copy>.pa-arrow{margin-left:.45em}.pa-property-controls button{display:grid;place-items:center}
