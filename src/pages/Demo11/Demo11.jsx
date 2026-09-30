@@ -10,6 +10,7 @@ function ExplodedInteraction() {
   const editorialText = useRef(null)
   const [playing, setPlaying] = useState(false)
   const [manualPlayback, setManualPlayback] = useState(false)
+  const [mobileDebug, setMobileDebug] = useState('initializing…')
 
   useEffect(() => {
     const film = video.current
@@ -34,6 +35,11 @@ function ExplodedInteraction() {
     const compact = window.matchMedia('(max-width: 760px), (max-width: 1024px) and (pointer: coarse)')
     const fallback = window.matchMedia('(prefers-reduced-motion: reduce)')
     const coarse = window.matchMedia('(pointer: coarse)')
+    const updateMobileDebug = (reason = 'update') => {
+      setMobileDebug(
+        `reason:${reason} | width:${window.innerWidth} | compact:${compact.matches} | coarse:${coarse.matches} | reduced:${fallback.matches} | manual:${manual} | seekFailed:${seekFailed}`
+      )
+    }
     // Compact touch layouts can scrub; retain the existing wide-screen fallback.
     const needsManual = () => !compact.matches && (fallback.matches || coarse.matches)
     let manual = needsManual()
@@ -53,6 +59,7 @@ function ExplodedInteraction() {
       frame = 0
       track.style.removeProperty('height')
       setManualPlayback(true)
+      updateMobileDebug('manual-fallback')
     }
 
     const seek = () => {
@@ -96,6 +103,7 @@ function ExplodedInteraction() {
         compactWidth = window.innerWidth
         compactViewport = window.innerHeight
       }
+      updateMobileDebug('progress')
       const viewport = compact.matches ? compactViewport : window.innerHeight
       const margin = parseFloat(getComputedStyle(region).marginTop) || 0
       const visualHeight = region.offsetHeight
@@ -201,6 +209,13 @@ function ExplodedInteraction() {
 
   return (
     <section className="d11-exploded" aria-labelledby="d11-exploded-title">
+      <div style={{
+        position: 'relative', zIndex: 20, margin: '0 7vw 12px', padding: '8px 10px',
+        background: '#fff', color: '#000', fontSize: '11px', lineHeight: 1.45,
+        fontFamily: 'monospace', overflowWrap: 'anywhere'
+      }}>
+        MOBILE DEBUG — {mobileDebug}
+      </div>
       <div className="d11-exploded-heading">
         <p className="d11-exploded-index">01 / THE ANATOMY OF H1</p>
         <h2 id="d11-exploded-title">PRECISION,<br /><span>LAYER BY LAYER.</span></h2>
