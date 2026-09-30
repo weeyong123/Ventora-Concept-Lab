@@ -1,0 +1,74 @@
+.vs-shell { position: fixed; inset: 0; width: 100%; height: 100svh; overflow: hidden; display: grid; place-items: center; background: #080a0d; }
+:where(.vs-shell) .vs-stage { --vs-scale: 0; position: absolute; width: 1080px; height: 1920px; flex: none; overflow: hidden; transform: scale(var(--vs-scale)); background: #101317; color: #f3f1eb; font-family: 'Manrope', Arial, sans-serif; text-align: left; isolation: isolate; }
+:where(.vs-shell) .vs-stage * { box-sizing: border-box; }
+:where(.vs-shell) .vs-stage h1, :where(.vs-shell) .vs-stage h2, :where(.vs-shell) .vs-stage p { margin: 0; }
+:where(.vs-shell) .vs-light { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: radial-gradient(ellipse at 100% 20%, #17314980, transparent 58%), radial-gradient(ellipse at 0% 83%, #6c412a38, transparent 57%), linear-gradient(155deg, #0b1018, #15191e 48%, #0c0e13); }
+:where(.vs-shell) .vs-atmosphere-tone { position: absolute; inset: 0; opacity: 0; background: radial-gradient(ellipse at 105% 28%, var(--cool), transparent 62%), radial-gradient(ellipse at -12% 76%, var(--warm), transparent 60%); }
+:where(.vs-shell) .vs-tone-fitness { --cool: #1260ac65; --warm: #d26b334d; }
+:where(.vs-shell) .vs-tone-construction { --cool: #73503938; --warm: #bd653f66; }
+:where(.vs-shell) .vs-tone-dental { --cool: #88c5e657; --warm: #286aa733; }
+:where(.vs-shell) .vs-tone-law { --cool: #77716a30; --warm: #aa866247; }
+:where(.vs-shell) .vs-tone-actualized { --cool: #8a7a5a30; --warm: #c3926052; }
+:where(.vs-shell) .vs-haze { position: absolute; inset: -100px; will-change: transform; }
+:where(.vs-shell) .vs-haze-back { opacity: .48; background: radial-gradient(ellipse 75% 12% at 82% 21%, #729cb024, transparent 75%), radial-gradient(ellipse 85% 16% at 20% 70%, #96a8b41c, transparent 75%), radial-gradient(ellipse 60% 10% at 95% 87%, #b1906a20, transparent 75%); }
+:where(.vs-shell) .vs-haze-front { opacity: .4; background: radial-gradient(ellipse 85% 8% at 10% 34%, #b4c6d222, transparent 74%), radial-gradient(ellipse 70% 14% at 86% 77%, #758b9d26, transparent 75%); }
+:where(.vs-shell) .vs-atmosphere-lines { position: absolute; inset: 0; opacity: .16; will-change: transform; }
+:where(.vs-shell) .vs-atmosphere-lines i { position: absolute; width: 1px; height: 1000px; top: -220px; right: 130px; transform: rotate(26deg); background: linear-gradient(transparent, #89b5d1, transparent); }
+:where(.vs-shell) .vs-atmosphere-lines i:nth-child(2) { right: 205px; top: -300px; opacity: .4; }
+:where(.vs-shell) .vs-atmosphere-lines i:nth-child(3) { right: auto; left: 85px; top: 1280px; height: 700px; background: linear-gradient(transparent, #c59768, transparent); }
+:where(.vs-shell) .vs-dust { position: absolute; display: block; border-radius: 50%; background: #c6d4df; opacity: .08; }
+:where(.vs-shell) .vs-dust:nth-of-type(3n) { background: #d7b286; }
+:where(.vs-shell) .vs-atmosphere-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, transparent 40%, #070b1260 100%), linear-gradient(90deg, transparent, #0b101426 35%, #0b101426 65%, transparent); }
+
+:where(.vs-shell) .vs-stage::after { content: ''; position: absolute; inset: 40px; border: 1px solid #ffffff08; pointer-events: none; }
+:where(.vs-shell) .vs-brand { position: absolute; top: 142px; left: 86px; display: flex; gap: 18px; align-items: center; font-size: 29px; letter-spacing: 5px; line-height: 1; }
+:where(.vs-shell) .vs-brand-logo { display: block; width: 300px; height: 80px; object-fit: contain; }
+:where(.vs-shell) .vs-edition { position: absolute; top: 235px; left: 88px; font-size: 17px; letter-spacing: 3px; color: #858e95; }
+:where(.vs-shell) .vs-scene { position: absolute; inset: 0; visibility: hidden; opacity: 0; }
+:where(.vs-shell) .vs-opening { opacity: 1; visibility: visible; }
+:where(.vs-shell) .vs-opening-copy { position: absolute; top: 500px; left: 86px; right: 80px; }
+:where(.vs-shell) .vs-eyebrow { font-size: 19px; font-weight: 500; letter-spacing: 3px; color: #aab2b9; }
+:where(.vs-shell) .vs-opening h1 { color: #fffdf7; font-size: 84px; font-weight: 600; line-height: 1.11; letter-spacing: -4px; margin-top: 53px; }
+:where(.vs-shell) .vs-opening h1 span { display: block; margin-top: 34px; color: #f0dcb6; }
+:where(.vs-shell) .vs-rule { width: 110px; height: 2px; background: #d4be96; margin-top: 56px; }
+:where(.vs-shell) .vs-case-heading { position: absolute; top: 320px; left: 86px; right: 100px; }
+:where(.vs-shell) .vs-case-heading .vs-eyebrow { display: flex; justify-content: space-between; }
+:where(.vs-shell) .vs-case-heading h2 { display: flex; justify-content: space-between; align-items: center; font-size: 80px; letter-spacing: -4px; font-weight: 500; margin-top: 22px; }
+:where(.vs-shell) .vs-case-heading h2 span { color: #d4be96; font-size: 64px; font-weight: 300; }
+:where(.vs-shell) .vs-phase { position: absolute; top: 502px; left: 88px; font-size: 21px; letter-spacing: 5px; }
+:where(.vs-shell) .vs-phase > span { position: absolute; width: 250px; }
+:where(.vs-shell) .vs-label-before { color: #92999f; }
+:where(.vs-shell) .vs-label-after { color: #e2cda8; opacity: 0; }
+:where(.vs-shell) .vs-label-after i { display: inline-block; width: 9px; height: 9px; background: #e2cda8; border-radius: 50%; vertical-align: middle; margin: 0 12px 4px 0; }
+:where(.vs-shell) .vs-art-window { position: absolute; left: 70px; right: 70px; top: 575px; height: 1050px; }
+:where(.vs-shell) .vs-before { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; }
+:where(.vs-shell) .vs-before-window { width: 740px; overflow: hidden; filter: saturate(.55) brightness(.84); box-shadow: 0 28px 90px #0006; }
+:where(.vs-shell) .vs-page-image { display: block; width: 100%; max-width: none; height: auto; }
+:where(.vs-shell) .vs-page-track { transform-origin: 50% 0%; }
+:where(.vs-shell) .vs-after { position: absolute; inset: -12px -16px; clip-path: inset(0 100% 0 0); overflow: hidden; background: #171a1e; box-shadow: 0 30px 80px #0005; }
+:where(.vs-shell) .vs-after-art { transform-origin: 50% 0%; }
+:where(.vs-shell) .vs-outcome { position: absolute; left: 86px; top: 1660px; }
+:where(.vs-shell) .vs-outcome .vs-eyebrow { font-size: 15px; letter-spacing: 3px; }
+:where(.vs-shell) .vs-outcome p { font-size: 29px; margin-top: 9px; letter-spacing: -.5px; }
+:where(.vs-shell) .vs-footer { position: absolute; bottom: 58px; left: 86px; right: 86px; display: flex; justify-content: space-between; font-size: 13px; letter-spacing: 2px; color: #7c858c; }
+:where(.vs-shell) .vs-closing-copy { position: absolute; top: 485px; left: 86px; right: 86px; }
+:where(.vs-shell) .vs-closing h2 { position: relative; height: 263.34px; font-size: 133px; letter-spacing: -7px; line-height: .99; font-weight: 500; margin-top: 55px; }
+:where(.vs-shell) .vs-closing h2 span { color: #d4be96; }
+:where(.vs-shell) .vs-values { font-size: 24px; letter-spacing: 4px; margin-top: 42px !important; }
+:where(.vs-shell) .vs-promise { font-size: 48px; line-height: 1.4; letter-spacing: -1.5px; margin-top: 48px !important; }
+:where(.vs-shell) .vs-cta { font-size: 73px; font-weight: 500; letter-spacing: -2px; margin-top: 92px !important; color: #f4dfb9; text-shadow: 0 0 32px #e2cda81a; }
+:where(.vs-shell) .vs-cta span { margin-left: 35px; }
+:where(.vs-shell) .vs-services { font-size: 21px; color: #9ea5aa; margin-top: 42px !important; }
+:where(.vs-shell) .vs-error { position: absolute; left: 86px; right: 86px; bottom: 160px; font-size: 28px; }
+
+:where(.vs-shell) .vs-opening-copy .vs-eyebrow { color: #d8dce0; }
+
+:where(.vs-shell) .vs-closing-logo { display: block; width: 100%; height: 100%; object-fit: contain; object-position: left center; }
+:where(.vs-shell) .vs-footer-brand { display: inline-flex; align-items: center; }
+:where(.vs-shell) .vs-footer-brand img { width: 130px; height: 26px; object-fit: contain; }
+:where(.vs-shell) .vs-case-law .vs-before-window { width: 660px; filter: saturate(.45) brightness(.78); }
+:where(.vs-shell) .vs-case-law .vs-page-after { width: 106%; margin-left: -3%; }
+
+/* Actualized: magnify only the upper page in the existing frame, at full source color. */
+:where(.vs-shell) .vs-case-actualized .vs-before-window { width: 940px; filter: none; }
+:where(.vs-shell) .vs-case-actualized .vs-page-before { margin-top: 0; }

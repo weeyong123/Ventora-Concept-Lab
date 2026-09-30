@@ -10,6 +10,10 @@ import Saas from './Saas.jsx'
 import LeadstouConcept from './LeadstouConcept.jsx'
 import HighTicketBabesPage from './pages/HighTicketBabes/HighTicketBabesPage.jsx'
 
+const VentoraShowreel = lazy(() => import('./pages/VentoraShowreel/VentoraShowreel.jsx'))
+
+const Demo11 = lazy(() => import('./pages/Demo11/Demo11.jsx'))
+
 const Demo9 = lazy(() => import('./pages/Demo9/Demo9.jsx'))
 
 const route = window.location.pathname.replace(/\/+$/, '') || '/'
@@ -21,11 +25,13 @@ const isSaas = route === '/saas'
 const isLeadstou = route === '/leadstou-concept'
 const isHighTicketBabes = route === '/highticketbabes'
 document.documentElement.dataset.demo = isStreetStudio ? 'street-studio' : isPropertyAdvisor ? 'property-advisor' : isLeadstou ? 'leadstou' : isSaas ? 'saas' : isConstruction ? 'construction' : isCoach ? 'coach' : 'noema'
+if (route === '/ventora-showreel') document.documentElement.dataset.demo = 'ventora-showreel'
+if (route === '/demo11') document.documentElement.dataset.demo = 'demo11'
 if (route === '/demo9') document.documentElement.dataset.demo = 'demo9'
 if (isHighTicketBabes) document.documentElement.dataset.demo = 'highticketbabes'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {route === '/demo9' ? <Suspense fallback={null}><Demo9 /></Suspense> : isHighTicketBabes ? <HighTicketBabesPage /> : isStreetStudio ? <StreetStudio /> : isPropertyAdvisor ? <PropertyAdvisor /> : isLeadstou ? <LeadstouConcept /> : isSaas ? <Saas /> : isConstruction ? <Construction /> : isCoach ? <Coach /> : <App />}
+    {route === '/demo11' ? <Suspense fallback={null}><Demo11 /></Suspense> : route === '/ventora-showreel' ? <Suspense fallback={null}><VentoraShowreel /></Suspense> : route === '/demo9' ? <Suspense fallback={null}><Demo9 /></Suspense> : isHighTicketBabes ? <HighTicketBabesPage /> : isStreetStudio ? <StreetStudio /> : isPropertyAdvisor ? <PropertyAdvisor /> : isLeadstou ? <LeadstouConcept /> : isSaas ? <Saas /> : isConstruction ? <Construction /> : isCoach ? <Coach /> : <App />}
   </StrictMode>,
 )
