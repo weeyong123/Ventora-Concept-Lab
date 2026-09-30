@@ -35,7 +35,7 @@ function ExplodedInteraction() {
     const fallback = window.matchMedia('(prefers-reduced-motion: reduce)')
     const coarse = window.matchMedia('(pointer: coarse)')
     // Compact touch layouts can scrub; retain the existing wide-screen fallback.
-    const needsManual = () => fallback.matches || (coarse.matches && !compact.matches)
+    const needsManual = () => !compact.matches && (fallback.matches || coarse.matches)
     let manual = needsManual()
     let compactViewport = window.innerHeight
     let compactWidth = window.innerWidth
@@ -75,6 +75,12 @@ function ExplodedInteraction() {
           useManualPlayback()
         }, 4000)
       } catch {
+        // Do not expose the manual PLAY fallback on compact/mobile layouts.
+        // A transient Safari seek failure should leave the section scroll-driven.
+        if (compact.matches) {
+          window.clearTimeout(seekTimer)
+          return
+        }
         seekFailed = true
         useManualPlayback()
       }
