@@ -65,9 +65,15 @@ function ExplodedInteraction() {
         film.currentTime = targetTime
         window.clearTimeout(seekTimer)
         seekTimer = window.setTimeout(() => {
+          // Mobile Safari can take longer to decode an arbitrary seek.
+          // Keep compact layouts in scroll-scrub mode instead of exposing PLAY.
+          if (compact.matches) {
+            scheduleSeek()
+            return
+          }
           seekFailed = true
           useManualPlayback()
-        }, 2500)
+        }, 4000)
       } catch {
         seekFailed = true
         useManualPlayback()
@@ -124,7 +130,7 @@ function ExplodedInteraction() {
     }
     const onPreferenceChange = () => {
       film.pause()
-      manual = needsManual() || seekFailed
+      manual = needsManual() || (seekFailed && !compact.matches)
       setManualPlayback(manual)
       if (manual) {
         cancelAnimationFrame(frame)
