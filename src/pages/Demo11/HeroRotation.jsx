@@ -108,17 +108,20 @@ export default function HeroRotation() {
       startY = event.clientY
       distance = 0
       axis = null
-      element.setPointerCapture(pointer)
-      element.dataset.dragging = 'true'
+      // Wait for clear horizontal intent before explicitly capturing touch.
     }
     const move = event => {
       if (event.pointerType === 'mouse') { follow(event); return }
       if (event.pointerId !== pointer) return
       const dx = event.clientX - lastX
       if (!axis) {
-        if (Math.max(Math.abs(dx), Math.abs(event.clientY - startY)) < 6) return
-        if (Math.abs(event.clientY - startY) > Math.abs(dx)) { finish(); return }
+        const dy = Math.abs(event.clientY - startY)
+        if (Math.max(Math.abs(dx), dy) < 10) return
+        if (dy >= Math.abs(dx)) { finish(); return }
+        if (Math.abs(dx) < dy * 1.35) return
         axis = 'horizontal'
+        element.setPointerCapture(pointer)
+        element.dataset.dragging = 'true'
       }
       lastX = event.clientX
       distance += dx

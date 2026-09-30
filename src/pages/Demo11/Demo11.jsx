@@ -31,9 +31,14 @@ function ExplodedInteraction() {
         phrase.setAttribute('aria-hidden', opacity === 0 ? 'true' : 'false')
       })
     }
-    // Touch devices use explicit playback rather than frequent decoder seeks.
-    const fallback = window.matchMedia('(prefers-reduced-motion: reduce), (pointer: coarse)')
-    let manual = fallback.matches
+    const compact = window.matchMedia('(max-width: 760px), (max-width: 1024px) and (pointer: coarse)')
+    const fallback = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const coarse = window.matchMedia('(pointer: coarse)')
+    // Compact touch layouts can scrub; retain the existing wide-screen fallback.
+    const needsManual = () => fallback.matches || (coarse.matches && !compact.matches)
+    let manual = needsManual()
+    let compactViewport = window.innerHeight
+    let compactWidth = window.innerWidth
     let frame = 0
     let seekTimer = 0
     let targetTime = 0
@@ -73,22 +78,31 @@ function ExplodedInteraction() {
       if (!frame && !manual && !disposed) frame = requestAnimationFrame(seek)
     }
     const updateProgress = () => {
-      const viewport = window.innerHeight
+      // iPhone browser chrome changes height during a gesture. Keep mobile
+      // scroll geometry stable until width/orientation changes.
+      if (compactWidth !== window.innerWidth) {
+        compactWidth = window.innerWidth
+        compactViewport = window.innerHeight
+      }
+      const viewport = compact.matches ? compactViewport : window.innerHeight
       const margin = parseFloat(getComputedStyle(region).marginTop) || 0
       const visualHeight = region.offsetHeight
       // Trim the extra viewport travel from 0.6 to 0.2; retain linear seeking.
-      const distance = (visualHeight + viewport * 0.2) * 1.8 * 2.7
+      const desktopDistance = (visualHeight + viewport * 0.2) * 1.8 * 2.7
+      // 2.2 viewports is ~45% less than the previous phone scrub range.
+      const distance = compact.matches ? viewport * 1.35 : desktopDistance
       // Real track height (not bottom padding) gives sticky a containing block
       // for the entire scrub. Keep the visual centered while the track scrolls.
-      const stickyTop = Math.max(0, (viewport - visualHeight) / 2)
+      const stickyTop = compact.matches ? 24 : Math.max(0, (viewport - visualHeight) / 2)
       track.style.setProperty('--d11-sticky-top', `${stickyTop}px`)
       if (manual) {
         track.style.removeProperty('height')
         return
       }
       // Keep a brief final-frame viewing moment, reduced from 0.35 viewport.
-      const endHold = viewport * 0.2
-      track.style.height = `${margin + visualHeight + distance + endHold}px`
+      const endHold = viewport * (compact.matches ? 0 : 0.2)
+      const trackHeight = compact.matches ? visualHeight + distance * 0.55 : margin + visualHeight + distance + endHold
+      track.style.height = `${trackHeight}px`
       if (!Number.isFinite(film.duration) || film.duration <= 0) return
       const start = track.getBoundingClientRect().top + margin
       const progress = Math.min(1, Math.max(0, (stickyTop - start) / distance))
@@ -110,7 +124,7 @@ function ExplodedInteraction() {
     }
     const onPreferenceChange = () => {
       film.pause()
-      manual = fallback.matches || seekFailed
+      manual = needsManual() || seekFailed
       setManualPlayback(manual)
       if (manual) {
         cancelAnimationFrame(frame)
@@ -140,6 +154,8 @@ function ExplodedInteraction() {
     film.addEventListener('loadeddata', syncEditorialText)
     film.addEventListener('timeupdate', syncEditorialText)
     fallback.addEventListener('change', onPreferenceChange)
+    compact.addEventListener('change', onPreferenceChange)
+    coarse.addEventListener('change', onPreferenceChange)
     document.addEventListener('visibilitychange', onVisibilityChange)
     if (film.readyState >= 1) initializeFirstFrame()
     else updateProgress()
@@ -157,6 +173,8 @@ function ExplodedInteraction() {
       film.removeEventListener('loadeddata', syncEditorialText)
       film.removeEventListener('timeupdate', syncEditorialText)
       fallback.removeEventListener('change', onPreferenceChange)
+      compact.removeEventListener('change', onPreferenceChange)
+      coarse.removeEventListener('change', onPreferenceChange)
       document.removeEventListener('visibilitychange', onVisibilityChange)
       film.pause()
     }
