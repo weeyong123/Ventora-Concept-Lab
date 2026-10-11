@@ -14,6 +14,8 @@ const VentoraShowreel = lazy(() => import('./pages/VentoraShowreel/VentoraShowre
 
 const Demo10 = lazy(() => import('./pages/Demo10/Demo10.jsx'))
 
+const Demo13 = lazy(() => import('./pages/Demo13/Demo13.jsx'))
+
 const Demo11 = lazy(() => import('./pages/Demo11/Demo11.jsx'))
 
 const Demo9 = lazy(() => import('./pages/Demo9/Demo9.jsx'))
@@ -29,12 +31,13 @@ const isHighTicketBabes = route === '/highticketbabes'
 document.documentElement.dataset.demo = isStreetStudio ? 'street-studio' : isPropertyAdvisor ? 'property-advisor' : isLeadstou ? 'leadstou' : isSaas ? 'saas' : isConstruction ? 'construction' : isCoach ? 'coach' : 'noema'
 if (route === '/ventora-showreel') document.documentElement.dataset.demo = 'ventora-showreel'
 if (route === '/demo10') document.documentElement.dataset.demo = 'demo10'
+if (route === '/demo13') document.documentElement.dataset.demo = 'demo13'
 if (route === '/demo11') document.documentElement.dataset.demo = 'demo11'
 if (route === '/demo9') document.documentElement.dataset.demo = 'demo9'
 if (isHighTicketBabes) document.documentElement.dataset.demo = 'highticketbabes'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {route === '/demo10' ? <Suspense fallback={null}><Demo10 /></Suspense> : route === '/demo11' ? <Suspense fallback={null}><Demo11 /></Suspense> : route === '/ventora-showreel' ? <Suspense fallback={null}><VentoraShowreel /></Suspense> : route === '/demo9' ? <Suspense fallback={null}><Demo9 /></Suspense> : isHighTicketBabes ? <HighTicketBabesPage /> : isStreetStudio ? <StreetStudio /> : isPropertyAdvisor ? <PropertyAdvisor /> : isLeadstou ? <LeadstouConcept /> : isSaas ? <Saas /> : isConstruction ? <Construction /> : isCoach ? <Coach /> : <App />}
+    {route === '/demo13' ? <Suspense fallback={null}><Demo13 /></Suspense> : route === '/demo10' ? <Suspense fallback={null}><Demo10 /></Suspense> : route === '/demo11' ? <Suspense fallback={null}><Demo11 /></Suspense> : route === '/ventora-showreel' ? <Suspense fallback={null}><VentoraShowreel /></Suspense> : route === '/demo9' ? <Suspense fallback={null}><Demo9 /></Suspense> : isHighTicketBabes ? <HighTicketBabesPage /> : isStreetStudio ? <StreetStudio /> : isPropertyAdvisor ? <PropertyAdvisor /> : isLeadstou ? <LeadstouConcept /> : isSaas ? <Saas /> : isConstruction ? <Construction /> : isCoach ? <Coach /> : <App />}
   </StrictMode>,
 )
