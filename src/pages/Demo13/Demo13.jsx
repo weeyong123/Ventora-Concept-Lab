@@ -176,6 +176,7 @@ export default function Demo13() {
   const [selected, setSelected] = useState(0)
   const [view, setView] = useState('paths')
   const [focused, setFocused] = useState(0)
+  const [preview, setPreview] = useState(0)
   const [navigation, setNavigation] = useState(null)
   const [notes, setNotes] = useState({})
   const [playing, setPlaying] = useState(false)
@@ -301,6 +302,7 @@ export default function Demo13() {
   function select(index, fromTour = false) {
     setSelected(index)
     setFocused(index)
+    setPreview(index)
     setView('journey')
     setNavigation({ target: 'journey', focus: !fromTour })
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -341,6 +343,7 @@ export default function Demo13() {
       } else if (stage.scene === 'paths') {
         setSelected(stage.path)
         setFocused(stage.path)
+        setPreview(stage.path)
         setView('paths')
         setEntry(null)
         setNavigation({ target: 'paths', focus: false })
@@ -355,14 +358,20 @@ export default function Demo13() {
       <video ref={film} className="d13-film" src="/demo13/wellness-hero.mp4" muted playsInline preload="auto" onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onEnded={() => { setFilmEnded(true); setPlaying(false) }} onTimeUpdate={() => { const video = film.current; filmProgress.current?.style.setProperty('--d13-film-progress', video.duration ? video.currentTime / video.duration : 0) }} aria-label="Wellness film in an architectural setting" />
       <div className="d13-shade" />
       <header className="d13-header"><a className="d13-brand" href="#d13-top" aria-label="VITAL / 01 home">VITAL <span>/ 01</span></a><span className="d13-header-note">A MORE CONSIDERED WELLBEING</span><a className="d13-nav" href="#d13-journeys">Find your path <span aria-hidden="true">↗</span></a></header>
-      <div className="d13-hero-copy"><p className="d13-eyebrow"><span className="d13-dot" /> HUMAN POTENTIAL. CONSIDERED.</p><h1 id="d13-title">THE FUTURE OF<br />FEELING <em>BETTER.</em></h1><div className="d13-hero-bottom"><p>A more considered approach to performance,<br className="d13-desktop-break" /> recovery and living well.</p><div className="d13-hero-actions"><a className="d13-round-link" href="#d13-journeys"><span>Discover your direction</span><i aria-hidden="true">↓</i></a><button className="d13-tour-launch" ref={launchTour} onClick={startTour}><span aria-hidden="true">▷</span> PLAY THE EXPERIENCE <small>24 SEC</small></button></div></div></div>
+      <div className="d13-hero-copy"><p className="d13-eyebrow"><span className="d13-dot" /> HUMAN POTENTIAL. CONSIDERED.</p><h1 id="d13-title">THE FUTURE OF<br />FEELING <em>BETTER.</em></h1><div className="d13-hero-bottom"><p>A more considered approach to performance,<br className="d13-desktop-break" /> recovery and living well.</p><div className="d13-hero-actions"><a className="d13-round-link" href="#d13-journeys"><span>Discover your direction</span><i aria-hidden="true">↓</i></a><div className="d13-tour-invitation"><button className="d13-tour-launch" ref={launchTour} onClick={startTour} aria-describedby="d13-tour-hint">TAKE A GUIDED TOUR <span aria-hidden="true">↗</span></button><small id="d13-tour-hint">One click. Discover what’s right for you.</small></div></div></div></div>
       <div className="d13-film-footer"><div className="d13-film-progress" ref={filmProgress} aria-hidden="true" /><span>PERFORMANCE / RECOVERY / LONGEVITY</span><button onClick={() => { if (playing) film.current.pause(); else if (filmEnded) replayFilm(); else film.current.play().catch(() => {}) }} aria-label={playing ? 'Pause background film' : filmEnded ? 'Replay background film' : 'Play background film'}><span aria-hidden="true">{playing ? 'Ⅱ' : '▷'}</span> {playing ? 'PAUSE FILM' : filmEnded ? 'REPLAY FILM' : 'PLAY FILM'}</button></div>
     </section>
 
     <section className="d13-journeys" id="d13-journeys" ref={selector} aria-labelledby="d13-question">
       <div className="d13-section-meta"><span className="d13-eyebrow">01 — YOUR DIRECTION</span><span className="d13-eyebrow">WELLBEING IS PERSONAL.</span></div>
       <div className="d13-intro"><h2 id="d13-question">WHAT BRINGS<br /><em>YOU HERE?</em></h2><p>Different goals deserve <br />different journeys.<span>Choose what matters to you.</span></p></div>
-      <div className="d13-selector" role="tablist" aria-label="Choose your wellness path" aria-orientation="vertical">{paths.map((item, index) => <button className="d13-choice" key={item.id} id={`d13-tab-${item.id}`} role="tab" aria-selected={selected === index} aria-controls="d13-experience" tabIndex={focused === index ? 0 : -1} onFocus={() => setFocused(index)} ref={el => { tabs.current[index] = el }} onClick={() => select(index)} onKeyDown={event => onKey(event, index)}><span className="d13-number">{item.number} /</span><span className="d13-choice-name">{item.name}</span><span className="d13-choice-copy">{item.short}</span><span className="d13-choice-arrow" aria-hidden="true">{selected === index ? '↘' : '↗'}</span></button>)}</div>
+      <div className="d13-path-studio"><div className="d13-selector" role="tablist" aria-label="Choose your wellness path" aria-orientation="vertical">{paths.map((item, index) => <button className="d13-choice" key={item.id} id={`d13-tab-${item.id}`} role="tab" aria-selected={selected === index} aria-controls="d13-experience" tabIndex={focused === index ? 0 : -1} data-preview={preview === index ? "true" : undefined} onPointerEnter={event => { if (event.pointerType !== "touch") setPreview(index) }} onFocus={() => { setFocused(index); setPreview(index) }} ref={el => { tabs.current[index] = el }} onClick={() => select(index)} onKeyDown={event => onKey(event, index)}><span className="d13-number">{item.number} /</span><span className="d13-choice-name">{item.name}</span><span className="d13-choice-copy">{item.short}</span><span className="d13-choice-arrow" aria-hidden="true">{selected === index ? '↘' : '↗'}</span></button>)}</div>
+        <div className="d13-path-window" aria-hidden="true">
+          {paths.map((item, index) => <img key={item.id} src={`/demo13/${item.id}-editorial.jpg`} alt="" width="1536" height="1024" className={preview === index ? 'is-current' : ''} />)}
+          <div className="d13-window-caption"><span>YOUR NEXT CHAPTER / {paths[preview].number}</span><strong>{paths[preview].name}</strong><small>{paths[preview].short}</small></div>
+          <div className="d13-window-track">{paths.map((item, index) => <span key={item.id} className={preview === index ? 'is-current' : ''}>{item.number}</span>)}</div>
+        </div>
+      </div>
     </section>
 
     <section id="d13-experience" className={`d13-experience d13-experience-${path.id}`} role="tabpanel" aria-labelledby={`d13-tab-${path.id}`} hidden={view === 'paths'} ref={journey}>
