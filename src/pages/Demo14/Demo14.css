@@ -212,7 +212,7 @@ html[data-demo="demo14"]{background:#0f1016;color:#f5f1e8;scroll-padding-top:30p
  .haunt-hero-copy h1{font-size:clamp(41px,12.2vw,53px);line-height:1.02;margin:14px auto 18px;letter-spacing:-.02em}
  .haunt-hero-copy>p:not(.haunt-eyebrow){font-size:12px;line-height:1.8;max-width:280px;margin:0 auto 14px;text-shadow:0 2px 10px #000}
  .haunt-hero-copy>.haunt-text{justify-content:center;margin:8px auto 0;padding:10px 0;font-size:8px!important}
- .haunt-scene-transformation .haunt-room-1 .haunt-media,.haunt-scene-transformation .haunt-room-2 .haunt-media{object-position:50% center}
+ .haunt .haunt-room-1 .haunt-media,.haunt .haunt-room-2 .haunt-media{object-position:50% center}
  .haunt-film-skip{gap:10px;line-height:1.5}
  .haunt-film-skip>svg{width:18px;height:18px;flex-basis:18px}
 }
