@@ -216,3 +216,130 @@ html[data-demo="demo14"]{background:#0f1016;color:#f5f1e8;scroll-padding-top:30p
  .haunt-film-skip{gap:10px;line-height:1.5}
  .haunt-film-skip>svg{width:18px;height:18px;flex-basis:18px}
 }
+/* Halloween 2026: scope-first offers and a concise trust section. */
+.haunt-card.haunt-card-featured{border-color:#efad5c;box-shadow:0 0 30px #f28a1a18}
+.haunt-card .haunt-featured-label{min-height:0;margin:12px 0 0;color:#ffc47b;font-size:9px;letter-spacing:1.2px}
+.haunt-offer-result{padding:15px 0;border-top:1px solid #ffffff18;margin-bottom:15px}.haunt-offer-result small{color:#d9bb8f;font-size:9px;letter-spacing:1.5px}.haunt-offer-result p{font-size:12px;line-height:1.8;color:#dcd3e3}
+.haunt-room-outcome{max-width:430px;font-size:13px;line-height:1.8}.haunt-room-outcome strong{display:block;color:#f0bd7a;margin-bottom:7px}
+.haunt-trust,.haunt-terms{max-width:1296px;margin:auto;padding:35px 5%}.haunt-trust{text-align:center}.haunt-trust h2{margin-bottom:25px}.haunt-trust>div{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.haunt-trust strong{display:block;color:#f1d2a6;font-family:Cinzel,Georgia,serif;font-weight:400;font-size:18px;margin-bottom:6px}.haunt-trust>p:not(.haunt-eyebrow){max-width:650px;margin:20px auto}.haunt-trust .haunt-text{justify-content:center}
+.haunt-terms summary{cursor:pointer;color:#e6c695;padding:16px 0;border-block:1px solid #ffffff22}.haunt-terms li{color:#bfb4cb;font-size:12px;margin:12px 0;line-height:1.8}.haunt-terms summary:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+@media(max-width:700px){.haunt-trust>div{grid-template-columns:1fr;gap:4px}.haunt-trust,.haunt-terms{padding:25px 6%}.haunt-room-outcome{font-size:12px;max-width:320px}.haunt-price-now{gap:12px}.haunt-price-now>span{font-size:7px}}
+.haunt-included-label{display:block;margin-top:20px;color:#d9bb8f;font-size:9px;letter-spacing:1.5px}
+/* Slow invitation glow: draw attention without moving controls or text. */
+.haunt-entrance-button .haunt-keyhole,
+.haunt-door-marker .haunt-keyhole,
+.haunt-scene-before .haunt-curse-seal,
+.haunt-scene-after .haunt-room-actions>.haunt-button,
+.haunt-card>.haunt-button,
+.haunt-door-preview>.haunt-button{
+ animation:haunt-invitation-breathe 2.4s ease-in-out infinite;
+}
+@keyframes haunt-invitation-breathe{
+ 0%,100%{box-shadow:0 0 10px 1px #f28a1a24,inset 0 0 10px #f28a1a0d}
+ 50%{box-shadow:0 0 30px 5px #f28a1a66,inset 0 0 18px #f28a1a26}
+}
+.haunt-entrance-button:is(:hover,:focus-visible,:active) .haunt-keyhole,
+.haunt-door:is(:hover,:focus-visible,:active) .haunt-keyhole,
+.haunt-curse-button:is(:hover,:focus-visible,:active) .haunt-curse-seal,
+.haunt-scene-after .haunt-room-actions>.haunt-button:is(:hover,:focus-visible,:active),
+.haunt-card>.haunt-button:is(:hover,:focus-visible,:active),
+.haunt-door-preview>.haunt-button:is(:hover,:focus-visible,:active){animation:none}
+/* Preserve the separate fracture animation when the curse is activated. */
+.haunt.is-breaking .haunt-curse-seal{animation:haunt-seal-break .65s ease-in forwards}
+@media(prefers-reduced-motion:reduce){
+ .haunt-entrance-button .haunt-keyhole,.haunt-door-marker .haunt-keyhole,
+ .haunt-scene-before .haunt-curse-seal,.haunt-scene-after .haunt-room-actions>.haunt-button,
+ .haunt-card>.haunt-button,.haunt-door-preview>.haunt-button{
+ animation:none;box-shadow:0 0 16px #f28a1a40,inset 0 0 10px #f28a1a14;
+ }
+}
+/* A readable price comparison wherever an offer is mentioned. */
+.haunt .haunt-inline-price{display:inline-flex;align-items:baseline;flex-wrap:wrap;gap:8px;font-size:inherit;letter-spacing:0;color:inherit}
+.haunt .haunt-inline-price s{color:#f0e9f3;font-size:14px;font-weight:500;text-decoration:line-through;text-decoration-color:#aa947d;text-decoration-thickness:1px;white-space:nowrap}
+.haunt .haunt-inline-price b{color:#ffbb6c;font-size:1.08em;font-weight:600;white-space:nowrap}
+.haunt .haunt-radio>.haunt-inline-price{flex:0 0 auto;justify-content:flex-end}
+/* Door invitations read as controls, not background ornament. */
+.haunt-door-marker .haunt-door-enter{display:flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:10px 18px;border:0;border-radius:0;background:transparent;color:#fff0d5;font-size:13px;font-weight:600;letter-spacing:2px;white-space:nowrap;text-shadow:0 2px 5px #000,0 0 14px #000;animation:none}
+.haunt-door-marker .haunt-door-enter svg{width:17px;height:17px;margin:0;color:inherit;flex-shrink:0}
+.haunt-door-marker .haunt-keyhole{border-color:#d9b77b88;color:#ffe6bc;animation:haunt-door-breathe 2.4s ease-in-out infinite}
+.haunt-door-marker .haunt-keyhole svg{color:#ffe6bc;filter:drop-shadow(0 0 5px #d9b77b55)}
+@keyframes haunt-door-breathe{0%,100%{box-shadow:0 0 8px #d9b77b18,inset 0 0 8px #d9b77b0a}50%{box-shadow:0 0 20px #d9b77b50,inset 0 0 12px #d9b77b1a}}
+.haunt-door:is(:hover,:focus-visible,:active) .haunt-door-enter,.haunt-door:is(:hover,:focus-visible,:active) .haunt-keyhole{animation:none;box-shadow:none;border-color:#f0d3a1}
+.haunt-scroll-cue{padding:18px 30px;border:0;border-radius:0;background:transparent;box-shadow:none;animation:none;gap:12px}
+.haunt-scroll-cue>strong{font-size:16px;font-weight:600;color:#ffe0a6;letter-spacing:1.5px}
+.haunt-scroll-cue>span{color:#e9daca;font-size:10px;letter-spacing:1.2px}
+.haunt-scroll-cue svg{width:28px;height:36px;stroke-width:1.8;animation-duration:1.5s}
+.haunt-scroll-cue:is(:hover,:focus-visible,:active){animation:none;background:transparent;color:#fff1dc}
+@media(max-width:700px){
+ .haunt-door-marker .haunt-door-enter{font-size:11px;min-height:36px;padding:7px 5px;gap:5px;letter-spacing:1px}
+ .haunt-door-marker .haunt-door-enter svg{width:13px;height:13px}
+ .haunt-door-marker .haunt-keyhole{width:34px;height:34px}
+ .haunt-scroll-cue{padding:16px 20px;max-width:100%}
+ .haunt-scroll-cue>strong{font-size:13px}.haunt-scroll-cue>span{font-size:8px}
+ .haunt .haunt-radio>.haunt-inline-price{flex-direction:column;gap:0;align-items:flex-end}
+}
+@media(prefers-reduced-motion:reduce){.haunt-door-marker .haunt-door-enter,.haunt-door-marker .haunt-keyhole,.haunt-scroll-cue,.haunt-scroll-cue svg{animation:none}}
+/* Keep the full wordmark inside its hit area, including its final letters. */
+.haunt .haunt-brand{width:122px;padding:0}
+.haunt .haunt-brand img{left:0}
+@media(max-width:700px){.haunt .haunt-brand{width:92px}.haunt .haunt-brand img{left:0}}
+
+/* Original prices stay legible beside the offer, with one fine strike only. */
+.haunt-price-before>span{font-size:10px;color:#ded4e4;gap:6px}
+.haunt-price-before s{font-size:23px;font-weight:500;color:#f0e9f3;text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:#aa947d}
+.haunt-price-before s:after{content:none}
+.haunt .haunt-room-detail .haunt-inline-price s,.haunt .haunt-room-outcome .haunt-inline-price s{font-size:16px}
+.haunt .haunt-inline-price{gap:10px}
+.haunt-scroll-cue>strong{color:#fff0da;text-shadow:0 2px 8px #000}
+.haunt-scroll-cue>span{color:#ded5e5;text-shadow:0 2px 8px #000}
+/* Strong lettering over a soft local shadow, without a framed badge. */
+.haunt-door-marker .haunt-door-enter{font-family:Manrope,Arial,sans-serif;font-size:16px;font-weight:700;letter-spacing:2px;color:#fff9ed;text-shadow:0 2px 3px #000,0 0 8px #000;background:radial-gradient(ellipse,#08070be8 15%,#08070b99 48%,transparent 74%);padding:12px 22px;min-height:48px}
+.haunt-door-marker .haunt-door-enter svg{width:19px;height:19px;stroke-width:1.8}
+/* One consistent red diagonal strike across every displayed original price. */
+.haunt .haunt-inline-price s,.haunt .haunt-price-before s{position:relative;display:inline-block;text-decoration:none;line-height:1.6;white-space:nowrap}
+.haunt .haunt-inline-price s:after,.haunt .haunt-price-before s:after{content:'';position:absolute;left:-2px;right:-2px;top:50%;height:2px;background:#ff625e;opacity:1;transform:rotate(-9deg);transform-origin:center;pointer-events:none}
+@media(max-width:700px){.haunt-door-marker .haunt-door-enter{font-size:13px;letter-spacing:1px;padding:10px 12px;min-height:44px;gap:6px}.haunt-door-marker .haunt-door-enter svg{width:15px;height:15px}}
+/* Seasonal accents stay decorative and never intercept an invitation. */
+.haunt-hall,.haunt-offers{position:relative}
+.haunt-corner-web{position:absolute;left:0;top:0;width:145px;height:145px;stroke:#ded4e7;stroke-width:.65;opacity:.17;pointer-events:none;z-index:1}
+.haunt-hall>.haunt-corner-web{top:100px}
+.haunt-offers>.haunt-corner-web{left:auto;right:0;transform:scaleX(-1)}
+.haunt-pumpkin{display:inline-block;font-size:17px;vertical-align:middle;margin-right:4px;letter-spacing:0}
+.haunt-bats{position:absolute;top:12%;left:64%;width:180px;height:90px;pointer-events:none;z-index:0;color:#090912}
+.haunt-bats svg{position:absolute;fill:currentColor;width:48px;height:24px;opacity:.85;transform:rotate(-12deg)}
+.haunt-bats svg:nth-child(2){left:64px;top:27px;width:34px;transform:rotate(13deg)}
+.haunt-bats svg:nth-child(3){left:118px;top:5px;width:26px;transform:rotate(-5deg)}
+/* The sale amount is always larger than its readable original price. */
+.haunt .haunt-inline-price s{font-size:14px}
+.haunt .haunt-inline-price b{font-size:20px;line-height:1.35;font-weight:700}
+.haunt .haunt-room-detail .haunt-inline-price s,.haunt .haunt-room-outcome .haunt-inline-price s{font-size:16px}
+.haunt .haunt-room-detail .haunt-inline-price b,.haunt .haunt-room-outcome .haunt-inline-price b{font-size:24px}
+@media(max-width:700px){.haunt-corner-web{width:85px;height:85px;opacity:.13}.haunt-bats{left:auto;right:5%;top:85px;width:100px;height:35px}.haunt-bats svg{width:30px;height:16px}.haunt-bats svg:nth-child(2){left:40px;top:9px;width:24px}.haunt-bats svg:nth-child(3){left:72px;top:0;width:19px}.haunt-pumpkin{font-size:15px}}
+/* A first-visit invitation; sound still requires an explicit user gesture. */
+.haunt-sound-hint{position:absolute;right:4.5%;top:76px;display:flex;align-items:center;gap:7px;padding:5px 9px;background:#0d0b12d9;border-radius:8px;color:#ffe1ac!important;pointer-events:auto;font-size:9px!important;letter-spacing:1px}
+.haunt-sound-hint>span{font-size:22px;line-height:1.2;animation:haunt-sound-point 1.6s ease-in-out 5}
+@keyframes haunt-sound-point{50%{transform:translateY(-4px)}}
+.haunt-hall-instructions,.haunt-door-mobile-label{display:none}
+.haunt-step-label{display:block;font-size:10px;letter-spacing:1px;color:#f1d2a4;margin:0 0 15px}
+@media(max-width:700px),(hover:none){
+ .haunt-hall-desktop-intro,.haunt-door-desktop-label{display:none}
+ .haunt-door-mobile-label{display:inline}
+ .haunt-hall-heading{order:1;padding:0 6% 22px;pointer-events:auto}
+ .haunt-hall-art{order:2}
+ .haunt-hall-heading h1{font-size:clamp(28px,7.5vw,38px);margin:8px 0 16px}
+ .haunt-hall .haunt-hall-instructions{display:flex;flex-direction:column;gap:5px;font-size:13px;max-width:340px;margin:auto;color:#dfd4e7}
+ .haunt-hall-instructions b{font-size:13px;letter-spacing:1.5px;color:#ffe2b3}
+ .haunt-hall-instructions strong{font-weight:600;color:#ffe2b3}
+ .haunt-door-choices article{scroll-margin-block:24px}
+ .haunt-door-choices article.is-previewed{border-color:#cba36b;box-shadow:0 0 20px #d9ad7320}
+ .haunt-door.is-previewed{border-color:#edc78e!important;box-shadow:0 0 24px #e9b66e55}
+ .haunt-door-choices .haunt-door-preview>.haunt-button{font-size:12px!important;min-height:54px;border-color:#e4b879!important;background:linear-gradient(110deg,#654023,#2b1d22);color:#fff0d4}
+}
+@media(max-width:700px){.haunt-sound-hint{right:6%;top:64px;font-size:8px!important;gap:5px}.haunt-sound-hint>span{font-size:19px}.haunt-hall{padding-top:115px}}
+@media(prefers-reduced-motion:reduce){.haunt-sound-hint>span{animation:none}}
+/* Neon-green breathing for circular invitations, without a text frame. */
+.haunt-entrance-button .haunt-keyhole,.haunt-door-marker .haunt-keyhole,.haunt-scene-before .haunt-curse-seal{border-color:#b6ed807a;animation:haunt-keyhole-green 2.4s ease-in-out infinite}
+.haunt-entrance-button .haunt-keyhole svg,.haunt-door-marker .haunt-keyhole svg{color:#d9ffad;filter:drop-shadow(0 0 6px #a8ff2a66)}
+@keyframes haunt-keyhole-green{0%,100%{box-shadow:0 0 9px #a8ff2a24,inset 0 0 10px #a8ff2a0d}50%{box-shadow:0 0 28px 3px #a8ff2a80,inset 0 0 16px #a8ff2a29}}
+.haunt-entrance-button:is(:hover,:focus-visible,:active) .haunt-keyhole,.haunt-door:is(:hover,:focus-visible,:active) .haunt-keyhole{animation:none;border-color:#caff8e;background:#a8ff2a12;box-shadow:0 0 24px #a8ff2a66,inset 0 0 12px #a8ff2a18}
+@media(prefers-reduced-motion:reduce){.haunt-entrance-button .haunt-keyhole,.haunt-door-marker .haunt-keyhole,.haunt-scene-before .haunt-curse-seal{animation:none;box-shadow:0 0 14px #a8ff2a33}}
