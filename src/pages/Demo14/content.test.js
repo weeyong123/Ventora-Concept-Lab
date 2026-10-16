@@ -36,11 +36,11 @@ test("every room retains its before, after and transformation assets", () => {
   });
   assert(existsSync(`public${revealBackground}`));
 });
-test("public price comparisons stay off, including a production preview query", () => {
+test("public comparisons are restored; production query does not enable preview", () => {
   assert.deepEqual(publicPriceComparisons, {
-    standardPrice: false,
-    beforeDiscount: false,
-    discount: false,
+    standardPrice: true,
+    beforeDiscount: true,
+    discount: true,
   });
   assert.deepEqual(getPricingVisibility({ search: "?pricing-preview=1" }), {
     ...publicPriceComparisons,

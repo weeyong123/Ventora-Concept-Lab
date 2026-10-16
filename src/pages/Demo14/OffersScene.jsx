@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { pricing } from "./pricing";
 import SceneImage from "./SceneImage";
 import { imageSource } from "./images";
@@ -30,10 +31,28 @@ export default function OffersScene({
   notice,
   links,
 }) {
+  const cards = useRef(null);
+  useEffect(() => {
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motion.matches || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (!isIntersecting) return;
+        target.classList.add("has-entered");
+        observer.unobserve(target);
+      });
+    }, { threshold: 0, rootMargin: "0px 0px -40px 0px" });
+    cards.current?.querySelectorAll(".haunt-card").forEach(card => observer.observe(card));
+    // If the user changes this setting, reveal everything immediately.
+    const stop = () => { if (motion.matches) observer.disconnect(); };
+    motion.addEventListener("change", stop);
+    return () => { observer.disconnect(); motion.removeEventListener("change", stop); };
+  }, []);
   return (
     <>
       <section
         className="haunt-reveal"
+        id="haunt-reveal"
         style={{
           "--reveal-bg": `url("${imageSource("final-reveal-bg.png")}")`,
           "--reveal-bg-mobile": `url("${imageSource("final-reveal-bg.png", true)}")`,
@@ -93,7 +112,7 @@ export default function OffersScene({
             <small>All prices in USD.</small>
           </div>
         </div>
-        <div className="haunt-offer-grid">
+        <div className="haunt-offer-grid" ref={cards}>
           {offers.map((o, i) => (
             <article
               key={o.name}
@@ -101,6 +120,7 @@ export default function OffersScene({
               tabIndex={-1}
               className={`haunt-card ${i === 1 ? "haunt-card-featured" : ""} ${selected === i ? "selected" : ""}`}
               style={{
+                "--card-enter-delay": `${i * 100}ms`,
                 "--card-image": `url("${imageSource(`door${i + 1}-after.png`, true)}")`,
               }}
             >
@@ -142,8 +162,8 @@ export default function OffersScene({
                   <div className="haunt-price-before">
                     {pricing.standardPrice && (
                       <span>
-                        STANDARD PRICE REFERENCE{" "}
-                        <s>${o.regularPrice.toLocaleString("en-US")} USD</s>
+                        REGULAR PRICE · BEFORE DISCOUNT{" "}
+                        <s>${o.regularPrice.toLocaleString("en-US")}+ USD</s>
                       </span>
                     )}
                     {pricing.discount && (
@@ -367,9 +387,14 @@ export default function OffersScene({
       </section>
       <footer className="haunt-footer">
         <span>VENTORA DIGITAL © 2026</span>
-        <button onClick={() => go("hall")}>
-          <Icon type="back" /> RETURN TO THE HALL
-        </button>
+        <nav className="haunt-footer-navigation" aria-label="Experience navigation">
+          <button onClick={() => go("hall")}>
+            <Icon type="back" /> RETURN TO THE HALL
+          </button>
+          <button onClick={() => go("hero")}>
+            <Icon type="up" /> BACK TO THE MANSION
+          </button>
+        </nav>
         <span>GOOD DESIGN HAS A SECOND LIFE.</span>
       </footer>
     </>

@@ -71,7 +71,8 @@ test("before/after preserve both story stages without revealing activity prices"
     assert(before.includes("SEE THE OFFER"));
     assert(!before.includes("BACK TO THE HALL"));
     const after = renderToStaticMarkup(<RoomScene {...props} scene="after" />);
-    assert(after.includes("CLAIM MY HALLOWEEN OFFER"));
+    assert(after.includes("CHECK MY HALLOWEEN OFFER →"));
+    assert(after.includes("HOW MUCH CAN YOU SAVE? ??%"));
     assert(after.includes("EXPLORE OTHER OFFERS"));
     assert(after.includes("BEFORE DISCOUNT"));
     assert(after.includes(`$${offers[i].regularPrice.toLocaleString("en-US")}`));
@@ -79,11 +80,12 @@ test("before/after preserve both story stages without revealing activity prices"
     assert(after.includes(offers[i].scope.toUpperCase()));
   }
 });
-test("public offer cards show only current prices, with no implicit package selection", () => {
+test("public offer cards show original prices and savings without implicit selection", () => {
   const html = renderToStaticMarkup(<OffersScene {...offerProps(null)} />);
   for (const offer of offers) {
     assert(html.includes(`$${offer.price}`));
-    assert(!html.includes(`$${offer.regularPrice.toLocaleString("en-US")}`));
+    assert(html.includes(`$${offer.regularPrice.toLocaleString("en-US")}`));
+    assert(html.includes(`SAVE ${Math.floor((1 - offer.price / offer.regularPrice) * 100)}%`));
     assert(text(html).includes(offer.shortLabel));
   }
   assert(!html.includes('checked=""'));
@@ -92,7 +94,7 @@ test("public offer cards show only current prices, with no implicit package sele
   assert(!html.includes("https://wa.me/"));
   assert(html.includes("View Full Terms"));
   assert(!html.includes("MOST POPULAR"));
-  assert(!html.includes("REGULAR PRICE"));
+  assert(html.includes("REGULAR PRICE · BEFORE DISCOUNT"));
 });
 test("selected enquiries render the correct current package without reference charges", () => {
   for (let i = 0; i < 3; i++) {
@@ -134,9 +136,9 @@ test("internal comparison preview is explicit and keeps the After activity price
     assert(offer.includes("<s>"));
   } finally {
     Object.assign(pricing, {
-      standardPrice: false,
-      beforeDiscount: false,
-      discount: false,
+      standardPrice: true,
+      beforeDiscount: true,
+      discount: true,
       preview: false,
     });
   }

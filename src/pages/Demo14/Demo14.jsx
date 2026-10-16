@@ -101,10 +101,7 @@ export default function Demo14() {
             next === "offers"
               ? {
                   id:
-                    target ||
-                    (scene === "after"
-                      ? `haunt-offer-${index ?? selected}`
-                      : "haunt-offers"),
+                    target || "haunt-reveal",
                 }
               : null,
           );

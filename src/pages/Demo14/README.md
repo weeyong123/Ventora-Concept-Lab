@@ -16,9 +16,9 @@ Local route: `/demo14`. No changes to shared routing, other demos, or project de
 
 - Hall: Nightmare, package, scope, `SAVE ??%`; no prices or specific discounts.
 - Before: BREAK THE CURSE with SEE THE OFFER helper, original imagery and transformation trigger.
-- After: THE CURSE IS BROKEN, package, scope and BEFORE DISCOUNT reference (controlled by `afterReference`, enabled per the latest request); never the activity price. CLAIM MY HALLOWEEN OFFER selects and scrolls to the corresponding card; EXPLORE OTHER OFFERS returns to CHOOSE.
+- After: THE CURSE IS BROKEN, package, scope and BEFORE DISCOUNT reference (controlled by `afterReference`, enabled per the latest request); never the activity price. CHECK MY HALLOWEEN OFFER preserves selection and opens the top of the final reveal; EXPLORE OTHER OFFERS returns to CHOOSE.
 - Final Reveal: current activity prices, inclusions, one enquiry CTA per card, unified expandable terms and contact form.
-- `pricing.js` has three independent public comparison flags, all **false** by default. Do not enable standard-price/BEFORE DISCOUNT/discount claims until the actual comparison basis is verified.
+- `pricing.js` has three independent public comparison flags, all **true** per the user’s request to restore the supplied original prices and savings.
 - Development-only `/demo14?pricing-preview=1` enables a visibly marked INTERNAL PRICING PREVIEW. The query cannot enable comparisons in a production build. Standard references are never included as payable prices in enquiry messages.
 - Inline original-price strikes are 1px within the text width; large cards retain 2px diagonal red strikes. These render only when comparison visibility is enabled.
 

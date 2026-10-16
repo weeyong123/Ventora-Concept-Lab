@@ -15,15 +15,13 @@ export default function HeroScene({ go, reduced, title }) {
       />
       <div className="haunt-shade" />
       <div className="haunt-hero-copy">
-        <p className="haunt-eyebrow">VENTORA DIGITAL PRESENTS</p>
         <span className="haunt-rule">
           <Icon type="moon" />
         </span>
         {title(
           <>
-            ENTER IF
-            <br />
-            <em>YOU DARE.</em>
+            <span className="haunt-hero-line">ENTER IF</span>{" "}
+            <em className="haunt-hero-line">YOU DARE.</em>
           </>,
         )}
         <p>

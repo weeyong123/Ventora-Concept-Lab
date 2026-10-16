@@ -1,0 +1,95 @@
+/* Only the animated glow changes colour; the button artwork stays intact. */
+@keyframes haunt-purple-breathe {
+  0%, 100% { box-shadow: 0 0 10px 1px #b79ae824, inset 0 0 10px #b79ae80d; }
+  50% { box-shadow: 0 0 30px 5px #b79ae866, inset 0 0 18px #b79ae826; }
+}
+.haunt .haunt-hero-copy h1 { line-height: 1; }
+.haunt .haunt-hero-line { display: block; }
+.haunt .haunt-hero-copy h1 em.haunt-hero-line { font-size: 1.12em; line-height: 1.04; margin-top: .04em; }
+.haunt .haunt-hero-copy > p:not(.haunt-eyebrow) { margin-top: 16px; }
+@keyframes haunt-line-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes haunt-card-enter {
+  from { opacity: .2; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .haunt .haunt-entrance-button .haunt-keyhole { animation: haunt-purple-breathe 3.5s ease-in-out infinite; }
+  .haunt .haunt-entrance-button:is(:hover, :focus-visible, :active) .haunt-keyhole { animation: none; }
+  .haunt .haunt-hero-line { animation: haunt-line-enter 650ms ease-out both; }
+  .haunt .haunt-hero-line:nth-child(2) { animation-delay: 150ms; }
+  .haunt .haunt-hero-copy > p:not(.haunt-eyebrow) { animation: haunt-line-enter 500ms 300ms ease-out both; }
+  .haunt .haunt-card.has-entered { animation: haunt-card-enter 550ms var(--card-enter-delay, 0ms) ease-out both; }
+  .haunt .haunt-card:focus-within { animation: none; }
+}
+@media (max-width: 700px) {
+  /* Flow layout keeps the invitation below the copy, including short phones. */
+  .haunt .haunt-stage.haunt-entrance { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; height: auto; min-height: 100svh; padding: 0 0 max(30px, env(safe-area-inset-bottom)); }
+  .haunt .haunt-hero-copy { flex: 0 0 auto; padding: clamp(125px, 19svh, 165px) 6% 0; width: 100%; }
+  .haunt .haunt-hero-copy h1 { font-size: clamp(37px, 11vw, 49px); margin: 10px auto; }
+  .haunt .haunt-hero-copy > p:not(.haunt-eyebrow) { margin: 14px auto 0; max-width: 300px; font-size: 16px; line-height: 1.55; }
+  .haunt .haunt-entrance-button { position: relative; top: auto; left: auto; transform: none; flex-shrink: 0; margin: clamp(28px, 6svh, 60px) auto 0; }
+  .haunt .haunt-price-now { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .haunt .haunt-price-now > span { font-size: 12px; line-height: 1.6; letter-spacing: .5px; }
+  .haunt .haunt-card.has-entered { --card-enter-delay: 0ms !important; animation-duration: 400ms; }
+}
+@media (max-width: 700px) and (max-height: 600px) {
+  .haunt .haunt-hero-copy { padding-top: 115px; }
+  .haunt .haunt-hero-copy h1 { font-size: 35px; }
+  .haunt .haunt-entrance-button { margin-top: 20px; }
+}
+
+/* Regular-price hierarchy, shared by the room and final offer cards. */
+@media (min-width: 701px) {
+  .haunt .haunt-entrance-button { top: calc(66% + 24px); }
+}
+.haunt .haunt-reference-price { flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 16px; }
+.haunt .haunt-reference-price small,
+.haunt .haunt-price-before > span { font-size: 16px; font-weight: 700; line-height: 1.5; letter-spacing: .6px; color: #eee2ce; }
+.haunt .haunt-reference-price b { font-size: clamp(30px, 3vw, 38px); line-height: 1.2; }
+.haunt .haunt-price-before > span { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.haunt .haunt-price-before > span s { display: inline-block; font-size: 30px; line-height: 1.2; }
+@media (max-width: 700px) {
+  .haunt .haunt-reference-price small,
+  .haunt .haunt-price-before > span { font-size: 15px; letter-spacing: .3px; }
+}
+
+.haunt .haunt-savings-hint {
+  display: block;
+  margin-top: 6px;
+  font: 500 11px/1.5 Manrope, Arial, sans-serif;
+  letter-spacing: .6px;
+  color: #ecd2a2;
+}
+
+/* Desktop offer actions: one aligned text column and balanced hit areas. */
+@media (min-width: 701px) {
+  .haunt-scene-after .haunt-room-actions { align-items: stretch; gap: 14px; }
+  .haunt-scene-after .haunt-room-actions > .haunt-button {
+    min-height: 74px; padding: 15px 22px; gap: 14px;
+  }
+  .haunt-scene-after .haunt-room-actions > .haunt-text {
+    min-height: 74px; padding: 15px 18px;
+  }
+  .haunt .haunt-offer-button-copy { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 5px; }
+  .haunt .haunt-offer-button-title {
+    font: 600 12px/1.5 Manrope, Arial, sans-serif;
+    letter-spacing: .5px; color: #fff0d4;
+  }
+  .haunt .haunt-offer-button-copy .haunt-savings-hint {
+    margin: 0; font-size: 10px; font-weight: 400; line-height: 1.5;
+    letter-spacing: .45px; color: #cbbca6;
+  }
+  .haunt-scene-after .haunt-room-actions > .haunt-button > svg { width: 18px; height: 18px; flex-shrink: 0; }
+}
+
+.haunt .haunt-footer { flex-wrap: wrap; }
+.haunt .haunt-footer-navigation { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 24px; }
+.haunt .haunt-footer-navigation button { min-height: 44px; margin: 0; padding: 10px 0; background: transparent; border: 0; box-shadow: none; animation: none; font-size: 11px; }
+.haunt .haunt-footer-navigation button:hover { color: #ffe0ae; }
+@media (max-width: 700px) {
+  .haunt .haunt-footer-navigation { width: 100%; gap: 4px 20px; }
+  .haunt .haunt-footer-navigation button { font-size: 12px; }
+}

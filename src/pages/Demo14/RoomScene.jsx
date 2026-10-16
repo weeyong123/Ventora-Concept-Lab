@@ -79,8 +79,8 @@ export default function RoomScene({
                   </span>
                   {pricing.afterReference && (
                     <span className="haunt-reference-price">
-                      <small>BEFORE DISCOUNT</small>
-                      <b>${room.regularPrice.toLocaleString("en-US")} USD</b>
+                      <small>REGULAR PRICE · BEFORE DISCOUNT</small>
+                      <b>${room.regularPrice.toLocaleString("en-US")}+ USD</b>
                     </span>
                   )}
                 </>
@@ -106,21 +106,23 @@ export default function RoomScene({
               }
             >
               {scene === "before" ? <CurseSeal /> : <Icon type="key" />}
-              <span>
-                {scene === "before"
-                  ? "BREAK THE CURSE"
-                  : "CLAIM MY HALLOWEEN OFFER"}
-                {scene === "before" && (
+              <span className={scene === "after" ? "haunt-offer-button-copy" : undefined}>
+                <span className={scene === "after" ? "haunt-offer-button-title" : undefined}>
+                  {scene === "before"
+                    ? "BREAK THE CURSE"
+                    : "CHECK MY HALLOWEEN OFFER →"}
+                </span>
+                {scene === "before" ? (
                   <small className="haunt-see-offer">SEE THE OFFER</small>
+                ) : (
+                  <small className="haunt-savings-hint">HOW MUCH CAN YOU SAVE? ??%</small>
                 )}
               </span>
               {scene === "before" ? (
                 <span className="haunt-invitation-arrow" aria-hidden="true">
                   <Icon type="up" />
                 </span>
-              ) : (
-                <Icon />
-              )}
+              ) : null}
             </button>
             {scene === "after" && (
               <button className="haunt-text" onClick={() => go("hall")}>

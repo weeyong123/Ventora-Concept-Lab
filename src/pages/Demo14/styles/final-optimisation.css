@@ -245,3 +245,56 @@
     gap: 5px;
   }
 }
+
+/* Readability and original connected Journey treatment. */
+.haunt .haunt-brand-navigation { gap: 32px; }
+.haunt .haunt-menu-trigger { font-size: 10px; }
+.haunt .haunt-reference-price small { font-size: 13px; font-weight: 700; }
+.haunt .haunt-door-surprise { font-size: 24px; font-weight: 800; color: #ffd48c; text-shadow: 0 0 18px #ffad4555; }
+.haunt .haunt-discount { font-size: 21px; font-weight: 800; color: #ffd48c; }
+.haunt .haunt-progress ol { gap: 28px; }
+.haunt .haunt-progress li { width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid #b3a1c780; border-radius: 50%; background: #100e18e6 !important; font-size: 13px; }
+.haunt .haunt-progress li + li:before { display: block; width: 29px; }
+.haunt .haunt-progress li:is(.is-current, .is-complete) { color: #ffe0ae; border-color: #e9be79; background: #5e4529 !important; }
+.haunt .haunt-progress-name { position: absolute; top: 38px; font-size: 9px; }
+.haunt .haunt-progress-caption { font-size: 10px; }
+@keyframes haunt-sound-nudge { 0%, 65%, 100% { transform: translateY(0); } 74% { transform: translateY(-7px); } 83% { transform: translateY(0); } 91% { transform: translateY(-4px); } }
+@media (prefers-reduced-motion: no-preference) { .haunt .haunt-sound-hint { animation: haunt-sound-nudge 2.8s ease-in-out infinite; } }
+@media (min-width: 701px) {
+  .haunt-scene-after .haunt-room-actions > .haunt-text { order: -1; }
+}
+@media (max-width: 700px) {
+  .haunt { font-size: 16px; }
+  .haunt .haunt-brand-navigation { gap: 18px; }
+  .haunt .haunt-menu-trigger { font-size: 9px; }
+  .haunt .haunt-progress { gap: 10px; }
+  .haunt .haunt-progress ol { gap: 22px; }
+  .haunt .haunt-progress li { width: 28px; height: 28px; font-size: 12px; }
+  .haunt .haunt-progress li + li:before { width: 23px; }
+  .haunt .haunt-progress-name { top: 33px; font-size: 8px; }
+  .haunt .haunt-progress-caption { font-size: 9px; }
+  .haunt .haunt-room-lead, .haunt .haunt-room-detail, .haunt .haunt-room-outcome,
+  .haunt .haunt-package-description, .haunt .haunt-package-audience,
+  .haunt .haunt-card li, .haunt .haunt-generator p, .haunt .haunt-terms li { font-size: 16px; line-height: 1.65; }
+  .haunt .haunt-eyebrow, .haunt .haunt-after-scope, .haunt .haunt-door-scope,
+  .haunt .haunt-package-scope, .haunt .haunt-price-before, .haunt .haunt-price-now > span,
+  .haunt .haunt-offer-meta, .haunt .haunt-card-top, .haunt .haunt-sound-hint-copy small { font-size: 12px; }
+  .haunt .haunt-button, .haunt .haunt-text { font-size: 14px !important; }
+  .haunt-scene-after .haunt-room-actions > .haunt-button,
+  .haunt-scene-after .haunt-room-actions > .haunt-text { min-height: 64px; padding: 18px 14px; font-size: 15px !important; line-height: 1.45; width: 100%; letter-spacing: .4px; }
+  .haunt .haunt-generator input, .haunt .haunt-generator textarea, .haunt .haunt-generator select { font-size: 16px; }
+  .haunt .haunt-menu-panel button { font-size: 12px; }
+}
+.haunt .haunt-price-before > span { font-size: 13px; }
+@media (max-width: 700px) {
+  .haunt .haunt-eyebrow { font-size: 12px !important; }
+  .haunt .haunt-hero-copy > p, .haunt .haunt-reveal-copy > p,
+  .haunt .haunt-hall .haunt-hall-instructions, .haunt .haunt-hall-instructions b,
+  .haunt .haunt-door-info p, .haunt .haunt-door-preview p { font-size: 16px; line-height: 1.6; }
+  .haunt .haunt-step-label, .haunt .haunt-offer-meta small,
+  .haunt .haunt-featured-label, .haunt .haunt-generator label,
+  .haunt .haunt-terms summary, .haunt .haunt-footer { font-size: 13px; }
+  .haunt .haunt-door-choices .haunt-door-preview > .haunt-button { font-size: 14px !important; }
+}
+/* Preserve the original compact circles without crowding scene headings. */
+.haunt .haunt-progress-name { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

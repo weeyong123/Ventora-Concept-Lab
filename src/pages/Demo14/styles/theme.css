@@ -780,13 +780,13 @@
     line-height: 1.8;
   }
 }
-/* Brief, finite invitations; the native click target includes icon and label. */
+/* Continuous invitations; the native click target includes icon and label. */
 .haunt-invitation-arrow {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #ffe4b8;
-  animation: haunt-point-to-door 1.1s ease-in-out 2;
+  animation: haunt-point-to-door 1.1s ease-in-out infinite;
   animation-delay: 0.65s;
   filter: drop-shadow(0 2px 3px #000);
 }

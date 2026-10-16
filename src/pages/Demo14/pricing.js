@@ -1,8 +1,8 @@
-// Enable public comparisons only after the actual standard-price basis is verified.
+// Restore the supplied comparison prices at the user’s request.
 export const publicPriceComparisons = Object.freeze({
-  standardPrice: false,
-  beforeDiscount: false,
-  discount: false,
+  standardPrice: true,
+  beforeDiscount: true,
+  discount: true,
 });
 export function getPricingVisibility({
   development = false,
