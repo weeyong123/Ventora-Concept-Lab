@@ -1,0 +1,146 @@
+{
+  "three-doors-hall.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 2772521,
+    "sourceHash": "099ed587d7c8d013075a66f5c6e44bfe5e0dc2a6b676bb6e6dd82d7f3f779458",
+    "variants": [
+      {
+        "src": "/demo14/optimized/three-doors-hall-960.webp",
+        "width": 960,
+        "bytes": 153160
+      },
+      {
+        "src": "/demo14/optimized/three-doors-hall-1672.webp",
+        "width": 1672,
+        "bytes": 339636
+      }
+    ]
+  },
+  "final-reveal-bg.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 893426,
+    "sourceHash": "43103133788a268916ad3d7a67720be7c38345e4c8f067c4b53c3543b14b73c1",
+    "variants": [
+      {
+        "src": "/demo14/optimized/final-reveal-bg-960.webp",
+        "width": 960,
+        "bytes": 123830
+      },
+      {
+        "src": "/demo14/optimized/final-reveal-bg-1672.webp",
+        "width": 1672,
+        "bytes": 309944
+      }
+    ]
+  },
+  "door1-before.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 828410,
+    "sourceHash": "cb5953ded7f49b6ffe233b2eb244f669b5dee35066f715b3d09cad1acf5e8575",
+    "variants": [
+      {
+        "src": "/demo14/optimized/door1-before-960.webp",
+        "width": 960,
+        "bytes": 96456
+      },
+      {
+        "src": "/demo14/optimized/door1-before-1672.webp",
+        "width": 1672,
+        "bytes": 211154
+      }
+    ]
+  },
+  "door1-after.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 810695,
+    "sourceHash": "035ca5a91c69d06744efbfb769775cbe2ff7c6483c009508a751643b1ef5052e",
+    "variants": [
+      {
+        "src": "/demo14/optimized/door1-after-960.webp",
+        "width": 960,
+        "bytes": 124804
+      },
+      {
+        "src": "/demo14/optimized/door1-after-1672.webp",
+        "width": 1672,
+        "bytes": 273670
+      }
+    ]
+  },
+  "door2-before.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 976793,
+    "sourceHash": "d02d3e867347f427e596115a45a53fc756e7a5f7ce6c698031eb42c982ef6787",
+    "variants": [
+      {
+        "src": "/demo14/optimized/door2-before-960.webp",
+        "width": 960,
+        "bytes": 125034
+      },
+      {
+        "src": "/demo14/optimized/door2-before-1672.webp",
+        "width": 1672,
+        "bytes": 299414
+      }
+    ]
+  },
+  "door2-after.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 984060,
+    "sourceHash": "cb62c34e9ce733772f2eacad6e6ac182ed8ca0867cc26b3017e821c74ac4ad36",
+    "variants": [
+      {
+        "src": "/demo14/optimized/door2-after-960.webp",
+        "width": 960,
+        "bytes": 180988
+      },
+      {
+        "src": "/demo14/optimized/door2-after-1672.webp",
+        "width": 1672,
+        "bytes": 424582
+      }
+    ]
+  },
+  "door3-before.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 905661,
+    "sourceHash": "7dd0428146292baa482145d4c995cf33dcd0f74fdf9fff438cd2088a25c726a2",
+    "variants": [
+      {
+        "src": "/demo14/optimized/door3-before-960.webp",
+        "width": 960,
+        "bytes": 93370
+      },
+      {
+        "src": "/demo14/optimized/door3-before-1672.webp",
+        "width": 1672,
+        "bytes": 217870
+      }
+    ]
+  },
+  "door3-after.png": {
+    "width": 1672,
+    "height": 941,
+    "originalBytes": 781792,
+    "sourceHash": "f17c87ef904601b5b72bc5f83b72b403607bbfcc94d5e5800f7f545780bb5b5a",
+    "variants": [
+      {
+        "src": "/demo14/optimized/door3-after-960.webp",
+        "width": 960,
+        "bytes": 120090
+      },
+      {
+        "src": "/demo14/optimized/door3-after-1672.webp",
+        "width": 1672,
+        "bytes": 267416
+      }
+    ]
+  }
+}

@@ -1,0 +1,529 @@
+/* Hero invitation sits on the actual mansion entrance. */
+.haunt-entrance-button {
+  position: absolute;
+  left: 50%;
+  top: 66%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  white-space: nowrap;
+  border-color: #f28a1a99 !important;
+  background: linear-gradient(115deg, #422714ed, #211725ed);
+  color: #ffdcaa;
+  box-shadow:
+    0 0 30px #f28a1a24,
+    0 0 55px #7a5af51c;
+}
+.haunt-hero-copy .haunt-eyebrow {
+  color: #e8b878 !important;
+}
+.haunt-hero-copy .haunt-rule {
+  color: #dba361;
+}
+.haunt-hero-copy .haunt-rule:before,
+.haunt-hero-copy .haunt-rule:after {
+  background: #dba36170;
+}
+.haunt.is-fading .haunt-entrance-button {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+@media (max-width: 700px) {
+  .haunt-entrance-button {
+    top: 70%;
+    max-width: 90%;
+  }
+}
+
+@font-face {
+  font-family: Cinzel;
+  src: url("/demo14/fonts/cinzel-regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+.haunt h1,
+.haunt h2,
+.haunt h3,
+.haunt-door-choices strong {
+  font-family: Cinzel, Georgia, serif;
+  font-weight: 400;
+}
+.haunt .haunt-entrance-button {
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  border: 0 !important;
+  background: transparent;
+  box-shadow: none;
+  font-family: Cinzel, Georgia, serif !important;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+.haunt-keyhole {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border: 1px solid #e8af6366;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f28a1a22, transparent 72%);
+  box-shadow:
+    0 0 30px #f28a1a25,
+    inset 0 0 20px #f28a1a0f;
+  transition:
+    box-shadow 0.3s,
+    border-color 0.3s,
+    background 0.3s;
+}
+.haunt-entrance-button .haunt-keyhole svg {
+  width: 30px;
+  height: 30px;
+}
+.haunt .haunt-entrance-button:hover {
+  background: transparent;
+  box-shadow: none;
+  color: #fff0d4;
+}
+.haunt-entrance-button:hover .haunt-keyhole,
+.haunt-entrance-button:focus-visible .haunt-keyhole {
+  border-color: #ffc575;
+  background: #f28a1a1c;
+  box-shadow:
+    0 0 42px #f28a1a55,
+    inset 0 0 22px #f28a1a20;
+}
+.haunt .haunt-entrance-button:focus-visible {
+  outline: 0;
+}
+.haunt-entrance-button:focus-visible .haunt-keyhole {
+  outline: 2px solid #a8ff2a;
+  outline-offset: 6px;
+}
+.haunt-hero-copy h1 {
+  font-size: clamp(44px, 5.8vw, 90px);
+  line-height: 1.12;
+}
+@media (max-width: 700px) {
+  .haunt-keyhole {
+    width: 66px;
+    height: 66px;
+  }
+}
+/* Keep the hall composition centered; details belong to the door interaction. */
+.haunt-door-description,
+.haunt-door-offer {
+  display: block;
+  font-size: 11px;
+  line-height: 1.6;
+  margin-top: 9px;
+  color: #cfc4dc;
+  letter-spacing: 0;
+}
+.haunt-door-offer {
+  color: #efbb7e;
+  font-size: 10px;
+}
+@media (min-width: 701px) {
+  .haunt-hall {
+    height: 100svh;
+    min-height: 600px;
+    padding: 0;
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .haunt-hall-art {
+    width: min(100%, 177.7778svh);
+    margin: 0;
+    flex-shrink: 0;
+  }
+  .haunt-hall-heading {
+    position: absolute;
+    z-index: 2;
+    left: 3%;
+    right: 3%;
+    padding: 0;
+    pointer-events: none;
+    text-shadow:
+      0 2px 22px #08070b,
+      0 1px 8px #08070b;
+  }
+  .haunt-hall-heading .haunt-eyebrow {
+    display: none;
+  }
+  .haunt-hall-heading h1 {
+    font-size: clamp(30px, 3.2vw, 48px);
+    margin: 0 0 12px;
+  }
+  .haunt-hall-heading p:last-child {
+    font-size: 12px;
+    color: #ddd3e6;
+  }
+  .haunt-door-choices {
+    display: none;
+  }
+  .haunt-hall-footer {
+    position: absolute;
+    z-index: 2;
+    bottom: 16px;
+    left: 4.5%;
+    right: 4.5%;
+    margin: 0;
+    padding: 0;
+    font-size: 9px !important;
+    text-shadow: 0 2px 8px #000;
+  }
+  .haunt-door > span {
+    width: 240px;
+    top: calc(100% + 10px);
+    padding: 16px 18px;
+    background: #101019ed;
+    box-shadow: 0 8px 32px #0005;
+  }
+  .haunt-door:hover,
+  .haunt-door:focus-visible {
+    z-index: 3;
+  }
+  .haunt-door strong {
+    font-family: Cinzel, Georgia, serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+  }
+  .haunt-door svg {
+    margin-top: 10px;
+  }
+}
+/* Visible invitations match the Hero keyhole; descriptions stay contextual. */
+.haunt-door > .haunt-door-marker {
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #ffe0ae;
+}
+.haunt-door-marker .haunt-keyhole svg {
+  margin: 0;
+}
+.haunt-door-marker .haunt-door-enter {
+  font:
+    400 10px/1.4 Cinzel,
+    Georgia,
+    serif;
+}
+.haunt-door:hover .haunt-keyhole,
+.haunt-door:focus-visible .haunt-keyhole {
+  border-color: #ffc575;
+  box-shadow:
+    0 0 38px #f28a1a66,
+    inset 0 0 20px #f28a1a22;
+}
+@media (min-width: 701px) {
+  .haunt-hall-heading {
+    top: auto;
+    bottom: 95px;
+  }
+  .haunt-door > .haunt-door-info {
+    top: auto;
+    bottom: calc(100% + 12px);
+  }
+  .haunt-hall-art:after {
+    background: linear-gradient(
+      #0f101699,
+      transparent 25%,
+      transparent 65%,
+      #0f1016c9
+    );
+  }
+}
+@media (max-width: 700px) {
+  .haunt-hall {
+    display: flex;
+    flex-direction: column;
+  }
+  .haunt-hall-heading {
+    order: 2;
+    padding: 12px 24px 28px;
+  }
+  .haunt-hall-art {
+    order: 1;
+  }
+  .haunt-door-choices {
+    order: 3;
+  }
+  .haunt-hall-footer {
+    order: 4;
+  }
+}
+@media (min-width: 701px) {
+  .haunt-door-1 > .haunt-door-info {
+    top: calc(100% + 12px);
+    bottom: auto;
+  }
+}
+/* Room ritual: cinematic upper title and an interactive fractured seal below. */
+.haunt-scene-before .haunt-room {
+  min-height: 780px;
+  height: 100svh;
+}
+.haunt-scene-before .haunt-room-copy {
+  padding: 0;
+  max-width: none;
+}
+.haunt-scene-before .haunt-room-story {
+  position: absolute;
+  top: clamp(120px, 15svh, 175px);
+  left: 5%;
+  right: 5%;
+  text-align: center;
+  text-shadow: 0 2px 20px #000;
+}
+.haunt-scene-before .haunt-room h1 {
+  font-size: clamp(32px, 3.5vw, 54px);
+  margin: 16px auto 14px;
+  max-width: 1100px;
+  line-height: 1.15;
+  color: #f4dec2;
+}
+.haunt-scene-before .haunt-room-lead {
+  font-size: 15px;
+  margin: 0 0 8px;
+}
+.haunt-scene-before .haunt-room-detail {
+  font-size: 11px;
+  max-width: 540px;
+  margin: 0 auto;
+  color: #c0b5ca;
+}
+.haunt-scene-before .haunt-room-shade {
+  background: linear-gradient(
+    180deg,
+    #090912bb,
+    #09091288 25%,
+    transparent 47%,
+    #09091244 64%,
+    #090912d9
+  );
+}
+.haunt-scene-before .haunt-room-actions {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: max-content;
+  max-width: 90%;
+}
+.haunt-curse-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 13px;
+  min-width: 250px;
+  padding: 12px 25px 15px;
+  background: transparent;
+  border: 0;
+  color: #eee0ff !important;
+  text-shadow: 0 2px 12px #000;
+  font-family: Cinzel, Georgia, serif !important;
+  letter-spacing: 2px;
+  font-size: 13px !important;
+}
+.haunt-curse-button small {
+  font-family: Manrope, Arial, sans-serif;
+  font-size: 8px;
+  letter-spacing: 2.5px;
+  color: #b1a1c4;
+}
+.haunt-curse-seal {
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: radial-gradient(circle, #9770e633, transparent 70%);
+  filter: drop-shadow(0 0 12px #7a5af566);
+  transition:
+    filter 0.3s,
+    background 0.3s,
+    transform 0.3s;
+}
+.haunt-curse-seal svg {
+  width: 100%;
+  height: 100%;
+  stroke: #bca0e7;
+  stroke-width: 0.8;
+  transition: stroke 0.3s;
+}
+.haunt-curse-seal .haunt-seal-fracture {
+  stroke: #e7d3ff;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.haunt-curse-button:hover .haunt-curse-seal,
+.haunt-curse-button:focus-visible .haunt-curse-seal {
+  filter: drop-shadow(0 0 18px #7a5af599);
+  background: radial-gradient(
+    circle,
+    #a8ff2a18,
+    #7a5af525 45%,
+    transparent 70%
+  );
+  transform: scale(1.06);
+}
+.haunt-curse-button:hover .haunt-seal-fracture,
+.haunt-curse-button:focus-visible .haunt-seal-fracture {
+  stroke: #a8ff2a;
+  filter: drop-shadow(0 0 5px #a8ff2a77);
+}
+.haunt-curse-button:active .haunt-curse-seal {
+  transform: scale(0.94);
+}
+.haunt-scene-before .haunt-room .haunt-text {
+  justify-content: center;
+  margin: 8px auto 0;
+  font-size: 8px !important;
+  letter-spacing: 1.5px;
+  color: #b4a5c4 !important;
+}
+@media (max-width: 700px) {
+  .haunt-scene-before .haunt-room {
+    min-height: 760px;
+    height: 100svh;
+  }
+  .haunt-scene-before .haunt-room-story {
+    left: 6%;
+    right: 6%;
+  }
+  .haunt-scene-before .haunt-room h1 {
+    font-size: clamp(29px, 8vw, 40px);
+    max-width: 390px;
+  }
+  .haunt-scene-before .haunt-room-lead {
+    font-size: 13px;
+    max-width: 310px;
+    margin: 0 auto 9px;
+  }
+  .haunt-scene-before .haunt-room-detail {
+    font-size: 10px;
+    max-width: 290px;
+    line-height: 1.7;
+  }
+  .haunt-scene-before .haunt-room .haunt-media {
+    object-position: 60% center;
+  }
+  .haunt-scene-before .haunt-room-actions {
+    bottom: 18px;
+  }
+  .haunt-curse-seal {
+    width: 82px;
+    height: 82px;
+  }
+  .haunt-curse-button {
+    font-size: 12px !important;
+    gap: 11px;
+  }
+}
+/* The reveal explicitly leads into the offer collection. */
+.haunt-scroll-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  margin: 30px auto 0;
+  color: #f4c28b;
+  text-shadow: 0 2px 10px #000;
+}
+.haunt-scroll-cue > strong {
+  font:
+    400 12px/1.6 Cinzel,
+    Georgia,
+    serif;
+}
+.haunt-scroll-cue svg {
+  stroke: currentColor;
+  animation: haunt-scroll-nudge 2s ease-in-out infinite;
+}
+.haunt-scroll-cue:hover {
+  color: #ffe3b9;
+}
+@keyframes haunt-scroll-nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translateY(7px);
+    opacity: 1;
+  }
+}
+.haunt .haunt-price {
+  display: block;
+  padding-top: 15px;
+}
+.haunt-price-before {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.haunt-price-before > span {
+  display: flex;
+  flex-direction: column;
+  letter-spacing: 1.2px;
+}
+.haunt-price-before s {
+  letter-spacing: 0;
+}
+.haunt-price-before b {
+  padding: 6px 9px;
+  border: 1px solid #f28a1a55;
+  background: #f28a1a12;
+  color: #ffb35b;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.haunt-price-now {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.haunt-price-now > span {
+  font-size: 8px;
+  letter-spacing: 1px;
+  line-height: 1.8;
+  color: #d0c0d6;
+}
+.haunt-price-now strong {
+  font-size: 68px;
+  color: #ff981f;
+  text-shadow: 0 0 24px #f28a1a16;
+}
+@media (max-width: 700px) {
+  .haunt-scroll-cue {
+    margin-top: 24px;
+  }
+  .haunt-scroll-cue > span {
+    letter-spacing: 1.4px;
+  }
+  .haunt-price-now strong {
+    font-size: 70px;
+  }
+}

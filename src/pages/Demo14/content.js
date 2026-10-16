@@ -1,16 +1,144 @@
-export const asset = name => `/demo14/${name}`
-// The supplied final-reveal filename intentionally lacks the initial “f”.
-export const revealBackground = asset('final-reveal-bg.png')
+export const asset = (name) => `/demo14/${name}`;
+export const revealBackground = asset("final-reveal-bg.png");
 export const offers = [
-  { chapter: 'REVIVE', title: 'THE OUTDATED WEBSITE', name: 'Homepage Makeover', price: 399, regularPrice: 799, before: 'Your website is stuck in the past.', detail: 'An outdated experience can make a great business feel less trustworthy.', after: 'A stronger first impression starts here.', video: 'outdated-website-transformation.mp4', description: 'For businesses with an existing website ready for a stronger first impression.', result: 'A modern, clearly structured homepage that helps visitors understand your business and take action.', items: ['One custom-designed & developed homepage', 'Mobile-responsive development', 'Clear calls to action · Optional basic form', 'Basic homepage SEO', 'Standard deployment', '2 revision rounds within agreed scope'], limit: 'One homepage only. Existing-platform compatibility must be confirmed; other pages are quoted separately.' },
-  { chapter: 'REBUILD', title: 'THE MISSING PRESENCE', name: 'Business Website', price: 899, regularPrice: 1699, before: 'Your business deserves to be seen.', detail: 'Give potential customers a professional place to discover what you do.', after: 'Make your business easier to discover and understand.', video: 'missing-presence-transformation.mp4', description: 'For growing businesses ready to establish a professional online presence.', result: 'A custom-built website of up to four pages that introduces your brand, explains your services and makes contact easy.', items: ['Up to 4 custom-designed & developed pages', 'Mobile-responsive development', 'Contact form & clear calls to action', 'Basic on-page SEO across included pages', 'Standard deployment', '2 revision rounds within agreed scope'], limit: 'Up to 4 standard pages. Complex backends, booking, payment systems and e-commerce are quoted separately.' },
-  { chapter: 'CONVERT', title: 'THE LOST LEADS', name: 'Lead Generation Page', price: 349, regularPrice: 599, before: 'Visitors came. Opportunities vanished.', detail: 'Without a clear next step, interested visitors may leave without reaching out.', after: 'Give every interested visitor a clearer path to contact you.', video: 'lost-leads-transformation.mp4', description: 'For a single service or campaign that needs a clearer path from interest to enquiry.', result: 'One focused page with a clear message, trust elements and an enquiry form that gives visitors their next step.', items: ['One custom-designed & developed landing page', 'Focused content structure & trust elements', 'Enquiry form & clear calls to action', 'Mobile optimization & basic on-page SEO', 'Standard deployment', '2 revision rounds within agreed scope'], limit: 'Advertising, complex CRM automation and advanced analytics are not included.' },
-]
-export const discountPercent = offer => Math.floor((1 - offer.price / offer.regularPrice) * 100)
+  {
+    chapter: "REVIVE",
+    title: "THE OUTDATED WEBSITE",
+    name: "Website Redesign",
+    price: 399,
+    regularPrice: 799,
+    scope: "Up to 3 Pages",
+    shortLabel: "Up to 3 Pages · Custom Redesign & Development",
+    before: "Your website is stuck in the past.",
+    detail:
+      "An outdated experience can make a great business feel less trustworthy.",
+    after: "A stronger first impression starts here.",
+    video: "outdated-website-transformation.mp4",
+    description: "Refresh your existing website with a modern, custom design.",
+    audience: "For businesses refreshing an existing website.",
+    result:
+      "A refreshed website with up to 3 existing standard pages, redesigned and developed around your business.",
+    items: [
+      "Custom redesign of up to 3 existing website pages.",
+      "Mobile-responsive design and development.",
+      "Updated layout, typography and visual presentation.",
+      "Clear navigation and calls to action.",
+      "Basic on-page SEO setup.",
+      "2 rounds of revisions.",
+      "Standard launch support, subject to existing platform compatibility.",
+    ],
+  },
+  {
+    chapter: "REBUILD",
+    title: "THE MISSING PRESENCE",
+    name: "Business Website",
+    price: 899,
+    regularPrice: 1699,
+    scope: "Up to 5 Pages",
+    shortLabel: "Up to 5 Pages · Custom Design & Development",
+    before: "Your business deserves to be seen.",
+    detail:
+      "Give potential customers a professional place to discover what you do.",
+    after: "Make your business easier to discover and understand.",
+    video: "missing-presence-transformation.mp4",
+    description: "Build a professional website tailored to your business.",
+    audience: "For businesses building a new professional website.",
+    result:
+      "Up to 5 standard pages built around your business, such as Home, About, Services, Portfolio and Contact.",
+    items: [
+      "Up to 5 custom-designed website pages.",
+      "Mobile-responsive design and development.",
+      "Navigation and clear calls to action.",
+      "Basic on-page SEO setup.",
+      "One basic contact form.",
+      "2 rounds of revisions.",
+      "Standard website deployment.",
+    ],
+  },
+  {
+    chapter: "CONVERT",
+    title: "THE LOST LEADS",
+    name: "New Landing Page",
+    price: 349,
+    regularPrice: 599,
+    scope: "1 Page",
+    shortLabel: "1 Page · Conversion-Focused Design & Development",
+    before: "Visitors came. Opportunities vanished.",
+    detail:
+      "Without a clear next step, interested visitors may leave without reaching out.",
+    after: "Give every interested visitor a clearer path to contact you.",
+    video: "lost-leads-transformation.mp4",
+    description:
+      "Create a focused landing page for one service, offer, or campaign.",
+    audience: "For one service, offer, or campaign needing a focused page.",
+    result:
+      "One standalone marketing page with 5–7 standard content sections and a clear path to enquire.",
+    items: [
+      "1 custom-designed landing page.",
+      "Up to 5–7 standard content sections.",
+      "Mobile-responsive design and development.",
+      "Clear call-to-action buttons.",
+      "One basic enquiry form.",
+      "Basic on-page SEO setup.",
+      "2 rounds of revisions.",
+      "Standard deployment.",
+    ],
+  },
+];
+export const additionalScope =
+  "Additional pages, advanced features, e-commerce, booking systems, CRM automation, full copywriting, ongoing maintenance and third-party fees are quoted separately where required.";
+export const offerTerms = [
+  "Additional pages, complex features and customer dashboards are outside the standard packages and require separate scope and quotation.",
+  "E-commerce, payment systems, advanced booking, CRM automation and complex third-party integrations are quoted separately.",
+  "Full copywriting and professional long-form sales copy are not included.",
+  "Domain registration, paid hosting, third-party subscriptions and ongoing maintenance fees are not included.",
+  "Existing platform compatibility is subject to review. Direct code replacement on WordPress, Wix, Squarespace or any other existing platform is not guaranteed.",
+  "Clients provide their company or brand name, logo, final website copy, product or service information, images, brand assets and required account or domain access where applicable.",
+  "Two rounds of revisions apply only within the agreed scope. Extra revisions, additional pages, features and major changes of design direction require a new agreement and quotation.",
+  "Every package includes actual design and development, not only design files. Specific deliverables, schedule and cooperation terms must be confirmed before work begins.",
+  "Website Redesign covers up to 3 existing standard pages. Business Website creates up to 5 new standard pages. New Landing Page covers one service, offer or campaign and is not a multi-step sales funnel; advertising and guaranteed lead results are not included.",
+  "50% deposit is payable after scope, schedule and cooperation terms are confirmed. The remaining 50% is payable after completion and approval, before final handover or launch.",
+  "The promotion applies only to projects that fit the package scope. Offer booking ends November 2, 2026; this is not a delivery deadline. All prices are in USD.",
+];
+export const discountPercent = (offer) =>
+  Math.floor((1 - offer.price / offer.regularPrice) * 100);
+export function journeyStage(scene) {
+  return scene === "hall"
+    ? 1
+    : ["before", "transformation"].includes(scene)
+      ? 2
+      : scene === "after"
+        ? 3
+        : scene === "offers"
+          ? 4
+          : 0;
+}
 export function offerMessage(index, fields = {}) {
-  const offer = offers[index]
-  return ["Hi Ventora Digital! 🎃", "I'd like to claim your Halloween Special Offer.", `Package: ${offer.name}\nRegular Price: $${offer.regularPrice.toLocaleString('en-US')} USD\nHalloween Price: $${offer.price} USD\nDiscount: approximately ${discountPercent(offer)}% off`, [fields.name?.trim() && `Name: ${fields.name.trim()}`, fields.website?.trim() && `Website: ${fields.website.trim()}`, fields.notes?.trim() && `Project details: ${fields.notes.trim()}`].filter(Boolean).join('\n'), 'I understand the offer booking deadline is November 2, 2026. Please confirm the project scope, availability and timeline before booking. A 50% deposit follows scope approval, with the remaining 50% due upon completion and approval before final handover or launch.', 'Thank you!'].filter(Boolean).join('\n\n')
+  const offer = offers[index];
+  if (!offer) return "Choose a Halloween offer above to prepare your enquiry.";
+  return [
+    "Hi Ventora Digital! 🎃",
+    "I'd like to enquire about your Halloween Special Offer.",
+    `Package: ${offer.name} — ${offer.scope} — $${offer.price} USD\nScope: ${offer.shortLabel}`,
+    [
+      fields.name?.trim() && `Name: ${fields.name.trim()}`,
+      fields.website?.trim() && `Website: ${fields.website.trim()}`,
+      fields.notes?.trim() && `Project details: ${fields.notes.trim()}`,
+    ]
+      .filter(Boolean)
+      .join("\n"),
+    "I understand the offer booking deadline is November 2, 2026. Please confirm the project scope, availability, schedule and cooperation terms before booking. Payment: 50% deposit after agreement; 50% after completion and approval, before final handover or launch.",
+    "Thank you!",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 }
 export function contactLinks(index, message) {
-  return { facebook: 'https://www.facebook.com/dylan.ang87/', whatsapp: `https://wa.me/60129608633?text=${encodeURIComponent(message)}`, email: `mailto:hello@ventoradigital.com?subject=${encodeURIComponent(`Halloween Special Enquiry — ${offers[index].name}`)}&body=${encodeURIComponent(message)}` }
+  const offer = offers[index];
+  if (!offer) return {};
+  return {
+    facebook: "https://www.facebook.com/dylan.ang87/",
+    whatsapp: `https://wa.me/60129608633?text=${encodeURIComponent(message)}`,
+    email: `mailto:hello@ventoradigital.com?subject=${encodeURIComponent(`Halloween Special Enquiry — ${offer.name}`)}&body=${encodeURIComponent(message)}`,
+  };
 }

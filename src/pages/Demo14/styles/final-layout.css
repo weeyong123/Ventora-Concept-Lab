@@ -1,0 +1,308 @@
+/* A jagged display face belongs to the entrance, not to the reading copy. */
+@font-face {
+  font-family: "Metal Mania";
+  src: url("/demo14/fonts/metal-mania-regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+.haunt .haunt-hero-copy h1,
+.haunt .haunt-hero-copy h1 em {
+  font-family: "Metal Mania", Cinzel, serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.015em;
+  line-height: 1.05;
+}
+.haunt .haunt-hero-copy h1 {
+  color: #e8decb;
+  text-shadow:
+    0 3px 2px #08050b,
+    0 0 20px #44101988;
+}
+.haunt .haunt-hero-copy h1 em {
+  color: #e7a55d;
+  text-shadow:
+    0 3px 2px #10060a,
+    0 0 24px #7b251c55;
+}
+/* Quiet opt-in cue: no panel and no bobbing ghost. */
+.haunt .haunt-sound-hint {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 3px 0;
+  gap: 5px;
+  max-width: 215px;
+}
+.haunt .haunt-sound-ghost {
+  width: 22px;
+  height: 27px;
+  animation: none;
+  opacity: 0.65;
+  filter: none;
+}
+.haunt .haunt-sound-hint-copy small {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font:
+    10px/1.5 Manrope,
+    Arial,
+    sans-serif;
+  color: #c7bdcd;
+  text-shadow: 0 1px 5px #000;
+}
+.haunt-sound-hint-copy svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+.haunt-brand img {
+  transition: filter 0.3s;
+}
+.haunt-brand:is(:hover, :focus-visible) img {
+  filter: sepia(0.5) drop-shadow(0 0 4px #f4ad5c) drop-shadow(0 0 7px #ac6ee788);
+}
+.haunt-brand:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    #ffe3ac55 50%,
+    transparent 70%
+  );
+  transform: translateX(-130%);
+}
+.haunt-brand:is(:hover, :focus-visible):after {
+  animation: haunt-logo-sweep 0.8s ease-out 1;
+}
+@keyframes haunt-logo-sweep {
+  to {
+    transform: translateX(130%);
+  }
+}
+/* Shared grid tracks align the price row despite different copy lengths. */
+@media (min-width: 701px) {
+  .haunt-offer-grid {
+    row-gap: 0;
+  }
+  .haunt .haunt-card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 11;
+    row-gap: 0;
+  }
+  .haunt-card .haunt-featured-label {
+    min-height: 20px;
+    margin: 12px 0 0;
+    align-self: start;
+  }
+  .haunt-card h3,
+  .haunt-card > p,
+  .haunt-card .haunt-price {
+    align-self: start;
+  }
+  .haunt-card .haunt-price {
+    width: 100%;
+  }
+  .haunt-price-before {
+    min-height: 100px;
+    align-content: center;
+  }
+  .haunt-card .haunt-button {
+    align-self: end;
+  }
+}
+.haunt-door-select > span svg {
+  position: static;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 0 4px;
+}
+.haunt-door-preview > .haunt-button svg {
+  position: static;
+  flex-shrink: 0;
+  margin: 0;
+  width: 18px;
+  height: 18px;
+}
+.haunt-contacts > a > svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+@media (max-width: 700px) {
+  .haunt-door > .haunt-door-marker {
+    top: 91%;
+    gap: 2px;
+  }
+  .haunt-door-marker .haunt-keyhole {
+    width: 33px;
+    height: 33px;
+  }
+  .haunt-door-marker .haunt-keyhole .haunt-room-emblem {
+    width: 21px;
+    height: 21px;
+  }
+  .haunt-door-marker .haunt-door-enter {
+    min-height: 28px;
+    padding: 4px 7px;
+  }
+  .haunt-card .haunt-featured-label:empty {
+    display: none;
+  }
+  .haunt .haunt-sound-hint {
+    top: 66px;
+    max-width: 200px;
+  }
+  .haunt .haunt-hero-copy h1 {
+    font-size: clamp(37px, 11vw, 49px);
+  }
+}
+@media (max-width: 700px) and (max-height: 700px) {
+  .haunt .haunt-hero-copy h1 {
+    font-size: 35px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .haunt-brand:is(:hover, :focus-visible):after {
+    animation: none;
+  }
+  .haunt-brand img {
+    transition: none;
+  }
+}
+/* A quiet bounce keeps the sound invitation discoverable. */
+.haunt .haunt-sound-hint-copy {
+  animation: haunt-sound-invite 2.8s ease-in-out infinite;
+}
+@keyframes haunt-sound-invite {
+  0%,
+  18%,
+  38%,
+  100% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-4px);
+  }
+  28% {
+    transform: translateY(-2px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .haunt .haunt-sound-hint-copy {
+    animation: none;
+  }
+}
+/* Carry the entrance's horror lettering through the experience headings. */
+.haunt .haunt-hall-heading h1,
+.haunt .haunt-hall-heading h1 em,
+.haunt .haunt-room h1,
+.haunt .haunt-room h1 em,
+.haunt .haunt-reveal h1,
+.haunt .haunt-reveal h1 em {
+  font-family: "Metal Mania", Cinzel, serif;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.015em;
+}
+/* Keep the sound invitation anchored to its own control, beside the main site. */
+.haunt-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  pointer-events: auto;
+}
+.haunt-main-site {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  color: #d5ccd2;
+  font:
+    10px/1.4 Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.haunt-main-site svg {
+  width: 13px;
+  height: 13px;
+}
+.haunt-main-site:is(:hover, :focus-visible) {
+  color: #f7cf8e;
+}
+.haunt-sound-control {
+  position: relative;
+}
+.haunt .haunt-sound-control .haunt-sound-hint {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  left: auto;
+  width: max-content;
+  max-width: none;
+  white-space: nowrap;
+}
+.haunt-sound-control .haunt-sound-hint-copy small {
+  gap: 6px;
+}
+.haunt-site-mobile,
+.haunt-sound-hint-mobile {
+  display: none;
+}
+@media (max-width: 700px) {
+  .haunt-nav {
+    gap: 12px;
+  }
+  .haunt-nav-actions {
+    gap: 10px;
+  }
+  .haunt-main-site {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+    gap: 3px;
+  }
+  .haunt-main-site svg {
+    width: 12px;
+    height: 12px;
+  }
+  .haunt-site-desktop,
+  .haunt-sound-hint-desktop {
+    display: none;
+  }
+  .haunt-site-mobile,
+  .haunt-sound-hint-mobile {
+    display: inline;
+  }
+  .haunt-nav-actions .haunt-sound {
+    font-size: 8px !important;
+    padding: 8px;
+    gap: 5px;
+  }
+  .haunt .haunt-sound-control .haunt-sound-hint {
+    top: calc(100% + 10px);
+  }
+}
+/* Small inline prices need a finer strike than the large package cards. */
+.haunt .haunt-inline-price s:after {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+@media (max-width: 700px) {
+  .haunt-reveal {
+    background-image:
+      linear-gradient(#0d0d1a70, #100d20a0 55%, #0f1016),
+      var(--reveal-bg-mobile, var(--reveal-bg));
+  }
+}

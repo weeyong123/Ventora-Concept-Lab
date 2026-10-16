@@ -1,0 +1,246 @@
+/* Local final sales flow: preserve backgrounds, media framing and existing controls. */
+.haunt-brand-navigation {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  pointer-events: auto;
+}
+.haunt-menu {
+  position: relative;
+}
+.haunt-menu-trigger {
+  background: transparent;
+  color: #e8d8c1;
+  padding: 10px 0;
+  min-height: 44px;
+  font:
+    10px/1.4 Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.haunt-menu-trigger span {
+  margin-left: 4px;
+  color: #e8bb7e;
+}
+.haunt-menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 230px;
+  display: grid;
+  padding: 10px;
+  background: #17131df5;
+  border: 1px solid #b99a6855;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px #0008;
+  z-index: 10;
+}
+.haunt-menu-panel button {
+  min-height: 44px;
+  padding: 10px 12px;
+  background: transparent;
+  text-align: left;
+  font:
+    10px/1.4 Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: 0.8px;
+  border-radius: 7px;
+}
+.haunt-menu-panel button:is(:hover, :focus-visible) {
+  background: #e4ac5820;
+  color: #ffe0ae;
+}
+.haunt .haunt-progress {
+  top: 80px;
+  gap: 12px;
+}
+.haunt-progress ol {
+  gap: 10px;
+}
+.haunt-progress li {
+  width: auto;
+  height: 28px;
+  border: 0;
+  background: transparent !important;
+  border-radius: 0;
+  display: flex;
+  gap: 5px;
+  font-size: 10px;
+}
+.haunt-progress li + li:before {
+  display: none;
+}
+.haunt-progress-name {
+  font-size: 9px;
+  letter-spacing: 0.6px;
+}
+.haunt-progress li.is-current {
+  color: #ffe0ae;
+  text-shadow: 0 0 10px #e9ae5966;
+}
+.haunt-progress li:not(.is-current) {
+  color: #a89cad;
+}
+.haunt .haunt-pricing-preview {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 5px 12px;
+  background: #4c231ef2;
+  color: #ffe0b4;
+  text-align: center;
+  font:
+    10px/1.5 Manrope,
+    Arial,
+    sans-serif;
+  z-index: 30;
+  pointer-events: none;
+}
+.haunt .haunt-see-offer {
+  font:
+    600 11px/1.4 Manrope,
+    Arial,
+    sans-serif;
+  letter-spacing: 2px;
+  color: #ecd2a2;
+  margin: 0 0 14px;
+}
+.haunt-after-scope {
+  display: block;
+  color: #dac8e7;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.haunt-reference-price {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  color: #eee2ce;
+}
+.haunt-reference-price small {
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+.haunt-reference-price b {
+  font-size: 20px;
+}
+.haunt-door-scope {
+  display: block;
+  color: #dac8e7;
+  font-size: 12px;
+  margin: 6px 0;
+}
+.haunt-door-surprise {
+  display: block;
+  color: #eed09d;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+.haunt-package-description > span {
+  display: block;
+  margin-top: 9px;
+}
+.haunt-package-scope {
+  color: #eed1a6;
+  font-weight: 600;
+  font-size: 13px;
+}
+.haunt-package-audience {
+  font-size: 12px;
+  color: #d0bfd9;
+}
+.haunt-contacts a[aria-disabled="true"],
+.haunt-generator > .haunt-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.haunt-card {
+  scroll-margin-top: 24px;
+}
+@media (min-width: 701px) {
+  .haunt .haunt-card {
+    grid-row: span 10;
+  }
+}
+@media (max-width: 700px) {
+  .haunt-nav {
+    padding: 0 4%;
+    gap: 6px;
+  }
+  .haunt-brand-navigation {
+    gap: 7px;
+  }
+  .haunt-menu-trigger {
+    font-size: 9px;
+    letter-spacing: 0.5px;
+  }
+  .haunt-nav-actions {
+    gap: 7px;
+  }
+  .haunt-menu-panel {
+    left: -60px;
+    width: 220px;
+  }
+  .haunt .haunt-progress {
+    top: 86px;
+    gap: 8px;
+    max-width: 94%;
+    font-size: 9px;
+  }
+  .haunt-progress-caption {
+    font-size: 7px;
+    letter-spacing: 0.6px;
+  }
+  .haunt-progress ol {
+    gap: 8px;
+  }
+  .haunt-progress li {
+    font-size: 9px;
+    gap: 3px;
+  }
+  .haunt-progress-name {
+    font-size: 7px;
+    letter-spacing: 0.1px;
+  }
+  .haunt-scene-after .haunt-room-actions > .haunt-button {
+    font-size: 10px !important;
+    letter-spacing: 0.6px;
+    gap: 8px;
+  }
+  .haunt .haunt-see-offer {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+}
+@media (max-width: 360px) {
+  .haunt-brand-navigation {
+    gap: 4px;
+  }
+  .haunt-menu-trigger {
+    font-size: 8px;
+  }
+  .haunt-nav-actions {
+    gap: 4px;
+  }
+  .haunt-main-site {
+    font-size: 7px;
+    letter-spacing: 0;
+  }
+  .haunt-nav-actions .haunt-sound {
+    padding: 8px 5px;
+    gap: 3px;
+    font-size: 7px !important;
+  }
+  .haunt .haunt-progress {
+    gap: 5px;
+  }
+  .haunt-progress ol {
+    gap: 5px;
+  }
+}

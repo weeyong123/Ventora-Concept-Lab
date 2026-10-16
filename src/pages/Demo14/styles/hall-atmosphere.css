@@ -1,0 +1,226 @@
+/* Three distinct hauntings, registered to the uncropped hall artwork. */
+.haunt-door-0 {
+  --door-glow: 112, 186, 255;
+  --door-ink: #d6edff;
+}
+.haunt-door-1 {
+  --door-glow: 227, 68, 52;
+  --door-ink: #ffe0cc;
+}
+.haunt-door-2 {
+  --door-glow: 183, 113, 245;
+  --door-ink: #efd9ff;
+}
+.haunt-door .haunt-keyhole {
+  border-color: rgba(var(--door-glow), 0.65);
+  animation: haunt-chapter-glow 3.6s ease-in-out infinite;
+}
+.haunt-door-1 .haunt-keyhole {
+  animation-delay: -1.2s;
+}
+.haunt-door-2 .haunt-keyhole {
+  animation-delay: -2.4s;
+}
+.haunt-door .haunt-keyhole .haunt-room-emblem {
+  color: var(--door-ink);
+  filter: drop-shadow(0 0 5px rgba(var(--door-glow), 0.5));
+}
+.haunt-door:is(:hover, :focus-visible, .is-previewed) {
+  border-color: rgba(var(--door-glow), 0.65) !important;
+  background: rgba(var(--door-glow), 0.035);
+  box-shadow:
+    inset 0 0 28px rgba(var(--door-glow), 0.14),
+    0 0 25px rgba(var(--door-glow), 0.2);
+}
+.haunt-door:is(:hover, :focus-visible, .is-previewed) .haunt-keyhole {
+  animation: none;
+  border-color: var(--door-ink);
+  background: radial-gradient(circle, rgba(var(--door-glow), 0.24), #121019);
+  box-shadow: 0 0 28px rgba(var(--door-glow), 0.5);
+}
+.haunt-door > .haunt-door-omen {
+  display: block;
+  background: radial-gradient(
+    ellipse at 50% 90%,
+    rgba(var(--door-glow), 0.25),
+    transparent 70%
+  );
+  animation: none;
+  box-shadow: none;
+  transition: opacity 0.8s;
+}
+.haunt-door .haunt-door-omen i {
+  display: none;
+}
+.haunt-hall-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.haunt-hall-atmosphere > i {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.haunt-hall-blue {
+  left: 11%;
+  top: 29%;
+  width: 15%;
+  height: 44%;
+  background: radial-gradient(ellipse at 50% 85%, #57aaff65, transparent 68%);
+  opacity: 0.25;
+  animation: haunt-blue-breath 7s ease-in-out infinite;
+}
+.haunt-hall-red {
+  left: 48.8%;
+  top: 25%;
+  width: 2.4%;
+  height: 29%;
+  background: radial-gradient(ellipse, #ff402b70, transparent 70%);
+  filter: blur(3px);
+  animation: haunt-red-flicker 9s ease-in-out infinite;
+}
+.haunt-hall-mist {
+  left: 70%;
+  top: 63%;
+  width: 23%;
+  height: 11%;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse at 25% 55%, #aa66db55, transparent 55%),
+    radial-gradient(ellipse at 70% 40%, #bc81ed55, transparent 60%);
+  filter: blur(7px);
+  animation: haunt-purple-drift 13s ease-in-out infinite alternate;
+}
+.haunt-watcher {
+  position: absolute;
+  width: 3.6%;
+  height: 19%;
+  color: #05040c;
+  filter: blur(2px);
+  opacity: 0;
+  animation: haunt-watcher-appear 19s ease-in-out infinite;
+  transform-origin: bottom;
+}
+.haunt-watcher-0 {
+  left: 8.3%;
+  top: 43%;
+  animation-delay: 3s;
+}
+.haunt-watcher-1 {
+  left: 82%;
+  top: 4%;
+  height: 13%;
+  animation-delay: 11s;
+  animation-duration: 23s;
+}
+.haunt-hall-art:has(.haunt-door-0:is(:hover, :focus-visible, .is-previewed))
+  .haunt-hall-blue {
+  animation: none;
+  opacity: 0.8;
+}
+.haunt-hall-art:has(.haunt-door-1:is(:hover, :focus-visible, .is-previewed))
+  .haunt-hall-red {
+  animation: none;
+  opacity: 0.8;
+}
+.haunt-hall-art:has(.haunt-door-2:is(:hover, :focus-visible, .is-previewed))
+  .haunt-hall-mist {
+  filter: blur(5px);
+  opacity: 0.85;
+}
+.haunt-hall-blue,
+.haunt-hall-red,
+.haunt-hall-mist {
+  transition:
+    opacity 1s,
+    filter 1s;
+}
+@keyframes haunt-chapter-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(var(--door-glow), 0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 25px rgba(var(--door-glow), 0.48),
+      inset 0 0 12px rgba(var(--door-glow), 0.12);
+  }
+}
+@keyframes haunt-blue-breath {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.65;
+  }
+}
+@keyframes haunt-red-flicker {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  35% {
+    opacity: 0.55;
+  }
+  42% {
+    opacity: 0.3;
+  }
+  63% {
+    opacity: 0.65;
+  }
+  80% {
+    opacity: 0.35;
+  }
+}
+@keyframes haunt-purple-drift {
+  from {
+    transform: translate(-4%, 3%) scale(0.95);
+    opacity: 0.4;
+  }
+  to {
+    transform: translate(5%, -5%) scale(1.08);
+    opacity: 0.7;
+  }
+}
+@keyframes haunt-watcher-appear {
+  0%,
+  58%,
+  100% {
+    opacity: 0;
+    transform: translateX(-5%) skewX(-2deg);
+  }
+  70%,
+  78% {
+    opacity: 0.4;
+  }
+  88% {
+    opacity: 0;
+    transform: translateX(7%) skewX(2deg);
+  }
+}
+@media (max-width: 700px) {
+  .haunt-watcher {
+    filter: blur(1px);
+  }
+  .haunt-hall-mist {
+    filter: blur(3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .haunt .haunt-door .haunt-keyhole,
+  .haunt-hall-atmosphere > i,
+  .haunt-watcher {
+    animation: none;
+  }
+  .haunt-watcher {
+    display: none;
+  }
+  .haunt-hall-atmosphere > i {
+    opacity: 0.3;
+    transition: none;
+  }
+}

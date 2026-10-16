@@ -1,0 +1,48 @@
+import { asset } from "./content";
+import { Icon, HalloweenBats } from "./Artwork";
+import Film from "./Film";
+
+export default function HeroScene({ go, reduced, title }) {
+  return (
+    <section className="haunt-stage haunt-entrance">
+      <HalloweenBats />
+      <Film
+        src="mansion-hero-loop.mp4"
+        poster={asset("mansion-poster.jpg")}
+        sound={false}
+        background
+        reduced={reduced}
+      />
+      <div className="haunt-shade" />
+      <div className="haunt-hero-copy">
+        <p className="haunt-eyebrow">VENTORA DIGITAL PRESENTS</p>
+        <span className="haunt-rule">
+          <Icon type="moon" />
+        </span>
+        {title(
+          <>
+            ENTER IF
+            <br />
+            <em>YOU DARE.</em>
+          </>,
+        )}
+        <p>
+          Three nightmares. One way to bring
+          <br className="haunt-desktop" /> your business back to life.
+        </p>
+      </div>
+      <button
+        className="haunt-button haunt-entrance-button"
+        onClick={() => go(reduced ? "hall" : "opening")}
+      >
+        <span className="haunt-keyhole">
+          <Icon type="door" />
+        </span>
+        <span className="haunt-enter-label">ENTER THE MANSION</span>
+        <span className="haunt-invitation-arrow" aria-hidden="true">
+          <Icon type="up" />
+        </span>
+      </button>
+    </section>
+  );
+}

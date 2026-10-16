@@ -1,0 +1,1132 @@
+html[data-demo="demo14"] {
+  background: #0f1016;
+  color: #f5f1e8;
+  scroll-padding-top: 30px;
+}
+.haunt {
+  --purple: #7a5af5;
+  --green: #a8ff2a;
+  background: #0f1016;
+  color: var(--paper);
+  font:
+    14px/1.7 "Manrope",
+    Arial,
+    sans-serif;
+  min-height: 100svh;
+}
+.haunt * {
+  box-sizing: border-box;
+}
+.haunt button,
+.haunt a,
+.haunt input,
+.haunt textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+.haunt button {
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+.haunt button,
+.haunt fieldset {
+  border: 0;
+}
+.haunt a {
+  text-decoration: none;
+}
+.haunt button:disabled {
+  cursor: wait;
+}
+.haunt button:focus-visible,
+.haunt a:focus-visible,
+.haunt input:focus-visible,
+.haunt textarea:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 5px;
+}
+.haunt h1:focus,
+.haunt h2:focus {
+  outline: none;
+}
+.haunt h1,
+.haunt h2,
+.haunt h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+.haunt h1 {
+  font-size: clamp(45px, 6.4vw, 98px);
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+  margin: 25px 0;
+}
+.haunt h2 {
+  font-size: clamp(36px, 4.3vw, 66px);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  margin: 15px 0 30px;
+}
+.haunt h1 em,
+.haunt h2 em {
+  font-weight: 400;
+}
+.haunt p {
+  color: var(--muted);
+}
+.haunt-nav {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100px;
+  padding: 0 4.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border: 0;
+  background: transparent;
+  pointer-events: none;
+}
+.haunt-brand {
+  pointer-events: auto;
+  position: relative;
+  display: block;
+  width: 138px;
+  height: 45px;
+  background: none;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.haunt-brand img {
+  position: absolute;
+  width: 150px;
+  max-width: none;
+  left: -6px;
+  top: -26px;
+}
+.haunt-eyebrow,
+.haunt-sound,
+.haunt-text,
+.haunt-stage-footer,
+.haunt-stage-footer button,
+.haunt-hall-footer,
+.haunt-card-top,
+.haunt-offer-meta,
+.haunt-signature,
+.haunt-footer {
+  font-size: 10px !important;
+  letter-spacing: 2px;
+  line-height: 1.7;
+}
+.haunt-sound {
+  pointer-events: auto;
+  background: #0f101655;
+  border: 1px solid #ffffff29 !important;
+  padding: 11px 15px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  white-space: nowrap;
+}
+.haunt-sound svg {
+  width: 16px;
+}
+.haunt-eyebrow {
+  color: #d3bfef !important;
+  margin: 0;
+}
+.haunt-stage {
+  position: relative;
+  min-height: 760px;
+  height: 100svh;
+  isolation: isolate;
+  overflow: hidden;
+}
+.haunt-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -3;
+  pointer-events: none;
+}
+.haunt-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, #0b0b14ba, transparent 80%),
+    linear-gradient(0deg, #0f1016e8, transparent 45%, #0a0b1340);
+}
+.haunt-hero-copy {
+  position: relative;
+  padding: clamp(155px, 22vh, 240px) 0 120px 8%;
+  max-width: 850px;
+}
+.haunt-hero-copy > p:not(.haunt-eyebrow) {
+  font-size: 15px;
+  line-height: 1.9;
+  margin: 24px 0 32px;
+  color: #d9d2dd;
+}
+.haunt-rule {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 120px;
+  color: #c5acd7;
+  margin: 25px 0;
+}
+.haunt-rule:before,
+.haunt-rule:after {
+  content: "";
+  height: 1px;
+  background: #ae93c76b;
+  flex: 1;
+}
+.haunt-button {
+  position: relative;
+  display: inline-flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  padding: 17px 24px;
+  border: 1px solid #9c80d67a !important;
+  background: linear-gradient(115deg, #352747e8, #191620e8);
+  color: var(--paper);
+  font:
+    10px/1.6 "Manrope",
+    Arial,
+    sans-serif !important;
+  letter-spacing: 1.7px;
+  box-shadow:
+    0 0 25px #7a5af517,
+    inset 0 0 18px #7a5af50a;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    background 0.25s;
+}
+.haunt-button:hover {
+  border-color: #a8ff2a99 !important;
+  box-shadow:
+    0 0 26px #7a5af535,
+    inset 0 -1px #a8ff2a66;
+  background: #352849;
+}
+.haunt-button svg {
+  flex-shrink: 0;
+  width: 18px;
+}
+.haunt-text {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  background: transparent;
+  padding: 16px 0;
+  color: #ddd5e8 !important;
+}
+.haunt-hero-copy > .haunt-text {
+  margin-top: 13px;
+}
+.haunt-stage-footer {
+  position: absolute;
+  bottom: 30px;
+  left: 4.5%;
+  right: 4.5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #c9c0d2;
+}
+.haunt-stage-footer button,
+.haunt-footer button {
+  padding: 12px;
+  background: none;
+}
+.haunt-stage-footer button span {
+  margin-left: 12px;
+}
+.haunt-preload {
+  display: none;
+}
+.haunt-transition {
+  position: fixed;
+  inset: 0;
+  background: #08090e;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.32s;
+}
+.haunt.is-fading .haunt-transition {
+  opacity: 1;
+  pointer-events: auto;
+}
+.haunt.is-fading .haunt-hero-copy {
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.haunt-film-skip {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #101019e8;
+  border: 1px solid #92809888 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 52px;
+  padding: 15px 23px;
+  font-size: 10px !important;
+  letter-spacing: 1px;
+  width: max-content;
+  max-width: 90%;
+}
+.haunt-film-status {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 14px 22px;
+  text-align: center;
+  width: max-content;
+}
+.haunt-film-status button {
+  display: block;
+  margin: 8px auto 0;
+  padding: 8px 20px;
+  background: #392d50;
+}
+.haunt-hall {
+  padding-top: 135px;
+  min-height: 100svh;
+  background: radial-gradient(ellipse at 50% 20%, #36253e44, transparent 65%);
+}
+.haunt-hall-heading {
+  text-align: center;
+  padding: 0 24px 24px;
+}
+.haunt-hall-heading h1 {
+  font-size: clamp(34px, 4vw, 60px);
+  margin: 15px 0;
+}
+.haunt-hall-heading p:last-child {
+  margin: 0;
+}
+.haunt-hall-art {
+  position: relative;
+  width: min(100%, 1480px);
+  margin: 0 auto;
+}
+.haunt-hall-art > img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.haunt-hall-art:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    #0f1016 0%,
+    transparent 15%,
+    transparent 80%,
+    #0f1016
+  );
+  pointer-events: none;
+}
+.haunt-door {
+  position: absolute;
+  z-index: 1;
+  background: transparent;
+  border: 1px solid transparent !important;
+  border-radius: 48% 48% 4px 4px;
+  transition:
+    box-shadow 0.3s,
+    background 0.3s,
+    border-color 0.3s;
+}
+.haunt-door-0 {
+  left: 12.3%;
+  top: 32%;
+  width: 12%;
+  height: 39%;
+}
+.haunt-door-1 {
+  left: 44.4%;
+  top: 22%;
+  width: 11.4%;
+  height: 31%;
+}
+.haunt-door-2 {
+  left: 74.9%;
+  top: 32%;
+  width: 12%;
+  height: 39%;
+}
+.haunt-door:hover,
+.haunt-door:focus-visible {
+  border-color: #a8ff2a88 !important;
+  box-shadow:
+    inset 0 0 25px #a8ff2a24,
+    0 0 24px #a8ff2a35;
+  background: #a8ff2a09;
+}
+.haunt-door > span {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  padding: 16px;
+  background: #101019eb;
+  opacity: 0;
+  transition: opacity 0.2s;
+  border: 1px solid #8c75b966;
+  pointer-events: none;
+}
+.haunt-door:hover > span,
+.haunt-door:focus-visible > span {
+  opacity: 1;
+}
+.haunt-door small,
+.haunt-door strong {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.haunt-door small {
+  color: #c1addb;
+  margin-bottom: 5px;
+}
+.haunt-door svg {
+  margin-top: 10px;
+  color: var(--green);
+}
+.haunt-door-choices {
+  width: min(1160px, 90%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+}
+.haunt-door-choices button {
+  position: relative;
+  text-align: left;
+  background: none;
+  padding: 22px 26px 20px 0;
+  border-top: 1px solid #a69ab544;
+}
+.haunt-door-choices small {
+  color: #ac97c5;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+.haunt-door-choices strong {
+  font:
+    17px Georgia,
+    serif;
+  display: block;
+  margin: 10px 0;
+}
+.haunt-door-choices span {
+  font-size: 12px;
+  color: var(--muted);
+  display: block;
+}
+.haunt-door-choices em {
+  font-style: normal;
+  font-size: 11px;
+  color: #d5c8df;
+  display: block;
+  margin-top: 12px;
+}
+.haunt-door-choices svg {
+  position: absolute;
+  right: 0;
+  top: 48px;
+}
+.haunt-door-choices button:hover {
+  border-color: var(--green);
+}
+.haunt-hall-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 28px 5% 0;
+  padding-bottom: 28px;
+  color: #b8b4c7;
+}
+.haunt-room-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, #0b0b13ec 0%, #0b0b1390 35%, transparent 75%),
+    linear-gradient(0deg, #0b0b13ab, transparent 50%);
+}
+.haunt-scene-transformation .haunt-room-shade {
+  display: none;
+}
+.haunt-room-copy {
+  padding: clamp(185px, 29vh, 310px) 6% 90px;
+  max-width: 800px;
+}
+.haunt-room h1 {
+  font-size: clamp(43px, 5.3vw, 76px);
+}
+.haunt-room-lead {
+  font-size: 18px;
+  color: #e7dfec !important;
+}
+.haunt-room-detail {
+  font-size: 13px;
+  max-width: 370px;
+  margin-bottom: 30px;
+}
+.haunt-room .haunt-text {
+  margin-top: 15px;
+}
+.haunt-reveal {
+  position: relative;
+  min-height: 820px;
+  height: 95svh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background:
+    linear-gradient(#0d0d1a70, #100d20a0 55%, #0f1016),
+    var(--reveal-bg) center/cover;
+}
+.haunt-reveal-copy {
+  padding: 150px 25px 80px;
+  animation: haunt-rise 1s ease both;
+}
+.haunt-reveal h1 {
+  font-size: clamp(42px, 5.2vw, 80px);
+  max-width: 1050px;
+  text-shadow: 0 2px 35px #161124;
+}
+.haunt-reveal .haunt-rule {
+  margin: 25px auto;
+}
+.haunt-reveal p:not(.haunt-eyebrow) {
+  color: #d7cede;
+  font-size: 16px;
+}
+.haunt-signature {
+  display: block;
+  margin: 32px 0;
+  color: #f5f1e8;
+  letter-spacing: 5px;
+}
+.haunt-reveal .haunt-text {
+  justify-content: center;
+  margin-top: 30px;
+}
+.haunt-offers {
+  max-width: 1440px;
+  margin: auto;
+  padding: 80px 5%;
+}
+.haunt-section-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: end;
+  margin-bottom: 45px;
+}
+.haunt-section-heading h2 {
+  margin-bottom: 0;
+}
+.haunt-offer-meta {
+  text-align: right;
+  letter-spacing: 1px;
+}
+.haunt-offer-meta span {
+  color: #dbbd9b;
+}
+.haunt-offer-meta small {
+  letter-spacing: 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.haunt-offer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.haunt-card {
+  padding: 28px;
+  background: linear-gradient(150deg, #211e2acc, #171821cc);
+  border: 1px solid #7e73874a;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.haunt-card.selected {
+  border-color: #a58ad3;
+  box-shadow: 0 0 35px #7a5af519;
+}
+.haunt-card:hover {
+  border-color: #a8ff2a65;
+}
+.haunt-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 8px !important;
+  letter-spacing: 1px;
+}
+.haunt-card > svg {
+  margin: 30px 0 7px;
+  width: 28px;
+  height: 28px;
+  color: #bea3dd;
+}
+.haunt-card h3 {
+  font-size: 29px;
+  line-height: 1.2;
+  margin: 14px 0;
+}
+.haunt-card > p {
+  font-size: 12px;
+  min-height: 62px;
+}
+.haunt-price {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 0 30px;
+  border-bottom: 1px solid #ffffff20;
+}
+.haunt-price strong {
+  font:
+    58px/1 Georgia,
+    serif;
+  color: var(--orange);
+  letter-spacing: -3px;
+}
+.haunt-price span {
+  font-size: 8px;
+  letter-spacing: 1px;
+  line-height: 1.8;
+  color: #c3b4cb;
+}
+.haunt-card ul {
+  list-style: none;
+  padding: 16px 0;
+  min-height: 233px;
+  margin: 0;
+}
+.haunt-card li {
+  font-size: 12px;
+  margin: 13px 0;
+  padding-left: 18px;
+  position: relative;
+}
+.haunt-card li:before {
+  content: "+";
+  color: #b399d7;
+  position: absolute;
+  left: 0;
+}
+.haunt-card p.haunt-limit {
+  font-size: 10px;
+  color: #a9a2b8;
+  line-height: 1.8;
+  margin: 0 0 25px;
+  min-height: 55px;
+}
+.haunt-card .haunt-button {
+  margin-top: auto;
+  padding: 16px 12px;
+  width: 100%;
+  justify-content: space-between;
+}
+.haunt-deposit {
+  text-align: center;
+  font-size: 11px;
+  margin: 28px 0 0;
+}
+.haunt-claim {
+  border-top: 1px solid #ffffff20;
+  padding: 100px max(5%, calc((100% - 1296px) / 2));
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 9%;
+  background: radial-gradient(ellipse at 0 40%, #4c31552b, transparent 65%);
+}
+.haunt-claim-intro h2 {
+  font-size: clamp(34px, 3.4vw, 50px);
+}
+.haunt-claim-intro > p {
+  max-width: 340px;
+}
+.haunt-note {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #9c94ac;
+  display: block;
+  max-width: 320px;
+  margin-top: 35px;
+}
+.haunt-generator {
+  min-width: 0;
+}
+.haunt-generator fieldset {
+  margin: 0 0 26px;
+  padding: 0;
+  min-width: 0;
+}
+.haunt-generator legend,
+.haunt-generator > label,
+.haunt-inputs > label {
+  font-size: 12px;
+  display: block;
+  width: 100%;
+  color: #e1dbe8;
+}
+.haunt-generator legend {
+  margin-bottom: 12px;
+}
+.haunt-radio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 50px;
+  border-bottom: 1px solid #ffffff20;
+  font-size: 12px;
+  padding: 8px 0;
+  cursor: pointer;
+}
+.haunt-radio input {
+  accent-color: #a58ad3;
+  width: 16px;
+  height: 16px;
+}
+.haunt-radio span {
+  flex: 1;
+}
+.haunt-radio b {
+  color: #f0b474;
+  font-weight: 400;
+}
+.haunt-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.haunt-generator label > span:not(.haunt-radio span) {
+  color: #938b9f;
+  font-size: 10px;
+}
+.haunt-generator input:not([type="radio"]),
+.haunt-generator textarea {
+  width: 100%;
+  border: 1px solid #84779066;
+  background: #17151ee6;
+  color: #f5f1e8;
+  font:
+    13px/1.7 "Manrope",
+    Arial,
+    sans-serif;
+  border-radius: 0;
+  padding: 12px;
+  margin: 9px 0 22px;
+}
+.haunt-generator input::placeholder {
+  color: #96909f;
+  font-size: 11px;
+}
+.haunt-generator textarea {
+  resize: vertical;
+}
+.haunt-generator .haunt-message {
+  font: 12px/1.8 monospace;
+  color: #c8c0d3;
+  background: #101017;
+  padding: 20px;
+  min-height: 275px;
+}
+.haunt-generator > .haunt-button {
+  width: 100%;
+}
+.haunt-notice {
+  font-size: 11px;
+  min-height: 40px;
+  margin: 14px 0;
+}
+.haunt-contacts {
+  display: grid;
+  gap: 10px;
+}
+.haunt-contacts a {
+  border: 1px solid #8a789b66;
+  padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  min-height: 51px;
+}
+.haunt-contacts a:hover {
+  background: #30233d;
+}
+.haunt-footer {
+  padding: 28px 5%;
+  border-top: 1px solid #ffffff20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: #aaa1b6;
+  font-size: 8px !important;
+  letter-spacing: 1px;
+}
+.haunt-footer button {
+  font-size: 9px;
+}
+.haunt-skip {
+  position: fixed;
+  left: 20px;
+  top: -100px;
+  z-index: 30;
+  background: #171821;
+  padding: 15px;
+}
+.haunt-skip:focus {
+  top: 15px;
+}
+.haunt-sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@keyframes haunt-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (min-width: 1600px) {
+  .haunt-hero-copy {
+    padding-left: 10%;
+  }
+  .haunt-stage {
+    min-height: 850px;
+  }
+}
+@media (max-width: 1000px) {
+  .haunt-card {
+    padding: 22px 18px;
+  }
+  .haunt-card-top {
+    font-size: 7px !important;
+  }
+  .haunt-card h3 {
+    font-size: 24px;
+  }
+  .haunt-price strong {
+    font-size: 50px;
+  }
+  .haunt-claim {
+    gap: 5%;
+  }
+  .haunt-door-choices {
+    gap: 22px;
+  }
+  .haunt-door-choices strong {
+    font-size: 15px;
+  }
+}
+@media (max-width: 700px) {
+  .haunt-nav {
+    height: 80px;
+    padding: 0 6%;
+  }
+  .haunt-brand {
+    width: 115px;
+    height: 40px;
+  }
+  .haunt-brand img {
+    width: 127px;
+    top: -22px;
+  }
+  .haunt-sound {
+    padding: 9px 11px;
+    font-size: 8px !important;
+    letter-spacing: 1px;
+  }
+  .haunt-stage {
+    min-height: 730px;
+    height: 100svh;
+  }
+  .haunt h1 {
+    font-size: clamp(46px, 11.7vw, 73px);
+  }
+  .haunt-shade {
+    background:
+      linear-gradient(90deg, #080913a6, #08091325),
+      linear-gradient(0deg, #0f1016, transparent 65%);
+  }
+  .haunt-stage-footer {
+    left: 7%;
+    right: 7%;
+    bottom: 22px;
+    font-size: 8px !important;
+    letter-spacing: 1px;
+  }
+  .haunt-stage-footer > span:last-child {
+    display: none;
+  }
+  .haunt-stage-footer button {
+    font-size: 8px !important;
+    letter-spacing: 1px;
+  }
+  .haunt-eyebrow {
+    font-size: 9px !important;
+    letter-spacing: 1.5px;
+  }
+  .haunt-button {
+    font-size: 9px !important;
+    padding: 16px 18px;
+    gap: 15px;
+  }
+  .haunt-hall-heading h1 {
+    font-size: 36px;
+    line-height: 1.15;
+  }
+  .haunt-hall-heading p:last-child {
+    font-size: 12px;
+    max-width: 300px;
+    margin: auto;
+  }
+  .haunt-hall-art {
+    margin: 5px auto 20px;
+  }
+  .haunt-door > span {
+    display: none;
+  }
+  .haunt-door-choices {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 86%;
+  }
+  .haunt-door-choices button {
+    padding: 18px 40px 18px 20px;
+    background: #1d1b26;
+    border: 1px solid #9b87ae40;
+  }
+  .haunt-door-choices strong {
+    font-size: 17px;
+  }
+  .haunt-door-choices em {
+    margin-top: 8px;
+  }
+  .haunt-door-choices svg {
+    right: 16px;
+  }
+  .haunt-hall-footer {
+    display: block;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .haunt-hall-footer > span {
+    font-size: 8px;
+  }
+  .haunt-hall-footer .haunt-text {
+    margin: auto;
+  }
+  .haunt-room .haunt-media {
+    object-position: 62% center;
+  }
+  .haunt-room-shade {
+    background: linear-gradient(
+      0deg,
+      #090912f5 10%,
+      #090912a6 55%,
+      #09091233 90%
+    );
+  }
+  .haunt-room-copy {
+    padding: 300px 7% 50px;
+    max-width: 100%;
+  }
+  .haunt-room h1 {
+    font-size: 43px;
+    max-width: 420px;
+  }
+  .haunt-room-lead {
+    font-size: 16px;
+  }
+  .haunt-room-detail {
+    font-size: 12px;
+    max-width: 290px;
+  }
+  .haunt-room .haunt-eyebrow span {
+    display: none;
+  }
+  .haunt-room {
+    height: auto;
+    min-height: 100svh;
+  }
+  .haunt-scene-transformation .haunt-room {
+    height: 100svh;
+    min-height: 650px;
+  }
+  .haunt-film-skip {
+    font-size: 8px !important;
+    letter-spacing: 0.5px;
+    padding: 14px;
+  }
+  .haunt-reveal {
+    height: auto;
+    min-height: 730px;
+    background-position: center;
+  }
+  .haunt-reveal-copy {
+    padding: 160px 7% 100px;
+  }
+  .haunt-reveal h1 {
+    font-size: 42px;
+    line-height: 1.16;
+  }
+  .haunt-reveal p:not(.haunt-eyebrow) {
+    font-size: 13px;
+  }
+  .haunt-reveal .haunt-text {
+    font-size: 8px !important;
+    letter-spacing: 1px;
+  }
+  .haunt-offers {
+    padding: 55px 6%;
+  }
+  .haunt-section-heading {
+    display: block;
+  }
+  .haunt-section-heading h2 {
+    font-size: 42px;
+  }
+  .haunt-offer-meta {
+    text-align: left;
+    margin-top: 30px;
+  }
+  .haunt-offer-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .haunt-card {
+    padding: 28px;
+  }
+  .haunt-card-top {
+    font-size: 8px !important;
+  }
+  .haunt-card h3 {
+    font-size: 32px;
+  }
+  .haunt-card > p {
+    min-height: 0;
+    font-size: 13px;
+  }
+  .haunt-card ul {
+    min-height: 0;
+    padding-bottom: 20px;
+  }
+  .haunt-card li {
+    font-size: 13px;
+  }
+  .haunt-card p.haunt-limit {
+    min-height: 0;
+    font-size: 11px;
+  }
+  .haunt-price strong {
+    font-size: 62px;
+  }
+  .haunt-claim {
+    padding: 65px 6%;
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+  .haunt-claim-intro h2 {
+    font-size: 39px;
+  }
+  .haunt-note {
+    margin-top: 20px;
+  }
+  .haunt-inputs {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .haunt-generator input:not([type="radio"]),
+  .haunt-generator textarea {
+    font-size: 16px;
+  }
+  .haunt-generator .haunt-message {
+    font-size: 12px;
+  }
+  .haunt-footer {
+    flex-wrap: wrap;
+    padding: 25px 6%;
+    gap: 12px;
+  }
+  .haunt-footer > span:last-child {
+    width: 100%;
+    font-size: 7px;
+  }
+  .haunt-footer button {
+    padding-right: 0;
+    margin-left: auto;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .haunt *,
+  .haunt *:before,
+  .haunt *:after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* Neutralize the existing homepage's unscoped footer layout inside this demo. */
+.haunt .haunt-footer {
+  min-height: 0;
+  flex-direction: row;
+  position: relative;
+  overflow: visible;
+}
+.haunt-reveal-copy > * {
+  animation: haunt-rise 0.9s ease both;
+}
+.haunt-reveal-copy > h1 {
+  animation-delay: 0.15s;
+}
+.haunt-reveal-copy > p:not(.haunt-eyebrow) {
+  animation-delay: 0.3s;
+}
+.haunt-reveal-copy > .haunt-signature {
+  animation-delay: 0.45s;
+}
+.haunt-skip:not(:focus) {
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+}
