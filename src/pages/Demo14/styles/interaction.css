@@ -456,6 +456,7 @@
 .haunt-offer-preview img {
   display: block;
   width: 100%;
+  height: auto;
   aspect-ratio: 16/10;
   object-fit: cover;
   transition: transform 0.6s ease;

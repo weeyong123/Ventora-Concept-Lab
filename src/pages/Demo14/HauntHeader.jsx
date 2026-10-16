@@ -147,7 +147,9 @@ export default function HauntHeader({
                 }
                 aria-current={stage === index + 1 ? "step" : undefined}
               >
-                <span>{String(index + 1).padStart(2, "0")}</span>
+                <span aria-label={stage >= index + 1 ? "Reached" : undefined}>
+                  {stage >= index + 1 ? "✓" : String(index + 1).padStart(2, "0")}
+                </span>
                 <span className="haunt-progress-name">{label}</span>
               </li>
             ))}

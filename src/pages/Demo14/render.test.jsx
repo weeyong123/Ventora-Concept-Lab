@@ -73,7 +73,9 @@ test("before/after preserve both story stages without revealing activity prices"
     const after = renderToStaticMarkup(<RoomScene {...props} scene="after" />);
     assert(after.includes("CLAIM MY HALLOWEEN OFFER"));
     assert(after.includes("EXPLORE OTHER OFFERS"));
-    assert(!after.includes("$"));
+    assert(after.includes("BEFORE DISCOUNT"));
+    assert(after.includes(`$${offers[i].regularPrice.toLocaleString("en-US")}`));
+    assert(!after.includes(`$${offers[i].price}`));
     assert(after.includes(offers[i].scope.toUpperCase()));
   }
 });
@@ -137,5 +139,12 @@ test("internal comparison preview is explicit and keeps the After activity price
       discount: false,
       preview: false,
     });
+  }
+});
+
+test("Journey checks reached stages and resets with the scene", () => {
+  for (const [scene, count] of [["hall", 1], ["before", 2], ["transformation", 2], ["after", 3], ["offers", 4], ["hero", 0]]) {
+    const html = renderToStaticMarkup(<HauntHeader {...base} scene={scene} soundHint={false} toggleSound={noop} />);
+    assert.equal((html.match(/aria-label="Reached"/g) || []).length, count);
   }
 });

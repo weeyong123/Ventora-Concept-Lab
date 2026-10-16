@@ -44,6 +44,7 @@ test("public price comparisons stay off, including a production preview query", 
   });
   assert.deepEqual(getPricingVisibility({ search: "?pricing-preview=1" }), {
     ...publicPriceComparisons,
+    afterReference: true,
     preview: false,
   });
   assert.deepEqual(
@@ -52,6 +53,7 @@ test("public price comparisons stay off, including a production preview query", 
       standardPrice: true,
       beforeDiscount: true,
       discount: true,
+      afterReference: true,
       preview: true,
     },
   );

@@ -12,6 +12,8 @@ export function getPricingVisibility({
     development && new URLSearchParams(search).get("pricing-preview") === "1";
   return {
     ...publicPriceComparisons,
+    // After-scene reference restored at the user’s request.
+    afterReference: true,
     ...(preview
       ? { standardPrice: true, beforeDiscount: true, discount: true }
       : {}),

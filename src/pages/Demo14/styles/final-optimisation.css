@@ -102,13 +102,14 @@
   pointer-events: none;
 }
 .haunt .haunt-see-offer {
+  display: block;
   font:
     600 11px/1.4 Manrope,
     Arial,
     sans-serif;
   letter-spacing: 2px;
   color: #ecd2a2;
-  margin: 0 0 14px;
+  margin: 5px 0 0;
 }
 .haunt-after-scope {
   display: block;
@@ -215,7 +216,7 @@
   }
   .haunt .haunt-see-offer {
     font-size: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 }
 @media (max-width: 360px) {
