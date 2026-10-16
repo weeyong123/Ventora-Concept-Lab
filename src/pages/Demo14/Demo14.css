@@ -343,3 +343,152 @@ html[data-demo="demo14"]{background:#0f1016;color:#f5f1e8;scroll-padding-top:30p
 @keyframes haunt-keyhole-green{0%,100%{box-shadow:0 0 9px #a8ff2a24,inset 0 0 10px #a8ff2a0d}50%{box-shadow:0 0 28px 3px #a8ff2a80,inset 0 0 16px #a8ff2a29}}
 .haunt-entrance-button:is(:hover,:focus-visible,:active) .haunt-keyhole,.haunt-door:is(:hover,:focus-visible,:active) .haunt-keyhole{animation:none;border-color:#caff8e;background:#a8ff2a12;box-shadow:0 0 24px #a8ff2a66,inset 0 0 12px #a8ff2a18}
 @media(prefers-reduced-motion:reduce){.haunt-entrance-button .haunt-keyhole,.haunt-door-marker .haunt-keyhole,.haunt-scene-before .haunt-curse-seal{animation:none;box-shadow:0 0 14px #a8ff2a33}}
+/* Refined haunted-house palette and readable type scale. */
+.haunt{--paper:#f7eddf;--muted:#cdc2d7;--orange:#edaa57;font-size:15px}
+.haunt h1,.haunt h2{color:#f4dfc1;text-shadow:0 2px 18px #08060db3}
+.haunt h1 em,.haunt h2 em{color:#d9c2eb}
+.haunt-hero-copy h1 em{color:#f7b965}
+.haunt .haunt-eyebrow{font-size:11px!important;letter-spacing:2px;color:#d4b3ed!important}
+.haunt .haunt-text{font-size:12px!important;letter-spacing:1.2px;line-height:1.6}
+.haunt .haunt-button:not(.haunt-entrance-button),.haunt-contacts a,.haunt-film-skip{border-radius:12px;background:linear-gradient(125deg,#382b39eb,#1d1925ed);font-size:12px!important;letter-spacing:1px}
+.haunt .haunt-sound{border-radius:10px;border-color:#c8ad854d!important;background:#17131dcc;font-size:11px!important;letter-spacing:1px}
+.haunt .haunt-card{border-radius:18px;border-color:#c6aa7d44}
+.haunt .haunt-card-featured{border-color:#e9b873}
+.haunt .haunt-door-choices article,.haunt .haunt-door-info{border-radius:14px}
+.haunt .haunt-generator input:not([type=radio]),.haunt .haunt-generator textarea,.haunt .haunt-generator .haunt-message{border-radius:10px}
+.haunt .haunt-card>p:not(.haunt-limit),.haunt .haunt-card li,.haunt .haunt-offer-result p{font-size:14px;line-height:1.8;color:#e0d4e5}
+.haunt .haunt-card p.haunt-limit,.haunt .haunt-deposit,.haunt .haunt-terms li,.haunt .haunt-note{font-size:12px;line-height:1.8}
+.haunt .haunt-card h3{font-size:30px;color:#ffe5b8}
+.haunt .haunt-card-top{font-size:10px!important;letter-spacing:.8px;color:#d5b7e8}
+.haunt .haunt-included-label,.haunt .haunt-offer-result small{font-size:11px;color:#e7bf88}
+.haunt .haunt-room-lead{font-size:18px;line-height:1.7;color:#eaddeb!important}
+.haunt .haunt-room-detail,.haunt .haunt-room-outcome{font-size:14px;line-height:1.8}
+.haunt .haunt-hero-copy>p:not(.haunt-eyebrow){font-size:16px;color:#e2d5e7}
+.haunt .haunt-door-info strong{font-size:19px;color:#f8dfbc}
+.haunt .haunt-door-info .haunt-door-description{font-size:15px;color:#e4d9eb}
+.haunt .haunt-door-info .haunt-door-offer{font-size:14px;color:#efc58e}
+/* A small illustrated companion makes the opt-in sound cue feel intentional. */
+.haunt .haunt-sound-hint{top:83px;padding:10px 14px 10px 8px;gap:8px;max-width:245px;border:1px solid #bda3ce4d;border-radius:16px;background:linear-gradient(125deg,#292031f5,#15121cf5);box-shadow:0 8px 28px #0004;text-align:left;letter-spacing:0}
+.haunt .haunt-sound-hint>span{animation:none;font-size:inherit}
+.haunt-sound-ghost{width:45px;height:51px;flex-shrink:0;filter:drop-shadow(0 0 8px #b9a0d322);animation:haunt-ghost-float 2.4s ease-in-out 4}
+.haunt-sound-hint-copy{display:flex;flex-direction:column;gap:3px}
+.haunt-sound-hint-copy strong{font:600 17px/1.3 'Cormorant Garamond',Georgia,serif;color:#f6ddbb}
+.haunt-sound-hint-copy small{font:11px/1.5 Manrope,Arial,sans-serif;color:#d6c8e2}
+.haunt-sound-hint:hover{border-color:#e5c28b99!important}
+@keyframes haunt-ghost-float{50%{transform:translateY(-3px) rotate(-3deg)}}
+/* Fine metal rings, a dark center, and green light only around the circle. */
+.haunt-door-marker .haunt-keyhole{position:relative;width:66px;height:66px;border:1px solid #ddc39999;background:radial-gradient(circle,#292131ed,#0e0d15e8 70%);isolation:isolate}
+.haunt-door-marker .haunt-keyhole:after{content:'';position:absolute;inset:5px;border:1px solid #d9c5a236;border-radius:50%;pointer-events:none}
+.haunt-door-marker .haunt-keyhole svg{width:25px;height:25px;color:#f2dfba;filter:drop-shadow(0 0 4px #a8ff2a55)}
+.haunt-door-marker .haunt-door-enter{font-family:Cinzel,Georgia,serif;font-size:15px;font-weight:400;letter-spacing:2.5px;gap:8px;padding:9px 15px;color:#fff0d5;background:radial-gradient(ellipse,#100b12b3,transparent 74%);text-shadow:0 2px 4px #000,0 0 10px #000}
+.haunt-door-marker .haunt-door-enter svg{width:16px;height:16px;stroke-width:1.4;color:#eed4aa}
+@keyframes haunt-keyhole-green{0%,100%{box-shadow:0 0 8px #a8ff2a18,inset 0 0 8px #a8ff2a08}50%{box-shadow:0 0 24px 2px #a8ff2a66,inset 0 0 12px #a8ff2a16}}
+@media(max-width:700px){
+ .haunt .haunt-sound{font-size:9px!important;padding:9px 11px}
+ .haunt .haunt-sound-hint{top:68px;max-width:215px;padding:6px 10px 6px 5px;border-radius:13px;gap:5px}
+ .haunt-sound-ghost{width:37px;height:43px}.haunt-sound-hint-copy strong{font-size:17px}.haunt-sound-hint-copy small{font-size:10px}
+ .haunt-hero-copy{padding-top:155px}
+ .haunt .haunt-hero-copy h1{font-size:clamp(44px,12.5vw,55px);margin:12px auto 15px}
+ .haunt .haunt-hero-copy>p:not(.haunt-eyebrow){font-size:14px;line-height:1.7}
+ .haunt .haunt-eyebrow{font-size:10px!important;letter-spacing:1.4px}
+ .haunt .haunt-text{font-size:10px!important}
+ .haunt .haunt-room-lead{font-size:16px}.haunt .haunt-room-detail,.haunt .haunt-room-outcome{font-size:13px}
+ .haunt-door-marker .haunt-keyhole{width:39px;height:39px}.haunt-door-marker .haunt-keyhole:after{inset:4px}.haunt-door-marker .haunt-keyhole svg{width:19px;height:19px}
+ .haunt-door-marker .haunt-door-enter{font-family:Manrope,Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:.7px;gap:4px;padding:7px 9px}
+ .haunt-door-marker .haunt-door-enter svg{width:14px;height:14px}
+ .haunt .haunt-door-select strong{font-size:20px;color:#f5dfbf}.haunt .haunt-door-select>span{font-size:11px;line-height:1.6}
+ .haunt .haunt-card h3{font-size:29px}.haunt .haunt-card-top{font-size:9px!important}
+}
+@media(prefers-reduced-motion:reduce){.haunt-sound-ghost{animation:none}}
+/* A clear route through the three rooms, without gating access to offers. */
+.haunt-progress{position:absolute;left:50%;top:30px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;color:#e9d8bd;font:11px/1.4 Manrope,Arial,sans-serif;white-space:nowrap}
+.haunt-progress-caption{font-size:9px;letter-spacing:1.5px;color:#cab7da}
+.haunt-progress ol{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+.haunt-progress li{position:relative;display:grid;place-items:center;width:28px;height:28px;border:1px solid #b3a1c74d;border-radius:50%;color:#bcb0c8;background:#100e18b3}
+.haunt-progress li+li:before{content:'';position:absolute;right:100%;width:19px;height:1px;background:#c6b18c55}
+.haunt-progress li.is-current{color:#ffe3b3;border-color:#eac089}
+.haunt-progress li.is-complete{color:#ddf8b8;border-color:#c3e29999;background:#25331dcc}
+.haunt .haunt-entry-guide{font:12px/1.7 Manrope,Arial,sans-serif;letter-spacing:.3px;color:#e5d4e9;text-align:center;white-space:normal;text-shadow:0 2px 8px #000}
+.haunt .haunt-completed-label{color:#d8efb8;font-size:11px;margin-bottom:8px}
+.haunt-journey-feedback{margin:20px 0 18px;display:flex;flex-direction:column;gap:5px;max-width:450px}
+.haunt-journey-feedback strong{color:#d4eab3;font-size:12px;font-weight:500;letter-spacing:1px}
+.haunt-journey-feedback>span{color:#dfcee9;font-size:13px;text-transform:capitalize}
+.haunt .haunt-selected-guidance{padding:16px 18px;margin:0 0 26px;border:1px solid #c6a67855;border-radius:12px;background:#211c29;font-size:14px;color:#d8cce2;line-height:1.7}
+.haunt-selected-guidance strong{display:block;color:#f4d7ab;margin-bottom:4px}
+.haunt-scene-after .haunt-room{height:auto;min-height:100svh}
+.haunt-scene-after .haunt-room-copy{padding-bottom:70px}
+@media(max-width:700px){.haunt-progress{top:82px;gap:10px}.haunt-progress-caption{font-size:8px;letter-spacing:1px}.haunt-progress li{width:24px;height:24px;font-size:10px}.haunt-progress ol{gap:15px}.haunt-progress li+li:before{width:16px}.haunt-hall{padding-top:137px}.haunt-scene-before .haunt-room-story{top:132px}.haunt .haunt-entry-guide{font-size:11px;max-width:235px}.haunt-journey-feedback strong{font-size:11px}.haunt-journey-feedback>span{font-size:12px}.haunt-scene-after .haunt-room-copy{padding-top:145px}}
+/* A complete result and two equal choices, contained within one viewport. */
+.haunt-scene-after .haunt-room{height:100svh;min-height:0;display:flex;align-items:center}
+.haunt-scene-after .haunt-room-copy{width:min(760px,100%);max-width:760px;padding:115px 5% 28px;display:flex;flex-direction:column;justify-content:center;gap:14px;max-height:100%;box-sizing:border-box}
+.haunt-scene-after .haunt-room h1{font-size:clamp(42px,5.2vw,72px);line-height:1;margin:14px 0 18px}
+.haunt-scene-after .haunt-room-lead{font-size:16px;line-height:1.5;margin:0 0 12px}
+.haunt-scene-after .haunt-room-detail{margin:0;max-width:none;line-height:1.6}
+.haunt-scene-after .haunt-room-outcome{margin:0;max-width:540px;font-size:14px;line-height:1.6}
+.haunt-scene-after .haunt-room-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:5px 0 0}
+.haunt-scene-after .haunt-room-actions>.haunt-button{min-height:52px;padding:13px 18px}
+.haunt-scene-after .haunt-room-actions>.haunt-text{margin:0;min-height:48px;padding:12px 15px;border:1px solid #d5bd9555;border-radius:12px;justify-content:center;font-size:11px!important}
+.haunt .haunt-discount{font:600 11px/1.5 Manrope,Arial,sans-serif!important;letter-spacing:.5px;color:#dfebb8!important;white-space:nowrap;font-style:normal}
+.haunt .haunt-inline-price .haunt-discount{display:inline-block;padding:3px 6px;background:#b4d57c12;border-radius:5px}
+.haunt-door-marker .haunt-door-enter{color:#fff7e7;text-shadow:0 2px 3px #000,0 0 6px #000,0 0 14px #000,0 0 25px #000;background:radial-gradient(ellipse,#09070dec 10%,#09070d99 50%,transparent 76%)}
+.haunt-door-marker .haunt-door-enter svg{filter:drop-shadow(0 2px 3px #000)}
+/* Restore the Hero's warm invitation; the hall keeps its green circular glow. */
+.haunt-entrance-button .haunt-keyhole{border-color:#e8af6399;background:radial-gradient(circle,#f28a1a22,transparent 72%);animation:haunt-invitation-breathe 2.4s ease-in-out infinite}
+.haunt-entrance-button .haunt-keyhole svg{color:#ffe0ae;filter:drop-shadow(0 0 7px #f28a1a88)}
+.haunt-entrance-button:is(:hover,:focus-visible,:active) .haunt-keyhole{animation:none;border-color:#ffc575;background:#f28a1a1c;box-shadow:0 0 32px #f28a1a55,inset 0 0 20px #f28a1a20}
+@media(max-width:700px){
+ .haunt-scene-after .haunt-room-copy{width:100%;padding:122px 6% 22px;gap:12px}
+ .haunt-scene-after .haunt-room h1{font-size:clamp(40px,11vw,54px);margin:10px 0 14px}
+ .haunt-scene-after .haunt-room-lead{font-size:14px;margin-bottom:10px}
+ .haunt-scene-after .haunt-room-detail,.haunt-scene-after .haunt-room-outcome{font-size:12px;line-height:1.55}
+ .haunt-scene-after .haunt-room-actions{display:grid;grid-template-columns:1fr;width:100%;gap:8px}
+ .haunt-scene-after .haunt-room-actions>.haunt-button,.haunt-scene-after .haunt-room-actions>.haunt-text{min-height:44px;padding:10px 12px;margin:0}
+ .haunt .haunt-room-detail .haunt-inline-price b{font-size:22px}
+}
+@media(max-height:700px){
+ .haunt-scene-after .haunt-room-copy{gap:8px;padding-top:112px;padding-bottom:12px}
+ .haunt-scene-after .haunt-room h1{font-size:38px;margin:6px 0 8px}
+ .haunt-scene-after .haunt-room-lead{font-size:13px;line-height:1.4;margin-bottom:6px}
+ .haunt-scene-after .haunt-room-outcome{font-size:12px;line-height:1.4}
+}
+@media(max-height:500px) and (min-width:701px){.haunt-scene-after .haunt-room-copy{width:100%;max-width:none;padding-top:100px;display:grid;grid-template-columns:1fr 1fr;column-gap:28px}.haunt-scene-after .haunt-room-story{grid-row:span 2}.haunt-scene-after .haunt-room h1 br{display:none}.haunt-scene-after .haunt-room h1{font-size:36px}.haunt-scene-after .haunt-room-actions{margin:0}}
+@media(prefers-reduced-motion:reduce){.haunt-entrance-button .haunt-keyhole{animation:none;box-shadow:0 0 14px #f28a1a33}}
+/* A small jack-o'-lantern accompanies the native pointer. */
+.haunt-pointer-pumpkin{position:absolute;left:13px;top:15px;width:29px;height:29px;filter:drop-shadow(0 2px 3px #0008);transition:filter .2s,scale .2s;pointer-events:none}
+.haunt-pumpkin-eyes,.haunt-pumpkin-mouth{fill:#50301b;transition:fill .2s,filter .2s}
+.haunt-pointer.is-inviting .haunt-pumpkin-eyes,.haunt-pointer.is-inviting .haunt-pumpkin-mouth{fill:#fff1a5;filter:drop-shadow(0 0 3px #ffb42d)}
+.haunt-pointer.is-inviting .haunt-pointer-pumpkin{filter:drop-shadow(0 0 6px #f28a1a55);scale:1.08}
+.haunt-pointer.is-inviting .haunt-pointer-sigil{opacity:0}
+.haunt-pointer-sigil{stroke:#e9ad68;filter:drop-shadow(0 0 4px #f28a1a55)}
+.haunt .haunt-pointer-spark{width:3px;height:4px;background:#ffc16f;box-shadow:0 0 5px #ff9b3b,0 0 9px #f28a1a44}
+.haunt .haunt-pointer-spark:nth-child(3n){background:#f2a453;box-shadow:0 0 5px #ff9b3b}
+/* Halloween chapter emblems: time lost, a missing spirit, vanishing enquiries. */
+.haunt .haunt-room-emblem{stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.haunt-door-marker .haunt-keyhole .haunt-room-emblem{width:36px;height:36px;color:#f5dbaa}
+.haunt-emblem-crack{stroke:#c9ed9f}.haunt-emblem-particles{stroke:#d9b7ef}
+.haunt-card-top>span:first-child{display:flex;align-items:center;gap:8px}
+.haunt-card-top .haunt-room-emblem{width:27px;height:27px;color:#e8bc79}
+/* A candlelit inscription with its ornament outside the letterforms. */
+.haunt-hero-copy h1{position:relative;color:#ffe3b3;text-shadow:0 2px 7px #08050b,0 0 28px #d77a2630}
+.haunt-hero-copy h1:after{content:'◇ ─ ✦ ─ ◇';display:block;font:12px/1 Georgia,serif;letter-spacing:5px;color:#d9aa6d;margin-top:17px;text-shadow:0 0 10px #e69a4b55}
+.haunt-hero-copy h1 em{color:#f2a64e;text-shadow:0 2px 6px #09050b,0 0 23px #e37b243d}
+.haunt-hall-heading h1 em,.haunt-scene-before h1{color:#e2c4f0;text-shadow:0 2px 9px #08040f,0 0 24px #9260bc33}
+.haunt-reveal .haunt-rule{width:170px;color:#ecc28a}.haunt-reveal .haunt-rule:before,.haunt-reveal .haunt-rule:after{background:linear-gradient(90deg,transparent,#dcb88588,transparent)}
+.haunt-bats{color:#090712;filter:drop-shadow(0 1px 1px #bcb0d133)}
+.haunt-bats svg{opacity:.96}
+.haunt-corner-web{opacity:.25;stroke:#d9cae3}
+/* A dark parchment ground beneath the existing scene previews. */
+.haunt .haunt-card{background-color:#21191c;background-image:radial-gradient(ellipse at 0 0,#9f5d3226,transparent 60%),repeating-linear-gradient(97deg,#e1bd8710 0 1px,transparent 1px 7px);border-color:#b48c644f;box-shadow:inset 0 0 35px #08050b55}
+.haunt-card:after{background:linear-gradient(180deg,#19111dba 0%,#19111da6 18%,#201820ed 43%,#21191cf2 65%,#19141df5 100%)}
+.haunt .haunt-card-featured{border-color:#e5b373;box-shadow:0 0 25px #d58e3014,inset 0 0 30px #08050b44}
+.haunt-offer-preview{position:relative}
+.haunt-pumpkin-seal{position:absolute;right:12px;bottom:48px;width:54px;height:54px;display:block;color:#efbd77;transform:rotate(10deg);border-radius:50%;background:radial-gradient(circle,#5b2c20,#25131b);box-shadow:0 3px 12px #0007;pointer-events:none}
+.haunt-pumpkin-seal svg{width:100%;height:100%;stroke:currentColor;stroke-width:.85}
+.haunt .haunt-card h3{color:#f7d9a9}.haunt .haunt-discount{color:#d8ecb2!important}
+@media(max-width:700px){
+ .haunt-door-marker .haunt-keyhole .haunt-room-emblem{width:25px;height:25px}
+ .haunt-hero-copy h1:after{font-size:10px;letter-spacing:3px;margin-top:12px}
+ .haunt-pumpkin-seal{width:46px;height:46px;right:10px;bottom:44px}
+ .haunt-corner-web{opacity:.2}.haunt-card-top .haunt-room-emblem{width:23px;height:23px}
+ .haunt .haunt-door-select small{font-size:10px;letter-spacing:1px;line-height:1.8}
+}
