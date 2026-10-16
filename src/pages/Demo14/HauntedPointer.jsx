@@ -9,10 +9,11 @@ export default function HauntedPointer({ cinematic }) {
     const particles = [...node.querySelectorAll('.haunt-pointer-spark')]
     const seal = node.querySelector('.haunt-pointer-sigil')
     const media = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)')
-    let frame = 0, index = 0, lastSpark = 0
+    let frame = 0, index = 0, lastSpark = 0, position = null
     const hide = () => {
       cancelAnimationFrame(frame)
       node.style.opacity = '0'
+      position = null
       node.getAnimations({ subtree: true }).forEach(animation => animation.cancel())
     }
     const allowed = event => media.matches && !cinematic && event.pointerType !== 'touch' && !event.target.closest('input, textarea, select')
@@ -28,6 +29,7 @@ export default function HauntedPointer({ cinematic }) {
     }
     const move = event => {
       if (!allowed(event)) { hide(); return }
+      position = { clientX: event.clientX, clientY: event.clientY, pointerType: event.pointerType }
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(() => {
         core.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`
@@ -38,6 +40,11 @@ export default function HauntedPointer({ cinematic }) {
           lastSpark = performance.now()
         }
       })
+    }
+    const scroll = () => {
+      if (!position) return
+      const target = document.elementFromPoint(position.clientX, position.clientY)
+      if (target) move({ ...position, target })
     }
     const press = event => {
       if (!allowed(event)) return
@@ -50,7 +57,7 @@ export default function HauntedPointer({ cinematic }) {
     window.addEventListener('pointermove', move, { passive: true })
     window.addEventListener('pointerdown', press, { passive: true })
     window.addEventListener('blur', hide)
-    window.addEventListener('scroll', hide, { passive: true })
+    window.addEventListener('scroll', scroll, { passive: true })
     document.documentElement.addEventListener('pointerleave', hide)
     media.addEventListener('change', hide)
     hide()
@@ -59,7 +66,7 @@ export default function HauntedPointer({ cinematic }) {
       window.removeEventListener('pointermove', move)
       window.removeEventListener('pointerdown', press)
       window.removeEventListener('blur', hide)
-      window.removeEventListener('scroll', hide)
+      window.removeEventListener('scroll', scroll)
       document.documentElement.removeEventListener('pointerleave', hide)
       media.removeEventListener('change', hide)
     }
