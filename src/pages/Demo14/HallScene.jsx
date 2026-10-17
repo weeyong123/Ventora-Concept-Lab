@@ -140,7 +140,7 @@ export default function HallScene({
                 </span>
                 <p className="haunt-door-offer">{o.name.toUpperCase()}</p>
                 <p>{o.scope.toUpperCase()}</p>
-                <em>SAVE ??%</em>
+                <em className="haunt-mobile-save-sticker"><span>SAVE</span>{" "}<strong>??%</strong></em>
                 <button
                   className="haunt-button"
                   onClick={() => go("before", i)}

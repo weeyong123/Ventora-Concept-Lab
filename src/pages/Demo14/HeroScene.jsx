@@ -41,6 +41,13 @@ export default function HeroScene({ go, reduced, title }) {
           <Icon type="up" />
         </span>
       </button>
+      <div className="haunt-hero-invitation">
+        <p className="haunt-invited-title">YOU’RE INVITED.</p>
+        <p className="haunt-invited-copy">
+          Welcome to Ventora’s Halloween experience.
+          <span>The mansion awaits.</span>
+        </p>
+      </div>
     </section>
   );
 }

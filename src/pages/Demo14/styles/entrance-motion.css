@@ -142,3 +142,39 @@
   white-space: nowrap;
 }
 .haunt .haunt-price .haunt-base-savings > span { font-size: 12px; color: #e3c596; letter-spacing: .3px; }
+
+/* Invitation copy stays secondary to the entrance action. */
+.haunt .haunt-hero-invitation { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); width: min(90%, 480px); text-align: center; z-index: 2; text-shadow: 0 2px 8px #09070d; }
+.haunt .haunt-invited-title { margin: 0 0 8px; font: 400 30px/1.1 "Metal Mania", Georgia, serif; letter-spacing: 1.5px; color: #e8bd80; text-shadow: 0 2px 2px #170b12, 0 0 14px #b76a3933; }
+.haunt .haunt-invited-copy { margin: 0; font: 400 13px/1.7 Manrope, Arial, sans-serif; color: #d8cddc; }
+.haunt .haunt-invited-copy span { display: block; color: #c0afc7; }
+/* Keep the desktop invitation within the first viewport; never force an 860px hero. */
+@media (min-width: 701px) {
+  .haunt .haunt-stage.haunt-entrance { min-height: 100svh; }
+}
+@media (min-width: 1024px) {
+  .haunt .haunt-hero-invitation {
+    left: auto;
+    right: clamp(36px, 4.5vw, 70px);
+    bottom: clamp(36px, 7svh, 75px);
+    transform: none;
+    width: min(340px, 29vw);
+    text-align: center;
+  }
+  .haunt .haunt-invited-title { font-size: clamp(25px, 2.1vw, 30px); }
+}
+@media (max-width: 700px) {
+  .haunt .haunt-hero-invitation { position: relative; bottom: auto; left: auto; transform: none; margin: 42px auto 0; }
+  .haunt .haunt-invited-title { font-size: 28px; }
+  .haunt .haunt-invited-copy { font-size: 14px; }
+}
+/* A static ticket above the card's entry button, never over its label. */
+.haunt .haunt-door-choices .haunt-door-preview > .haunt-mobile-save-sticker {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  width: 82px; min-height: 70px; margin: 18px 6px 12px auto; padding: 8px 10px;
+  background: #e8bd80; color: #28152e; border: 1px dashed #76522f;
+  border-radius: 5px; box-shadow: 0 3px 10px #0005; transform: rotate(5deg);
+  font-style: normal; animation: none; line-height: 1.1;
+}
+.haunt .haunt-mobile-save-sticker > span { font: 700 11px/1.2 Manrope, Arial, sans-serif; letter-spacing: 1.4px; color: #28152e; }
+.haunt .haunt-mobile-save-sticker > strong { font: 800 27px/1.2 Manrope, Arial, sans-serif; color: #28152e; letter-spacing: -.5px; }
