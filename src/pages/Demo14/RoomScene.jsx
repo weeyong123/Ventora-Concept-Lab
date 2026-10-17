@@ -79,8 +79,8 @@ export default function RoomScene({
                   </span>
                   {pricing.afterReference && (
                     <span className="haunt-reference-price">
-                      <small>REGULAR PRICE · BEFORE DISCOUNT</small>
-                      <b>${room.regularPrice.toLocaleString("en-US")}+ USD</b>
+                      <small>REGULAR STARTING PRICE</small>
+                      <span className="haunt-reference-line"><b>${room.regularPrice.toLocaleString("en-US")} USD</b><small>BEFORE DISCOUNT</small></span>
                     </span>
                   )}
                 </>

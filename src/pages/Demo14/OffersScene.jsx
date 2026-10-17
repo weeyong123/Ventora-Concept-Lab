@@ -4,7 +4,7 @@ import SceneImage from "./SceneImage";
 import { imageSource } from "./images";
 import {
   offers,
-  discountPercent,
+  savingsAmount,
   offerTerms,
   additionalScope,
 } from "./content";
@@ -158,30 +158,37 @@ export default function OffersScene({
                 <span className="haunt-package-audience">{o.audience}</span>
               </p>
               <div className="haunt-price">
-                {(pricing.standardPrice || pricing.discount) && (
+                {pricing.standardPrice && (
                   <div className="haunt-price-before">
                     {pricing.standardPrice && (
                       <span>
-                        REGULAR PRICE · BEFORE DISCOUNT{" "}
-                        <s>${o.regularPrice.toLocaleString("en-US")}+ USD</s>
+                        REGULAR STARTING PRICE{" "}
+                        <s>${o.regularPrice.toLocaleString("en-US")} USD</s>
                       </span>
                     )}
-                    {pricing.discount && (
-                      <b className="haunt-discount">
-                        SAVE {discountPercent(o)}%
-                      </b>
-                    )}
+
                   </div>
                 )}
                 <div className="haunt-price-now">
-                  <strong>${o.price}</strong>
+                  <strong><span className="haunt-now-label">NOW</span>{" "}${o.price.toLocaleString("en-US")}{" "}<span className="haunt-now-currency">USD</span></strong>
                   <span>
-                    USD · ONE-TIME PROJECT FEE
+                    ONE-TIME PROJECT FEE
                     <br />
                     HALLOWEEN SPECIAL
                   </span>
                 </div>
+                {pricing.discount && (
+                  <p className="haunt-base-savings"><span aria-hidden="true">✧ </span><strong>SAVE ${savingsAmount(o)}</strong>{" "}<span>ON THE BASE PACKAGE</span></p>
+                )}
               </div>
+              <a
+                href="#haunt-claim"
+                className="haunt-button"
+                onClick={() => setSelected(i)}
+              >
+                CLAIM THIS OFFER
+                <Icon />
+              </a>
               <small className="haunt-included-label">WHAT’S INCLUDED</small>
               <ul>
                 {o.items.map((item) => (
@@ -192,20 +199,18 @@ export default function OffersScene({
                 <small>THE RESULT</small>
                 <p>{o.result}</p>
               </div>
-              <a
-                href="#haunt-claim"
-                className="haunt-button"
-                onClick={() => setSelected(i)}
-              >
-                CLAIM THIS OFFER
-                <Icon />
-              </a>
+              <div className="haunt-offer-scope-note">
+                <small>SCOPE NOTE</small>
+                <p>{o.scopeNote}</p>
+              </div>
+
             </article>
           ))}
         </div>
         <p className="haunt-deposit">
           50% deposit after scope approval · 50% upon completion and approval,
-          before final handover or launch.
+          before final handover or launch. Halloween pricing applies only to the stated base package.
+          To lock in the offer, both parties must confirm the project scope and the 50% deposit must be paid before the November 2, 2026 deadline.
         </p>
       </section>
       <section className="haunt-terms">

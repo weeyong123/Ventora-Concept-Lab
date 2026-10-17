@@ -15,8 +15,8 @@ test("all final packages share the exact name, scope and activity price", () => 
   assert.deepEqual(
     offers.map((o) => [o.name, o.scope, o.price, o.regularPrice]),
     [
-      ["Website Redesign", "Up to 3 Pages", 399, 799],
-      ["Business Website", "Up to 5 Pages", 899, 1699],
+      ["Website Redesign", "Up to 3 Pages", 499, 799],
+      ["Business Website", "Up to 5 Pages", 1099, 1699],
       ["New Landing Page", "1 Page", 349, 599],
     ],
   );
@@ -36,10 +36,10 @@ test("every room retains its before, after and transformation assets", () => {
   });
   assert(existsSync(`public${revealBackground}`));
 });
-test("public comparisons are restored; production query does not enable preview", () => {
+test("regular prices are visible; production query cannot enable savings or preview", () => {
   assert.deepEqual(publicPriceComparisons, {
     standardPrice: true,
-    beforeDiscount: true,
+    beforeDiscount: false,
     discount: true,
   });
   assert.deepEqual(getPricingVisibility({ search: "?pricing-preview=1" }), {
@@ -108,4 +108,14 @@ test("optional fields and all encoded destinations share the same enquiry", () =
     );
     assert.equal(links.facebook, "https://www.facebook.com/dylan.ang87/");
   }
+});
+
+test("base-package savings and scope notes are complete", () => {
+  assert.deepEqual(offers.map(o => o.regularPrice - o.price), [300, 600, 250]);
+  offers.forEach(o => assert(o.scopeNote.includes("quoted separately")));
+});
+
+test("terms preserve scope and define reservation, cancellation and delivery", () => {
+  const terms = offerTerms.join(" ");
+  for (const phrase of ["base deliverables", "before development begins", "November 2, 2026", "50% deposit before this deadline", "refund eligibility", "work already completed", "speed of client feedback", "Two rounds of revisions", "compatibility", "actual design and development"]) assert(terms.includes(phrase), phrase);
 });

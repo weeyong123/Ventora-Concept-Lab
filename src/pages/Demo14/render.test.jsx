@@ -80,12 +80,12 @@ test("before/after preserve both story stages without revealing activity prices"
     assert(after.includes(offers[i].scope.toUpperCase()));
   }
 });
-test("public offer cards show original prices and savings without implicit selection", () => {
+test("public offer cards show regular and special prices with scope", () => {
   const html = renderToStaticMarkup(<OffersScene {...offerProps(null)} />);
   for (const offer of offers) {
-    assert(html.includes(`$${offer.price}`));
+    assert(html.includes(`$${offer.price.toLocaleString("en-US")}`));
     assert(html.includes(`$${offer.regularPrice.toLocaleString("en-US")}`));
-    assert(html.includes(`SAVE ${Math.floor((1 - offer.price / offer.regularPrice) * 100)}%`));
+    assert(html.includes(offer.scopeNote));
     assert(text(html).includes(offer.shortLabel));
   }
   assert(!html.includes('checked=""'));
@@ -94,7 +94,11 @@ test("public offer cards show original prices and savings without implicit selec
   assert(!html.includes("https://wa.me/"));
   assert(html.includes("View Full Terms"));
   assert(!html.includes("MOST POPULAR"));
-  assert(html.includes("REGULAR PRICE · BEFORE DISCOUNT"));
+  assert(html.includes("REGULAR STARTING PRICE"));
+  assert.equal((html.match(/<s>/g) || []).length, 3);
+  assert(!/SAVE \d+%/.test(html));
+  for (const amount of [300, 600, 250]) assert(text(html).includes(`SAVE $${amount} ON THE BASE PACKAGE`));
+  assert.equal((html.match(/SCOPE NOTE/g) || []).length, 3);
 });
 test("selected enquiries render the correct current package without reference charges", () => {
   for (let i = 0; i < 3; i++) {
@@ -130,14 +134,16 @@ test("internal comparison preview is explicit and keeps the After activity price
     );
     assert(html.includes("BEFORE DISCOUNT"));
     assert(html.includes("$799"));
-    assert(!html.includes("$399"));
+    assert(!html.includes("$499"));
     const offer = renderToStaticMarkup(<OffersScene {...offerProps(0)} />);
-    assert(offer.includes("SAVE 50%"));
+    assert(text(offer).includes("SAVE $300 ON THE BASE PACKAGE"));
+    assert(offer.includes("REGULAR STARTING PRICE"));
+    assert(!/SAVE \d+%/.test(offer));
     assert(offer.includes("<s>"));
   } finally {
     Object.assign(pricing, {
       standardPrice: true,
-      beforeDiscount: true,
+      beforeDiscount: false,
       discount: true,
       preview: false,
     });
@@ -148,5 +154,13 @@ test("Journey checks reached stages and resets with the scene", () => {
   for (const [scene, count] of [["hall", 1], ["before", 2], ["transformation", 2], ["after", 3], ["offers", 4], ["hero", 0]]) {
     const html = renderToStaticMarkup(<HauntHeader {...base} scene={scene} soundHint={false} toggleSound={noop} />);
     assert.equal((html.match(/aria-label="Reached"/g) || []).length, count);
+  }
+});
+
+test("each card places claim CTA before inclusions and keeps scope after result", () => {
+  const html = renderToStaticMarkup(<OffersScene {...offerProps(null)} />);
+  for (const card of html.match(/<article[\s\S]*?<\/article>/g)) {
+    assert(card.indexOf("CLAIM THIS OFFER") < card.indexOf("WHAT’S INCLUDED"));
+    assert(card.indexOf("THE RESULT") < card.indexOf("SCOPE NOTE"));
   }
 });

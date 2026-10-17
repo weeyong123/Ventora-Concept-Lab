@@ -1,7 +1,7 @@
-// Restore the supplied comparison prices at the user’s request.
+// Regular starting prices and dollar savings are enabled at the user’s request.
 export const publicPriceComparisons = Object.freeze({
   standardPrice: true,
-  beforeDiscount: true,
+  beforeDiscount: false,
   discount: true,
 });
 export function getPricingVisibility({

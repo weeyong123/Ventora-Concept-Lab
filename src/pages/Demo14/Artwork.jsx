@@ -1,5 +1,5 @@
 import { pricing } from "./pricing";
-import { discountPercent } from "./content";
+import { savingsAmount } from "./content";
 
 export function Icon({ type = "arrow" }) {
   return (
@@ -48,16 +48,16 @@ export function OfferPrice({ offer }) {
     <span className="haunt-inline-price">
       {pricing.standardPrice && (
         <s
-          aria-label={`Standard price reference ${offer.regularPrice} US dollars`}
+          aria-label={`Regular starting price ${offer.regularPrice} US dollars`}
         >
           ${offer.regularPrice.toLocaleString("en-US")}
         </s>
       )}
       <b aria-label={`Halloween price ${offer.price} US dollars`}>
-        ${offer.price}
+        ${offer.price.toLocaleString("en-US")}
       </b>
       {pricing.discount && (
-        <em className="haunt-discount">SAVE {discountPercent(offer)}%</em>
+        <em className="haunt-discount">SAVE ${savingsAmount(offer)}</em>
       )}
     </span>
   );

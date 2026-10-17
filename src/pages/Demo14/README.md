@@ -6,8 +6,8 @@ Local route: `/demo14`. No changes to shared routing, other demos, or project de
 
 | Package | Scope | Halloween price (USD) | Internal standard reference |
 | --- | --- | --- | --- |
-| Website Redesign | Up to 3 existing pages | $399 | $799 |
-| Business Website | Up to 5 new standard pages | $899 | $1,699 |
+| Website Redesign | Up to 3 existing pages | $499 | $799 |
+| Business Website | Up to 5 new standard pages | $1,099 | $1,699 |
 | New Landing Page | 1 page, up to 5–7 standard sections | $349 | $599 |
 
 `content.js` is the source of truth for descriptions, scope, inclusions, terms and enquiry messages. All packages include design and development. Existing platform compatibility must be reviewed. Payment is 50% after agreeing scope/schedule/terms, 50% after approval and before handover or launch. Booking deadline: November 2, 2026.
@@ -17,8 +17,8 @@ Local route: `/demo14`. No changes to shared routing, other demos, or project de
 - Hall: Nightmare, package, scope, `SAVE ??%`; no prices or specific discounts.
 - Before: BREAK THE CURSE with SEE THE OFFER helper, original imagery and transformation trigger.
 - After: THE CURSE IS BROKEN, package, scope and BEFORE DISCOUNT reference (controlled by `afterReference`, enabled per the latest request); never the activity price. CHECK MY HALLOWEEN OFFER preserves selection and opens the top of the final reveal; EXPLORE OTHER OFFERS returns to CHOOSE.
-- Final Reveal: current activity prices, inclusions, one enquiry CTA per card, unified expandable terms and contact form.
-- `pricing.js` has three independent public comparison flags, all **true** per the user’s request to restore the supplied original prices and savings.
+- Final Reveal: current activity prices, inclusions, per-package scope notes, one enquiry CTA per card, unified expandable terms and contact form.
+- `pricing.js` has three independent public comparison flags, `standardPrice` is **true** per the latest request to show regular prices; the other flags remain **false**. The marked development preview enables comparison amounts. Final cards and selectors use dollar savings, not percentage savings.
 - Development-only `/demo14?pricing-preview=1` enables a visibly marked INTERNAL PRICING PREVIEW. The query cannot enable comparisons in a production build. Standard references are never included as payable prices in enquiry messages.
 - Inline original-price strikes are 1px within the text width; large cards retain 2px diagonal red strikes. These render only when comparison visibility is enabled.
 
